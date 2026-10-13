@@ -1,22 +1,21 @@
-import confetti from 'canvas-confetti';
-import { soundFx } from '../audio/soundFx.js';
+import { iconSvg } from './icon.js';
 
 export function setupBudgetCalculator() {
   const container = document.getElementById('budget-calculator-app');
   if (!container) return;
 
   const projectTypes = [
-    { id: 'automation', name: 'Bot ou Automação IA', basePrice: 900, baseDays: 6, stack: 'Python, n8n, OpenAI, Scrapers' },
+    { id: 'automation', name: 'Automação de processos', basePrice: 900, baseDays: 6, stack: 'Python, n8n, integrações, scrapers' },
     { id: 'web-saas', name: 'Sistema Web / SaaS / Dashboard', basePrice: 2200, baseDays: 14, stack: 'React, TypeScript, FastAPI/Spring, PostgreSQL' },
     { id: 'api-backend', name: 'API REST / Microsserviços', basePrice: 1300, baseDays: 8, stack: 'Java Spring Boot, Python FastAPI, Docker' },
     { id: 'mobile', name: 'Aplicativo Mobile (iOS/Android)', basePrice: 2600, baseDays: 18, stack: 'SwiftUI, Kotlin, Firebase' },
-    { id: 'landing', name: 'Landing Page de Alta Conversão', basePrice: 700, baseDays: 4, stack: 'HTML5, CSS3 Moderno, JavaScript, SEO' }
+    { id: 'landing', name: 'Página institucional', basePrice: 700, baseDays: 4, stack: 'HTML5, CSS3, JavaScript, SEO' }
   ];
 
   const features = [
     { id: 'auth', name: 'Autenticação & Controle de Acessos', price: 350, days: 2 },
     { id: 'payments', name: 'Pagamentos (PIX, Stripe, Mercado Pago)', price: 450, days: 2 },
-    { id: 'ai-agent', name: 'Agente de IA / Conexão com LLM', price: 600, days: 3 },
+    { id: 'ai-agent', name: 'Integração com modelos de linguagem', price: 600, days: 3 },
     { id: 'dashboard', name: 'Dashboard com Gráficos e Exportação', price: 500, days: 3 },
     { id: 'notifications', name: 'Notificações (WhatsApp / Telegram / Email)', price: 300, days: 2 },
     { id: 'security', name: 'Auditoria de Segurança & OWASP Shield', price: 400, days: 2 },
@@ -75,7 +74,7 @@ export function setupBudgetCalculator() {
             <div class="calc-features-grid" id="calc-features-group">
               ${features.map(f => `
                 <button type="button" class="calc-checkbox-chip ${selectedFeatures.has(f.id) ? 'active' : ''}" data-feature-id="${f.id}">
-                  <span class="calc-check-box">${selectedFeatures.has(f.id) ? '✓' : ''}</span>
+                  <span class="calc-check-box" aria-hidden="true"></span>
                   <span class="feature-text">${f.name}</span>
                 </button>
               `).join('')}
@@ -110,29 +109,29 @@ export function setupBudgetCalculator() {
               <div class="price-range">
                 <span class="currency">R$</span> ${minPrice.toLocaleString('pt-BR')} <span class="price-separator">—</span> <span class="currency">R$</span> ${maxPrice.toLocaleString('pt-BR')}
               </div>
-              <div class="price-sub">Valor justo, sem intermediários. Negociação flexível parcelada por entregas.</div>
+              <div class="price-sub">Estimativa inicial. O valor final depende do escopo combinado.</div>
             </div>
 
             <div class="calc-metrics-row">
               <div class="calc-metric-item">
-                <span class="metric-icon">⏱️</span>
+                <span class="metric-icon">${iconSvg('clock')}</span>
                 <div>
                   <div class="metric-val">~${totalDays} dias</div>
                   <div class="metric-lbl">Prazo Estimado</div>
                 </div>
               </div>
               <div class="calc-metric-item">
-                <span class="metric-icon">👥</span>
+                <span class="metric-icon">${iconSvg('people')}</span>
                 <div>
-                  <div class="metric-val">Dupla de Elite</div>
+                  <div class="metric-val">Dois desenvolvedores</div>
                   <div class="metric-lbl">Lucas & Felipe</div>
                 </div>
               </div>
               <div class="calc-metric-item">
-                <span class="metric-icon">🛡️</span>
+                <span class="metric-icon">${iconSvg('shield')}</span>
                 <div>
-                  <div class="metric-val">100% Garantido</div>
-                  <div class="metric-lbl">Código & Suporte</div>
+                  <div class="metric-val">Entrega acompanhada</div>
+                  <div class="metric-lbl">Código & suporte</div>
                 </div>
               </div>
             </div>
@@ -141,22 +140,22 @@ export function setupBudgetCalculator() {
               <strong>Stack Tecnológica Sugerida:</strong>
               <div class="calc-tag-pills">
                 ${selectedType.stack.split(',').map(s => `<span class="tag-pill">${s.trim()}</span>`).join('')}
-                ${selectedFeatures.has('ai-agent') ? `<span class="tag-pill highlight">LLM AI</span>` : ''}
+                ${selectedFeatures.has('ai-agent') ? `<span class="tag-pill highlight">Modelos de linguagem</span>` : ''}
                 ${selectedFeatures.has('security') ? `<span class="tag-pill highlight">OWASP Shield</span>` : ''}
               </div>
             </div>
 
             <div class="calc-actions">
               <button type="button" class="btn btn-primary btn-calc-copy" id="btn-copy-proposal">
-                <span class="btn-icon">📋</span> Copiar Proposta para o 99Freelas
+                Copiar proposta
               </button>
               <a href="https://wa.me/?text=${encodeURIComponent(generateProposalText(selectedType, selectedFeatures, features, minPrice, maxPrice, totalDays))}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-calc-whatsapp">
-                <span class="btn-icon">💬</span> Chamar no WhatsApp
+                Chamar no WhatsApp
               </a>
             </div>
 
             <div class="calc-copied-msg" id="calc-copied-alert" style="display: none;">
-              ✅ Proposta copiada com sucesso para a sua área de transferência!
+              Proposta copiada para a área de transferência.
             </div>
           </div>
         </div>
@@ -172,30 +171,26 @@ export function setupBudgetCalculator() {
       .map(f => `- ${f.name}`)
       .join('\n');
 
-    return `Olá! Vi o seu projeto e tenho a solução exata para o que você precisa.
+    return `Olá! Vi a descrição do projeto e gostaria de conversar sobre o escopo.
 
-Trabalho em dupla com o Felipe Luvizotto (Engenharia e Mobile - UNICAMP/Cotuca) e eu (Lucas Gabriel / blackxzin - Full Stack & Cibersegurança).
+Somos Lucas Gabriel e Felipe. Trabalhamos com sistemas web, APIs, aplicativos e automações.
 
-📋 Proposta de Escopo:
+Proposta de escopo:
 Tipo: ${type.name}
 Stack Tecnológica: ${type.stack}
 
 Funcionalidades incluídas:
 ${activeFeatsNames || '- Escopo customizado sob demanda'}
 
-⏱️ Prazo Estimado de Entrega: aproximadamente ${days} dias corridos
-💰 Estimativa de Investimento: R$ ${minP.toLocaleString('pt-BR')} a R$ ${maxP.toLocaleString('pt-BR')} (negociável em marcos de entrega)
+Prazo estimado: aproximadamente ${days} dias corridos
+Estimativa de investimento: R$ ${minP.toLocaleString('pt-BR')} a R$ ${maxP.toLocaleString('pt-BR')} (negociável em marcos de entrega)
 
-Diferenciais da nossa entrega:
-- 2 Desenvolvedores sêniores dedicados ao projeto
-- Código limpo, versionado e 100% documentado
-- Demonstrações parciais para você acompanhar e aprovar durante o desenvolvimento
-- Garantia de suporte pós-entrega
+Durante o projeto, alinhamos as etapas e compartilhamos o progresso. Na entrega, incluímos o código e as orientações de uso combinadas.
 
-Confira nosso portfólio 3D com projetos reais e código no GitHub:
+Confira nossos projetos e código no GitHub:
 https://github.com/blackxzin | https://github.com/Felipe-Luvizotto
 
-Podemos conversar no chat para fechar os detalhes e iniciar imediatamente?`;
+Se fizer sentido, podemos conversar para definir os próximos passos.`;
   }
 
   function bindCalculatorEvents() {
@@ -206,7 +201,6 @@ Podemos conversar no chat para fechar os detalhes e iniciar imediatamente?`;
         const found = projectTypes.find(t => t.id === id);
         if (found) {
           selectedType = found;
-          soundFx.playClick();
           render();
         }
       });
@@ -221,7 +215,6 @@ Podemos conversar no chat para fechar os detalhes e iniciar imediatamente?`;
         } else {
           selectedFeatures.add(id);
         }
-        soundFx.playHover();
         render();
       });
     });
@@ -233,7 +226,6 @@ Podemos conversar no chat para fechar os detalhes e iniciar imediatamente?`;
         const found = urgencies.find(u => u.id === id);
         if (found) {
           selectedUrgency = found;
-          soundFx.playClick();
           render();
         }
       });
@@ -262,14 +254,6 @@ Podemos conversar no chat para fechar os detalhes e iniciar imediatamente?`;
 
         try {
           await navigator.clipboard.writeText(text);
-          soundFx.playChime();
-
-          // Confetti celebration
-          confetti({
-            particleCount: 50,
-            spread: 60,
-            origin: { y: 0.8 }
-          });
 
           if (alertMsg) {
             alertMsg.style.display = 'block';

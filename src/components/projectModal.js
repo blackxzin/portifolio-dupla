@@ -1,4 +1,4 @@
-import { soundFx } from '../audio/soundFx.js';
+import { iconSvg } from './icon.js';
 
 export function setupProjectModal() {
   const modal = document.getElementById('project-detail-modal');
@@ -11,7 +11,6 @@ export function setupProjectModal() {
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
-    soundFx.playHover();
   }
 
   if (modalClose) modalClose.addEventListener('click', closeModal);
@@ -25,11 +24,10 @@ export function setupProjectModal() {
 
   return {
     open(project) {
-      soundFx.playClick();
       modalContent.innerHTML = `
         <div class="modal-header-section">
           <div class="modal-tags-row">
-            <span class="project-badge" style="background: ${project.accentColor}22; color: ${project.accentColor}; border: 1px solid ${project.accentColor}55;">
+            <span class="project-badge">
               ${project.badge}
             </span>
             <span class="modal-cat-badge">${project.categoryLabel}</span>
@@ -40,26 +38,26 @@ export function setupProjectModal() {
 
         <div class="modal-meta-grid">
           <div class="modal-meta-card">
-            <span class="meta-icon">👨‍💻</span>
+            <span class="meta-icon">${iconSvg('people')}</span>
             <div>
               <div class="meta-label">Desenvolvedor(es)</div>
               <div class="meta-value">${project.author}</div>
             </div>
           </div>
           <div class="modal-meta-card">
-            <span class="meta-icon">⚡</span>
+            <span class="meta-icon">${iconSvg('zap')}</span>
             <div>
-              <div class="meta-label">Desempenho & Métricas</div>
-              <div class="meta-value">${Object.values(project.metrics || {}).join(' • ') || 'Otimizado'}</div>
+              <div class="meta-label">Características</div>
+              <div class="meta-value">${Object.values(project.metrics || {}).join(' · ') || project.categoryLabel}</div>
             </div>
           </div>
         </div>
 
         <div class="modal-body-section">
-          <h4 class="section-subheading">Visão Geral da Arquitetura</h4>
+          <h4 class="section-subheading">Sobre este projeto</h4>
           <p class="modal-body-text">${project.longDesc}</p>
 
-          <h4 class="section-subheading">💼 Como essa solução gera valor para o cliente:</h4>
+          <h4 class="section-subheading">Como essa solução ajuda:</h4>
           <div class="modal-business-card">
             <p>${project.businessValue}</p>
           </div>
@@ -72,15 +70,15 @@ export function setupProjectModal() {
 
         <div class="modal-footer-actions">
           <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <span class="btn-icon">📦</span> Ver Repositório no GitHub
+            Ver repositório no GitHub
           </a>
           ${project.secondaryGithub ? `
             <a href="${project.secondaryGithub}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-              <span class="btn-icon">🔗</span> Repositório Complementar
+              Repositório complementar
             </a>
           ` : ''}
           <a href="#budget-calculator" class="btn btn-secondary" id="modal-want-similar">
-            <span class="btn-icon">💡</span> Quero um Projeto Semelhante
+            Quero conversar sobre algo parecido
           </a>
         </div>
       `;

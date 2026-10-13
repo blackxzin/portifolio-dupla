@@ -1,95 +1,95 @@
 export const duoProfile = {
-  brand: "NEXUS DUO",
-  tagline: "Engenharia de Software de Alta Performance & Inteligência Artificial",
-  headline: "Desenvolvemos o software que escala o seu negócio.",
-  subheadline: "Unimos backend robusto, automações com IA, aplicativos modernos e cibersegurança em uma única equipe de elite para entregar seus projetos no 99Freelas com rapidez e excelência.",
+  brand: "Lucas Gabriel & Felipe de Castro",
+  tagline: "Desenvolvimento de software",
+  headline: "Desenvolvimento feito de perto.",
+  subheadline: "Criamos sistemas web, APIs, aplicativos e automações sob medida, com escopo claro e acompanhamento próximo.",
   availability: "Disponíveis para novos projetos no 99Freelas",
-  rateStatus: "Orçamentos sob medida & Resposta em até 2 horas",
+  rateStatus: "Orçamentos sob medida",
   stats: [
-    { label: "Repositórios & Projetos", value: "+60" },
-    { label: "Tecnologias Dominadas", value: "+15" },
-    { label: "Foco em Performance", value: "100%" },
-    { label: "Entrega Garantida", value: "Ágil" }
+    { label: "Desenvolvedores", value: "2" },
+    { label: "Experiências", value: "Complementares" },
+    { label: "Projetos", value: "Sob medida" },
+    { label: "Acompanhamento", value: "Próximo" }
   ],
   services: [
     {
       id: "ai-auto",
-      icon: "bot",
-      title: "Automações & Bots com IA",
-      desc: "Automação de processos repetitivos, bots para WhatsApp/Telegram, pipelines n8n, raspagem de dados (scrapers) e agentes inteligentes com LLMs para economizar tempo e dinheiro da sua empresa.",
-      popular: true,
-      deliverables: ["Bots de atendimento", "Scraping e extração de dados", "Pipelines n8n & Webhooks", "Agentes inteligentes personalizados"]
+      icon: "link",
+      title: "Automações e integrações",
+      desc: "Automatização de tarefas repetitivas, integrações com WhatsApp e Telegram, fluxos no n8n e coleta de dados.",
+      popular: false,
+      deliverables: ["Bots de atendimento", "Coleta de dados", "Fluxos n8n e webhooks", "Integrações personalizadas"]
     },
     {
       id: "fullstack-saas",
       icon: "layout",
-      title: "Sistemas Web & SaaS Modernos",
-      desc: "Desenvolvimento de ponta a ponta com React, TypeScript, Next.js, FastAPI e Spring Boot. Interfaces rápidas, responsivas e painéis administrativos completos com autenticação e bancos relacionais.",
-      popular: true,
-      deliverables: ["Painéis administrativos (Dashboards)", "Plataformas SaaS completas", "Integração de pagamentos (PIX, Stripe, Mercado Pago)", "SEO e alta performance"]
+      title: "Sistemas web",
+      desc: "Aplicações e painéis administrativos feitos com React, TypeScript, FastAPI e Spring Boot, incluindo autenticação e banco de dados.",
+      popular: false,
+      deliverables: ["Painéis administrativos", "Plataformas SaaS", "Integração de pagamentos", "SEO técnico"]
     },
     {
       id: "apis-micro",
       icon: "server",
-      title: "APIs RESTful & Microsserviços",
-      desc: "Arquiteturas limpas e seguras em Java (Spring Boot) e Python (FastAPI). Integração entre sistemas terceiros (ERP, CRM, Gateways) com alta disponibilidade e documentação Swagger.",
+      title: "APIs e integrações",
+      desc: "Serviços em Java (Spring Boot) e Python (FastAPI), conectando plataformas, ERPs, CRMs e meios de pagamento.",
       popular: false,
-      deliverables: ["APIs escaláveis e documentadas", "Integração de CRMs e gateways", "Microsserviços em Docker", "Otimização de consultas a bancos SQL/NoSQL"]
+      deliverables: ["APIs documentadas", "Integração de CRMs e gateways", "Serviços em Docker", "Consultas SQL e NoSQL"]
     },
     {
       id: "mobile-apps",
       icon: "smartphone",
       title: "Aplicativos Mobile (iOS & Android)",
-      desc: "Criação de aplicativos fluidos com SwiftUI e Kotlin. Integração em tempo real com Firebase, mapas, notificações push e design refinado para encantar seus usuários.",
+      desc: "Aplicativos para iOS e Android com SwiftUI ou Kotlin, integrados a serviços, mapas e notificações.",
       popular: false,
       deliverables: ["Apps iOS nativos com SwiftUI", "Apps Android em Kotlin", "Integração com Firebase e APIs", "Publicação e testes"]
     },
     {
       id: "cyber-audit",
       icon: "shield-check",
-      title: "Cibersegurança & Auditoria de Código",
-      desc: "Proteção contra as vulnerabilidades críticas do OWASP Top 10, autenticação JWT robusta, rate-limiting, controle de riscos e auditoria defensiva para garantir que seus dados nunca vazem.",
+      title: "Revisão de segurança",
+      desc: "Análise de código e configuração de autenticação, permissões, limites de acesso e políticas de segurança.",
       popular: false,
-      deliverables: ["Auditoria contra falhas comuns", "Implementação de auth segura (JWT, OAuth)", "Risk scores e logs em tempo real", "Políticas de CORS e blindagem"]
+      deliverables: ["Revisão de falhas comuns", "Autenticação JWT ou OAuth", "Registro de eventos", "Configuração de CORS"]
     },
     {
       id: "desktop-custom",
       icon: "cpu",
-      title: "Ferramentas Desktop & Soluções Especiais",
-      desc: "Softwares desktop para Windows e Linux em Python e C#/.NET, utilitários de alta velocidade, transmissão multimídia local e rotinas especializadas sob demanda.",
+      title: "Aplicativos desktop",
+      desc: "Ferramentas para Windows e Linux em Python e C#/.NET, incluindo utilitários e transmissão multimídia local.",
       popular: false,
-      deliverables: ["Sistemas desktop C# / Python", "Streaming de baixa latência", "Autoclickers e automações de SO", "Simulações e gráficos 3D"]
+      deliverables: ["Sistemas desktop em C# e Python", "Transmissão multimídia", "Automação de tarefas", "Simulações 3D"]
     }
   ],
   members: [
     {
       name: "Lucas Gabriel",
       handle: "blackxzin",
-      role: "Full Stack Engineer & Cibersegurança",
-      bio: "Especialista em construir backends de missão crítica, APIs ultrarrápidas, integrações com IA, esteiras n8n e arquiteturas seguras. Experiência sólida com Java (Spring Boot), Python (FastAPI), React, Docker e análise defensiva.",
+      role: "Desenvolvimento web e segurança",
+      bio: "Desenvolvo APIs e sistemas web com Java (Spring Boot), Python (FastAPI) e React. Também trabalho com automações n8n e revisão de segurança.",
       avatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
       github: "https://github.com/blackxzin",
       tags: ["Python", "Java", "Spring Boot", "FastAPI", "React", "Docker", "n8n", "Cibersegurança", "APIs"],
       highlights: [
-        "Criador da plataforma de segurança Sentinel Platform",
-        "Desenvolvedor da API de análise de currículos e matching de vagas (ATS)",
-        "Especialista em automação de fluxos n8n e bots autônomos",
-        "Arquiteto de produtos SaaS e microsserviços em Docker"
+        "Desenvolvimento de sistemas web e APIs",
+        "Projetos com Spring Boot, FastAPI e React",
+        "Automações de processos com n8n",
+        "Revisão de segurança e infraestrutura"
       ]
     },
     {
-      name: "Felipe Luvizotto",
+      name: "Felipe de Castro",
       handle: "Felipe-Luvizotto",
-      role: "Software Engineer • Mobile & AI",
-      bio: "Formação técnica de elite pelo Cotuca (Colégio Técnico de Campinas - UNICAMP). Especialista em desenvolvimento mobile nativo (SwiftUI/iOS), algoritmos complexos em C#/.NET, inteligência artificial com Machine Learning e Unity 3D.",
+      role: "Aplicativos e experiências interativas",
+      bio: "Formado pelo Cotuca (Colégio Técnico de Campinas - UNICAMP). Trabalho com aplicativos iOS em SwiftUI, C#/.NET e Unity.",
       avatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
       github: "https://github.com/Felipe-Luvizotto/Felipe-Luvizotto",
       tags: ["C#", ".NET", "Swift", "SwiftUI", "Python", "Machine Learning", "TypeScript", "Unity 3D", "Firebase"],
       highlights: [
-        "Formação Cotuca / UNICAMP - Excelência técnica em algoritmos",
-        "Desenvolvedor de Multi-Agent LLM Trading Framework",
-        "Modelos de Machine Learning para detecção de fraudes financeiras",
-        "Apps iOS nativos com SwiftUI, Firebase e MapKit"
+        "Formação técnica em programação no COTUCA / UNICAMP",
+        "Desenvolvimento de aplicativos e sistemas",
+        "Projetos com Python e análise de dados",
+        "Experiência com SwiftUI, Firebase e MapKit"
       ]
     }
   ]
@@ -98,23 +98,23 @@ export const duoProfile = {
 export const projectsData = [
   {
     id: "freelahunter-ai",
-    title: "FreelaHunter AI",
+    title: "FreelaHunter",
     badge: "Colaboração da Dupla",
     featured: true,
     author: "Lucas & Felipe",
     authorHandle: "blackxzin + Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "ai",
-    categoryLabel: "Automação & IA",
-    techs: ["Python", "OpenAI / LLMs", "Web Scraping", "Automação", "Analytics"],
-    shortDesc: "Plataforma inteligente para caçar oportunidades de freelancing (99Freelas, Upwork, Workana), analisar briefings de vagas e gerar propostas persuasivas sob medida com rastreabilidade.",
-    longDesc: "Desenvolvida pela dupla para automatizar o processo de captação e análise de projetos freelancer. A ferramenta extrai descrições em tempo real, avalia compatibilidade de habilidades, calcula score de viabilidade do projeto e gera propostas altamente persuasivas personalizadas para cada cliente.",
-    businessValue: "Ideal para empresas e prestadores de serviço que desejam captar clientes no piloto automático, filtrando apenas leads com alta probabilidade de fechamento.",
+    categoryLabel: "Automação",
+    techs: ["Python", "Modelos de linguagem", "Coleta de dados", "Automação", "APIs"],
+    shortDesc: "Ferramenta para reunir oportunidades de trabalho, comparar briefings com um perfil profissional e acompanhar propostas.",
+    longDesc: "O projeto organiza vagas encontradas em plataformas de freelancers, registra os requisitos e ajuda a comparar cada oportunidade com as habilidades cadastradas.",
+    businessValue: "Ajuda a manter oportunidades e propostas organizadas em um só lugar.",
     github: "https://github.com/blackxzin/freelahunter-ai",
     secondaryGithub: "https://github.com/Felipe-Luvizotto/freelahunter-ai",
     stars: 0,
     accentColor: "#6366f1",
-    metrics: { efficiency: "+300% vel. de propostas", accuracy: "95% match de vagas" }
+    metrics: { workflow: "Busca · análise · acompanhamento" }
   },
   {
     id: "sentinel-security",
@@ -127,9 +127,9 @@ export const projectsData = [
     category: "security",
     categoryLabel: "APIs & Cibersegurança",
     techs: ["Java", "Spring Boot", "Risk Engine", "Webhooks", "REST API", "Docker"],
-    shortDesc: "Plataforma corporativa de monitoramento e detecção de atividades anômalas com motor de regras, cálculo dinâmico de Risk Score e alertas instantâneos de invasão.",
-    longDesc: "Sistema defensivo robusto construído em Java e Spring Boot com arquitetura orientada a eventos. Processa logs e requisições suspeitas, calcula o grau de risco em milissegundos e dispara gatilhos de segurança com webhooks e notificações em tempo real.",
-    businessValue: "Garante que o seu sistema ou e-commerce esteja blindado contra abusos, tentativas de força bruta, acessos não autorizados e comportamentos fraudulentos.",
+    shortDesc: "Serviço em Java para registrar eventos, aplicar regras de risco e enviar alertas por webhook.",
+    longDesc: "Construído com Spring Boot, o projeto recebe eventos, avalia regras configuradas e registra ocorrências para análise. Webhooks encaminham alertas a outros serviços.",
+    businessValue: "Pode servir como ponto de partida para monitoramento de eventos em aplicações web.",
     github: "https://github.com/blackxzin/sentinel-security-platform",
     stars: 0,
     accentColor: "#10b981",
@@ -137,22 +137,22 @@ export const projectsData = [
   },
   {
     id: "trading-agents",
-    title: "TradingAgents Multi-LLM",
-    badge: "Felipe Luvizotto",
+    title: "TradingAgents",
+    badge: "Felipe de Castro",
     featured: true,
-    author: "Felipe Luvizotto",
+    author: "Felipe de Castro",
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "ai",
-    categoryLabel: "Automação & IA",
-    techs: ["Python", "Multi-Agent AI", "LLMs", "Quant Finance", "Prompt Eng."],
-    shortDesc: "Framework financeiro multi-agente baseado em Large Language Models para análise coordenada de mercados, consolidação de notícias e hipóteses de investimento.",
-    longDesc: "Sistema avançado onde múltiplos agentes de IA desempenham papéis especializados (analista técnico, analista fundamentalista, gestor de risco e tomador de decisão), debatendo cenários de mercado para gerar relatórios sintetizados de altíssima precisão.",
-    businessValue: "Demonstra domínio prático sobre as arquiteturas de agentes de IA mais modernas do mundo, aplicáveis a qualquer tipo de consultoria, CRM analítico ou automação de processos complexos.",
+    categoryLabel: "Análise de dados",
+    techs: ["Python", "Sistemas multiagentes", "Modelos de linguagem", "Mercado financeiro"],
+    shortDesc: "Experimento em Python que combina modelos de linguagem para organizar análises de mercado e notícias.",
+    longDesc: "O projeto separa tarefas de análise técnica, notícias e risco em etapas, reunindo as respostas em um relatório. Os resultados servem como material de estudo, não como recomendação de investimento.",
+    businessValue: "Demonstra uma forma de estruturar tarefas de análise com modelos de linguagem.",
     github: "https://github.com/Felipe-Luvizotto/TradingAgents",
     stars: 0,
     accentColor: "#f59e0b",
-    metrics: { agents: "Multi-Agentes Colaborativos", domain: "Finanças & IA" }
+    metrics: { workflow: "Análise · revisão · relatório" }
   },
   {
     id: "cv-analyzer",
@@ -166,31 +166,31 @@ export const projectsData = [
     categoryLabel: "APIs & Microsserviços",
     techs: ["Java", "Spring Boot", "Text Parsing", "ATS Engine", "REST API", "PostgreSQL"],
     shortDesc: "API REST em Java para extração automática de dados de currículos, comparação semântica com vagas de emprego e geração de relatórios de compatibilidade para RH.",
-    longDesc: "Microsserviço de alta performance capaz de digerir dezenas de formatos de currículos, indexar competências técnicas, experiência profissional e calcular com precisão a aderência do candidato aos requisitos da vaga solicitada.",
-    businessValue: "Economiza centenas de horas de triagem manual para plataformas de recrutamento, agências de RH e empresas em expansão.",
+    longDesc: "A API recebe o conteúdo de um currículo, extrai campos de experiência e competências e compara esses dados com os requisitos de uma vaga.",
+    businessValue: "Pode apoiar a organização inicial de currículos em um processo de recrutamento.",
     github: "https://github.com/blackxzin/cv-analyzer-api",
     stars: 0,
     accentColor: "#3b82f6",
-    metrics: { speed: "Processamento instantâneo", format: "Padrão ATS Internacional" }
+    metrics: { workflow: "Extração · comparação · relatório" }
   },
   {
     id: "fraud-detection-ai",
-    title: "AI Fraude Detection Engine",
-    badge: "Felipe Luvizotto",
+    title: "Análise de transações",
+    badge: "Felipe de Castro",
     featured: true,
-    author: "Felipe Luvizotto",
+    author: "Felipe de Castro",
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "ai",
     categoryLabel: "Data Science & ML",
     techs: ["Python", "Jupyter Notebook", "Machine Learning", "Scikit-Learn", "Pandas"],
-    shortDesc: "Modelo preditivo de Machine Learning para identificação em tempo real de transações financeiras fraudulentas com alta taxa de acerto e minimização de falsos positivos.",
-    longDesc: "Projeto construído com rigor estatístico sobre bases de dados bancárias com classes desbalanceadas. Aplica engenharia de atributos avançada, algoritmos ensemble e validação cruzada para sinalizar comportamentos atípicos em pagamentos.",
-    businessValue: "Redução direta de prejuízos financeiros por chargeback e proteção ao cliente final em plataformas de checkout e gateways de pagamento.",
+    shortDesc: "Projeto em Python que usa dados de transações para estudar padrões associados a fraude.",
+    longDesc: "O notebook prepara os dados, treina um classificador e compara os resultados usando métricas de validação. É um projeto de estudo, não um serviço pronto para decisões financeiras.",
+    businessValue: "Exercício prático de preparação de dados e classificação de transações.",
     github: "https://github.com/Felipe-Luvizotto/InteligenciaArtificialDeFraudes",
     stars: 0,
     accentColor: "#ec4899",
-    metrics: { accuracy: "Score ROC-AUC Otimizado", domain: "Fintech & Antifraude" }
+    metrics: { workflow: "Preparação · treino · avaliação" }
   },
   {
     id: "linuxdesk",
@@ -214,9 +214,9 @@ export const projectsData = [
   {
     id: "swiftui-firebase",
     title: "SwiftUI & Firebase Suite",
-    badge: "Felipe Luvizotto",
+    badge: "Felipe de Castro",
     featured: false,
-    author: "Felipe Luvizotto",
+    author: "Felipe de Castro",
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "mobile",
@@ -229,7 +229,7 @@ export const projectsData = [
     secondaryGithub: "https://github.com/Felipe-Luvizotto/mapInSwiftUI",
     stars: 0,
     accentColor: "#06b6d4",
-    metrics: { platform: "iOS Nativo 100%", backend: "Firebase Cloud" }
+    metrics: { platform: "SwiftUI · iOS", backend: "Firebase" }
   },
   {
     id: "btc-trading-bot",
@@ -243,8 +243,8 @@ export const projectsData = [
     categoryLabel: "Automação & Finanças",
     techs: ["Python", "Crypto API", "Backtesting", "Risk Management", "Fast Execution"],
     shortDesc: "Laboratório de pesquisa para geração de sinais técnicos e execução controlada de estratégias em Bitcoin com limites rigorosos de risco e validação estatística.",
-    longDesc: "Sistema autônomo com monitoramento de book de ofertas, cálculo de indicadores (RSI, Médias Móveis, Volume Profile), gatilhos de Stop Loss / Trailing Stop e disparo de alertas instantâneos via webhook.",
-    businessValue: "Automação sem falhas de rotinas financeiras, integração com APIs de terceiros e tolerância zero a erros de execução.",
+    longDesc: "Sistema que monitora dados de mercado, calcula indicadores (RSI, médias móveis e Volume Profile) e envia alertas por webhook conforme as regras configuradas.",
+    businessValue: "Organiza tarefas financeiras repetitivas e integra dados de serviços externos.",
     github: "https://github.com/blackxzin/btc-trading-bot",
     stars: 0,
     accentColor: "#f97316",
@@ -272,9 +272,9 @@ export const projectsData = [
   {
     id: "marte-graphs-csharp",
     title: "Rotas Ótimas & Grafos (.NET)",
-    badge: "Felipe Luvizotto",
+    badge: "Felipe de Castro",
     featured: false,
-    author: "Felipe Luvizotto",
+    author: "Felipe de Castro",
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "web",
@@ -300,7 +300,7 @@ export const projectsData = [
     category: "web",
     categoryLabel: "Sistemas Web & SaaS",
     techs: ["Python", "FastAPI", "React", "PostgreSQL", "Docker", "Tailored SaaS"],
-    shortDesc: "Boilerplate de arquitetura para produtos SaaS modernos com autenticação, cobranças, pipeline de dados e inteligência artificial acoplada.",
+    shortDesc: "Base para produtos SaaS com autenticação, cobranças e processamento de dados.",
     longDesc: "Base sólida para lançamento veloz de produtos no mercado. Contém estrutura modular em camadas, documentação OpenAPI automática, migrações de banco seguras e isolamento com Docker.",
     businessValue: "Entrega do seu produto SaaS pronto para testes de validação com clientes reais em semanas, não meses.",
     github: "https://github.com/blackxzin/jobpilot-ai",
@@ -312,9 +312,9 @@ export const projectsData = [
   {
     id: "unity-3d-sims",
     title: "Simulação 3D & Unity Engine",
-    badge: "Felipe Luvizotto",
+    badge: "Felipe de Castro",
     featured: false,
-    author: "Felipe Luvizotto",
+    author: "Felipe de Castro",
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "mobile",
@@ -327,7 +327,7 @@ export const projectsData = [
     secondaryGithub: "https://github.com/Felipe-Luvizotto/RollerMadness22129",
     stars: 0,
     accentColor: "#e11d48",
-    metrics: { fps: "60 FPS Cravados", engine: "Unity 3D Engine" }
+    metrics: { engine: "Unity 3D" }
   },
   {
     id: "cyber-security-hub",
@@ -367,57 +367,57 @@ export const projectsData = [
     secondaryGithub: "https://github.com/blackxzin/manga-reader",
     stars: 2,
     accentColor: "#a855f7",
-    metrics: { ui: "Dark Mode Nativo", mobile: "100% Responsivo" }
+    metrics: { ui: "Tema escuro", mobile: "Layout responsivo" }
   }
 ];
 
 export const freelanceBenefits = [
   {
     icon: "zap",
-    title: "Dois Especialistas pelo Custo de Um",
-    desc: "Ao contratar nossa dupla no 99Freelas, você ganha a velocidade de dois desenvolvedores complementares (Backend/Segurança e Frontend/Mobile/IA) trabalhando em paralelo sem gargalos."
+      title: "Duas áreas de experiência",
+      desc: "Lucas trabalha principalmente com backend e segurança; Felipe com aplicativos, interfaces e projetos interativos."
   },
   {
     icon: "shield",
-    title: "Código Seguro e Blindado",
-    desc: "Não fazemos gambiarras. Nosso código segue padrões limpos, autenticação segura, proteção contra falhas e testes de robustez antes de qualquer entrega."
+      title: "Atenção à segurança",
+      desc: "Consideramos autenticação, permissões e validação de dados durante o desenvolvimento."
   },
   {
     icon: "clock",
-    title: "Comunicação Ágil & Sem Enrolação",
-    desc: "Atualizações constantes de progresso com links de demonstração para você testar durante o desenvolvimento. Sem surpresas no dia da entrega."
+      title: "Acompanhamento do projeto",
+      desc: "Compartilhamos o progresso e alinhamos as próximas etapas durante o desenvolvimento."
   },
   {
     icon: "award",
-    title: "Suporte e Garantia Pós-Entrega",
-    desc: "Garantimos o funcionamento do que foi entregue e oferecemos suporte para eventuais dúvidas de implantação, hospedagem e operação."
+      title: "Orientação na entrega",
+      desc: "Ao final, explicamos como executar e publicar o que foi desenvolvido."
   }
 ];
 
 export const processSteps = [
   {
     step: "01",
-    title: "Briefing & Entendimento",
-    desc: "Analisamos sua demanda no 99Freelas ou WhatsApp, tiramos dúvidas técnicas e definimos o escopo exato do que vai gerar mais resultado para você."
+      title: "Conversa inicial",
+      desc: "Entendemos a necessidade, esclarecemos dúvidas e combinamos o que será feito."
   },
   {
     step: "02",
-    title: "Arquitetura & Proposta Clara",
-    desc: "Apresentamos o plano de execução, tecnologias ideais e cronograma detalhado de entregas com valores justos e transparentes."
+      title: "Escopo e planejamento",
+      desc: "Definimos etapas, tecnologias e uma previsão de prazo e investimento."
   },
   {
     step: "03",
     title: "Desenvolvimento & Testes",
-    desc: "Lucas cuida da infraestrutura e APIs robustas enquanto Felipe desenvolve interfaces e integrações. Você recebe links de prévia para validar o projeto em andamento."
+      desc: "Dividimos as tarefas conforme o projeto e compartilhamos versões de prévia para receber comentários."
   },
   {
     step: "04",
     title: "Homologação & Segurança",
-    desc: "Testamos todos os fluxos: pagamentos, responsividade em celular, tempos de resposta e blindagem de segurança."
+      desc: "Revisamos os principais fluxos e ajustamos os problemas encontrados antes da publicação."
   },
   {
     step: "05",
     title: "Entrega Final & Suporte",
-    desc: "Subimos o projeto em produção na sua nuvem, entregamos o código-fonte completo documentado e realizamos o treinamento se necessário."
+      desc: "Entregamos o código e orientações para publicação e uso."
   }
 ];

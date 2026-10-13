@@ -1,11 +1,10 @@
 import './style.css';
-import confetti from 'canvas-confetti';
 import { duoProfile, projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
 import { Portfolio3DScene } from './three/scene.js';
-import { soundFx } from './audio/soundFx.js';
 import { applyTiltEffect } from './components/tiltEffect.js';
 import { setupProjectModal } from './components/projectModal.js';
 import { setupBudgetCalculator } from './components/budgetCalculator.js';
+import { iconSvg } from './components/icon.js';
 
 // Application Controller
 class PortfolioApp {
@@ -34,8 +33,6 @@ class PortfolioApp {
     this.renderProjects();
 
     // 4. Attach Interactions
-    this.bindThemeSwitcher();
-    this.bindSoundToggle();
     this.bindFiltersAndSearch();
     this.bindContactForm();
     this.bindScrollSpy();
@@ -53,19 +50,9 @@ class PortfolioApp {
     const container = document.getElementById('services-grid-container');
     if (!container) return;
 
-    const iconMap = {
-      'bot': '🤖',
-      'layout': '💻',
-      'server': '⚡',
-      'smartphone': '📱',
-      'shield-check': '🛡️',
-      'cpu': '⚙️'
-    };
-
     container.innerHTML = duoProfile.services.map(svc => `
-      <div class="service-card ${svc.popular ? 'popular-badge' : ''} tilt-card">
-        ${svc.popular ? '<span class="popular-tag">🔥 Mais Solicitado</span>' : ''}
-        <span class="service-icon">${iconMap[svc.icon] || '⚡'}</span>
+      <div class="service-card tilt-card">
+        <span class="service-icon">${iconSvg(svc.icon)}</span>
         <h3 class="service-title">${svc.title}</h3>
         <p class="service-desc">${svc.desc}</p>
         <ul class="service-deliverables-list">
@@ -92,16 +79,9 @@ class PortfolioApp {
     const container = document.getElementById('benefits-grid-container');
     if (!container) return;
 
-    const benefitIcons = {
-      'zap': '⚡',
-      'shield': '🛡️',
-      'clock': '⏱️',
-      'award': '🏆'
-    };
-
     container.innerHTML = freelanceBenefits.map(b => `
       <div class="benefit-card tilt-card">
-        <span class="benefit-icon">${benefitIcons[b.icon] || '✨'}</span>
+        <span class="benefit-icon">${iconSvg(b.icon)}</span>
         <h3 class="benefit-title">${b.title}</h3>
         <p class="benefit-desc">${b.desc}</p>
       </div>
@@ -158,7 +138,7 @@ class PortfolioApp {
     container.innerHTML = filtered.map(p => `
       <article class="project-card tilt-card" data-project-id="${p.id}">
         <div class="card-top-row">
-          <span class="project-author-pill" style="background: ${p.accentColor}20; color: ${p.accentColor}; border: 1px solid ${p.accentColor}44;">
+          <span class="project-author-pill">
             ${p.badge}
           </span>
           <span class="project-category-tag">${p.categoryLabel}</span>
@@ -173,8 +153,8 @@ class PortfolioApp {
         </div>
 
         <div class="project-metrics-pill">
-          <span>📊</span>
-          <span>${Object.values(p.metrics || {})[0] || 'Otimizado para Produção'}</span>
+          ${iconSvg('code')}
+          <span>${Object.values(p.metrics || {})[0] || p.categoryLabel}</span>
         </div>
 
         <div class="project-card-actions">
@@ -215,7 +195,6 @@ class PortfolioApp {
         filterTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         this.currentFilter = tab.getAttribute('data-filter') || 'all';
-        soundFx.playClick();
         this.renderProjects();
       });
     });
@@ -252,37 +231,6 @@ class PortfolioApp {
     }
   }
 
-  bindThemeSwitcher() {
-    const themeButtons = document.querySelectorAll('.theme-mode-btn');
-    themeButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const theme = btn.getAttribute('data-theme');
-        themeButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        document.body.setAttribute('data-active-theme', theme);
-        if (this.scene3d) {
-          this.scene3d.setTheme(theme);
-        }
-        soundFx.playModeSwitch();
-      });
-    });
-  }
-
-  bindSoundToggle() {
-    const soundBtn = document.getElementById('btn-sound-toggle');
-    const soundIcon = document.getElementById('sound-icon');
-    if (!soundBtn) return;
-
-    soundBtn.addEventListener('click', () => {
-      const isEnabled = soundFx.toggleSound();
-      if (soundIcon) {
-        soundIcon.textContent = isEnabled ? '🔊' : '🔇';
-      }
-      soundBtn.setAttribute('title', isEnabled ? 'Efeitos Sonoros Ativados' : 'Efeitos Sonoros Desativados');
-    });
-  }
-
   bindContactForm() {
     const form = document.getElementById('quick-contact-form');
     const feedback = document.getElementById('form-feedback-msg');
@@ -298,17 +246,10 @@ class PortfolioApp {
       const formattedMsg = `Olá Lucas e Felipe! Me chamo ${name} (${contact}). Gostaria de conversar sobre um projeto de ${type}: "${message}".`;
       const waUrl = `https://wa.me/?text=${encodeURIComponent(formattedMsg)}`;
 
-      soundFx.playChime();
-      confetti({
-        particleCount: 60,
-        spread: 70,
-        origin: { y: 0.8 }
-      });
-
       if (feedback) {
         feedback.className = 'form-feedback-message success';
         feedback.innerHTML = `
-          ✅ Obrigado, <strong>${name}</strong>! Mensagem preparada.<br>
+          Obrigado, <strong>${name}</strong>. Sua mensagem está pronta.<br>
           <a href="${waUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: bold; text-decoration: underline; margin-top: 6px; display: inline-block;">
             Clique aqui para abrir no WhatsApp com a mensagem pronta →
           </a>
