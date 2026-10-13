@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucas Gabriel & Felipe Luvizotto | Portfólio 3D & Engenharia de Software</title>
+    <meta name="description" content="Portfólio 3D interativo da dupla Lucas Gabriel (blackxzin) e Felipe Luvizotto. Desenvolvimento Full Stack, Automações com IA, APIs de alta performance, Mobile e Cibersegurança para projetos no 99Freelas." />
+    <meta name="keywords" content="99freelas, desenvolvedor full stack, python, java spring boot, react, swiftui, inteligência artificial, automação n8n, cibersegurança, felipe luvizotto, blackxzin" />
+    <meta name="author" content="Lucas Gabriel & Felipe Luvizotto" />
+    <meta name="theme-color" content="#070b19" />
+
+    <!-- Open Graph / Meta Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lucas Gabriel & Felipe Luvizotto | Portfólio 3D & Software Studio" />
+    <meta property="og:description" content="Engenharia de software de ponta, automações com inteligência artificial e produtos digitais completos para o seu negócio." />
+    <meta property="og:url" content="https://github.com/blackxzin" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <!-- 3D Canvas Background Container -->
+    <div id="webgl-canvas-container" class="webgl-container" aria-hidden="true"></div>
+
+    <!-- UI Overlay Wrapper -->
+    <div class="app-layout">
+      <!-- Header / Navigation Bar -->
+      <header class="site-header" id="main-header">
+        <div class="header-inner container">
+          <a href="#hero" class="brand-logo" id="brand-logo-btn">
+            <span class="brand-symbol">⚡</span>
+            <span class="brand-name">NEXUS<span class="highlight">DUO</span></span>
+            <span class="brand-sub">STUDIO</span>
+          </a>
+
+          <nav class="site-nav" id="desktop-nav" aria-label="Navegação Principal">
+            <a href="#hero" class="nav-link active">Início</a>
+            <a href="#duo-team" class="nav-link">A Dupla</a>
+            <a href="#projects" class="nav-link">Projetos 3D</a>
+            <a href="#services" class="nav-link">Serviços</a>
+            <a href="#budget-calculator" class="nav-link">Calculadora 99Freelas</a>
+            <a href="#process" class="nav-link">Como Trabalhamos</a>
+            <a href="#contact" class="nav-link">Contato</a>
+          </nav>
+
+          <div class="header-controls">
+            <!-- 3D Theme Selector -->
+            <div class="theme-selector-wrapper" title="Alterar Estilo Visual 3D">
+              <button type="button" class="theme-mode-btn active" data-theme="cyber" id="btn-theme-cyber" aria-label="Tema Cyber">🌌</button>
+              <button type="button" class="theme-mode-btn" data-theme="matrix" id="btn-theme-matrix" aria-label="Tema Matrix">🟢</button>
+              <button type="button" class="theme-mode-btn" data-theme="solar" id="btn-theme-solar" aria-label="Tema Solar">🔥</button>
+            </div>
+
+            <!-- Sound FX Toggle -->
+            <button type="button" class="icon-toggle-btn" id="btn-sound-toggle" title="Efeitos Sonoros Sci-Fi (Ativar/Desativar)" aria-label="Ativar som">
+              <span id="sound-icon">🔇</span>
+            </button>
+
+            <!-- 99Freelas CTA -->
+            <a href="#contact" class="btn btn-sm btn-glow header-cta" id="header-contact-btn">
+              Contratar no 99Freelas
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+          <div class="container hero-container">
+            <div class="hero-text-content">
+              <div class="hero-status-pill">
+                <span class="status-indicator"></span>
+                <span class="status-text">🟢 Disponíveis para novos projetos no 99Freelas</span>
+              </div>
+
+              <h1 class="hero-title">
+                Engenharia de Software de Elite &amp; <span class="gradient-text">Inteligência Artificial</span>
+              </h1>
+
+              <p class="hero-description">
+                Somos <strong>Lucas Gabriel</strong> e <strong>Felipe Luvizotto</strong>. Combinamos backend de alta robustez, automações com IA, aplicativos móveis e cibersegurança para construir o software que escala o seu negócio com rapidez e excelência.
+              </p>
+
+              <div class="hero-cta-group">
+                <a href="#projects" class="btn btn-primary btn-lg" id="hero-btn-projects">
+                  <span class="btn-icon">✨</span> Explorar Projetos &amp; Código
+                </a>
+                <a href="#budget-calculator" class="btn btn-secondary btn-lg" id="hero-btn-calculator">
+                  <span class="btn-icon">📊</span> Simular Orçamento 99Freelas
+                </a>
+              </div>
+
+              <!-- Quick Stats Grid -->
+              <div class="hero-stats-row">
+                <div class="hero-stat-card">
+                  <span class="stat-number">+60</span>
+                  <span class="stat-desc">Repositórios &amp; Projetos</span>
+                </div>
+                <div class="hero-stat-card">
+                  <span class="stat-number">2x</span>
+                  <span class="stat-desc">Velocidade de Entrega em Dupla</span>
+                </div>
+                <div class="hero-stat-card">
+                  <span class="stat-number">100%</span>
+                  <span class="stat-desc">Código Limpo &amp; Testado</span>
+                </div>
+                <div class="hero-stat-card">
+                  <span class="stat-number">&lt; 2h</span>
+                  <span class="stat-desc">Tempo Médio de Resposta</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3D Core Interactive Callout / Anchor -->
+            <div class="hero-3d-callout" id="hero-3d-interactive-hint">
+              <div class="interactive-hint-card">
+                <span class="hint-icon">🪐</span>
+                <span class="hint-text">Núcleo 3D Interativo • Mova o mouse ou clique para girar</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Duo Profiles Section -->
+        <section class="section team-section" id="duo-team">
+          <div class="container">
+            <div class="section-header text-center">
+              <span class="section-tag">QUEM SOMOS</span>
+              <h2 class="section-title">A Dupla por Trás do Seu Projeto</h2>
+              <p class="section-subtitle">
+                Dois desenvolvedores especialistas com habilidades que se complementam perfeitamente para cobrir todas as etapas do seu software do início ao fim.
+              </p>
+            </div>
+
+            <div class="team-cards-grid">
+              <!-- Lucas Gabriel Card -->
+              <article class="developer-profile-card tilt-card" id="profile-lucas">
+                <div class="dev-card-glow"></div>
+                <div class="dev-card-header">
+                  <div class="dev-avatar-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/173632812?v=4" alt="Lucas Gabriel (blackxzin)" class="dev-avatar" loading="lazy" />
+                    <span class="dev-avatar-badge" title="Full Stack & Cibersegurança">🛡️</span>
+                  </div>
+                  <div class="dev-info-col">
+                    <h3 class="dev-name">Lucas Gabriel</h3>
+                    <div class="dev-handle">@blackxzin</div>
+                    <div class="dev-role">Full Stack Engineer &amp; Cibersegurança</div>
+                  </div>
+                </div>
+
+                <p class="dev-bio">
+                  Especialista em arquitetura de microsserviços, backends de alta performance com Spring Boot e FastAPI, automações inteligentes de fluxos corporativos com n8n, bots de trading e auditoria de segurança (OWASP Top 10).
+                </p>
+
+                <div class="dev-skills-section">
+                  <span class="skills-title">Principais Tecnologias:</span>
+                  <div class="dev-tech-chips">
+                    <span class="tech-chip">Python</span>
+                    <span class="tech-chip">Java</span>
+                    <span class="tech-chip">Spring Boot</span>
+                    <span class="tech-chip">FastAPI</span>
+                    <span class="tech-chip">React</span>
+                    <span class="tech-chip">Docker</span>
+                    <span class="tech-chip">n8n</span>
+                    <span class="tech-chip">Cibersegurança</span>
+                  </div>
+                </div>
+
+                <div class="dev-highlights-box">
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>Criador da <strong>Sentinel Security Platform</strong> e APIs de ATS</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>Automação de workflows empresariais e scraping com IA</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>Arquitetura de microsserviços em Docker e Cloud</span>
+                  </div>
+                </div>
+
+                <div class="dev-footer-actions">
+                  <a href="https://github.com/blackxzin" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-block">
+                    <span class="btn-icon">🐙</span> Ver GitHub (@blackxzin)
+                  </a>
+                </div>
+              </article>
+
+              <!-- Felipe Luvizotto Card -->
+              <article class="developer-profile-card tilt-card" id="profile-felipe">
+                <div class="dev-card-glow"></div>
+                <div class="dev-card-header">
+                  <div class="dev-avatar-wrapper">
+                    <img src="https://avatars.githubusercontent.com/u/101439293?v=4" alt="Felipe Luvizotto" class="dev-avatar" loading="lazy" />
+                    <span class="dev-avatar-badge" title="Cotuca / UNICAMP - Software & Mobile">🎓</span>
+                  </div>
+                  <div class="dev-info-col">
+                    <h3 class="dev-name">Felipe Luvizotto</h3>
+                    <div class="dev-handle">@Felipe-Luvizotto</div>
+                    <div class="dev-role">Software Engineer • Mobile &amp; AI</div>
+                  </div>
+                </div>
+
+                <p class="dev-bio">
+                  Formado pelo <strong>Cotuca (Colégio Técnico de Campinas - UNICAMP)</strong>. Especialista em engenharia de software com C#/.NET, desenvolvimento mobile nativo para iOS (SwiftUI), modelos de Machine Learning para detecção de fraudes e motores 3D (Unity).
+                </p>
+
+                <div class="dev-skills-section">
+                  <span class="skills-title">Principais Tecnologias:</span>
+                  <div class="dev-tech-chips">
+                    <span class="tech-chip">C#</span>
+                    <span class="tech-chip">.NET</span>
+                    <span class="tech-chip">Swift</span>
+                    <span class="tech-chip">SwiftUI (iOS)</span>
+                    <span class="tech-chip">Machine Learning</span>
+                    <span class="tech-chip">TypeScript</span>
+                    <span class="tech-chip">Unity 3D</span>
+                    <span class="tech-chip">Firebase</span>
+                  </div>
+                </div>
+
+                <div class="dev-highlights-box">
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>Formação <strong>Cotuca / UNICAMP</strong> — rigor algorítmico</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>Desenvolvimento nativo de apps iOS com SwiftUI &amp; Firebase</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>Machine Learning antifraude e arquiteturas Multi-Agente LLM</span>
+                  </div>
+                </div>
+
+                <div class="dev-footer-actions">
+                  <a href="https://github.com/Felipe-Luvizotto" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-block">
+                    <span class="btn-icon">🐙</span> Ver GitHub (@Felipe-Luvizotto)
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <!-- Duo Synergy Callout Banner -->
+            <div class="synergy-banner">
+              <div class="synergy-icon">⚡🤝⚡</div>
+              <div class="synergy-content">
+                <h3 class="synergy-title">Por que contratar a dupla no 99Freelas?</h3>
+                <p class="synergy-text">
+                  Em projetos individuais, atrasos e gargalos são comuns quando um único freelancer precisa fazer tudo sozinho. Conosco, você tem <strong>um especialista em backend, segurança e infraestrutura</strong> trabalhando lado a lado com <strong>um especialista em frontend moderno, mobile e dados</strong>. O resultado é o dobro de velocidade, revisão mútua de código e zero retrabalho.
+                </p>
+              </div>
+              <div class="synergy-action">
+                <a href="#budget-calculator" class="btn btn-primary">Fazer Orçamento Conosco</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="section services-section" id="services">
+          <div class="container">
+            <div class="section-header text-center">
+              <span class="section-tag">SOLUÇÕES PARA O SEU NEGÓCIO</span>
+              <h2 class="section-title">O Que Podemos Construir para Você</h2>
+              <p class="section-subtitle">
+                Entregamos soluções completas, desde scripts rápidos e bots de atendimento até sistemas corporativos de ponta a ponta.
+              </p>
+            </div>
+
+            <div class="services-grid" id="services-grid-container">
+              <!-- Dynamically populated / styled -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section class="section projects-section" id="projects">
+          <div class="container">
+            <div class="section-header">
+              <div class="section-header-left">
+                <span class="section-tag">PORTFÓLIO REAL &amp; CÓDIGO ABERTO</span>
+                <h2 class="section-title">Projetos &amp; Trabalhos Realizados</h2>
+                <p class="section-subtitle">
+                  Explore nossos repositórios no GitHub, arquitetura e soluções reais desenvolvidas por Lucas e Felipe.
+                </p>
+              </div>
+
+              <!-- Real-time Search Input -->
+              <div class="project-search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="project-search-input" placeholder="Buscar por tecnologia (ex: Python, Spring, Swift, IA)..." aria-label="Buscar projetos" />
+                <button type="button" id="clear-search-btn" class="clear-search-btn" style="display: none;" aria-label="Limpar busca">✕</button>
+              </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="projects-filter-bar" id="projects-filter-bar">
+              <button type="button" class="filter-tab active" data-filter="all">🔥 Todos os Projetos</button>
+              <button type="button" class="filter-tab" data-filter="duo">🤝 Colaborações da Dupla</button>
+              <button type="button" class="filter-tab" data-filter="lucas">👨‍💻 Lucas (blackxzin)</button>
+              <button type="button" class="filter-tab" data-filter="felipe">👨‍💻 Felipe (Luvizotto)</button>
+              <button type="button" class="filter-tab" data-filter="ai">🤖 IA &amp; Automação</button>
+              <button type="button" class="filter-tab" data-filter="web">🌐 Fullstack Web</button>
+              <button type="button" class="filter-tab" data-filter="mobile">📱 Mobile &amp; Desktop</button>
+              <button type="button" class="filter-tab" data-filter="security">🛡️ APIs &amp; Segurança</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid" id="projects-grid-container">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div class="projects-empty-state" id="projects-empty-state" style="display: none;">
+              <span class="empty-icon">📂</span>
+              <h3>Nenhum projeto encontrado</h3>
+              <p>Tente buscar por outro termo ou limpe o filtro.</p>
+              <button type="button" class="btn btn-secondary" id="reset-filter-btn">Redefinir Filtros</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 99Freelas Budget Calculator Section -->
+        <section class="section calculator-section" id="budget-calculator">
+          <div class="container">
+            <div class="section-header text-center">
+              <span class="section-tag">SIMULADOR INTERATIVO</span>
+              <h2 class="section-title">Calculadora de Escopo &amp; Orçamento para 99Freelas</h2>
+              <p class="section-subtitle">
+                Precisa de uma estimativa rápida para o seu projeto? Selecione os requisitos abaixo e gere um escopo com valores e prazo aproximados para conversarmos.
+              </p>
+            </div>
+
+            <!-- Budget Calculator Container -->
+            <div id="budget-calculator-app">
+              <!-- Rendered via src/components/budgetCalculator.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Agile Process Section -->
+        <section class="section process-section" id="process">
+          <div class="container">
+            <div class="section-header text-center">
+              <span class="section-tag">METODOLOGIA TRANSPARENTE</span>
+              <h2 class="section-title">Como Funciona a Contratação &amp; Desenvolvimento</h2>
+              <p class="section-subtitle">
+                Processo ágil, sem burocracia, focado em entregas frequentes para você ter controle total do projeto.
+              </p>
+            </div>
+
+            <div class="process-steps-grid" id="process-steps-container">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Benefits & Guarantee Section -->
+        <section class="section benefits-section" id="benefits">
+          <div class="container">
+            <div class="section-header text-center">
+              <span class="section-tag">SEGURANÇA &amp; CONFIANÇA</span>
+              <h2 class="section-title">Nossos Diferenciais Competitivos</h2>
+              <p class="section-subtitle">
+                O que você ganha ao nos escolher no 99Freelas em comparação a outros prestadores:
+              </p>
+            </div>
+
+            <div class="benefits-grid" id="benefits-grid-container">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact & Hire Section -->
+        <section class="section contact-section" id="contact">
+          <div class="container">
+            <div class="contact-card-wrapper">
+              <div class="contact-left-info">
+                <span class="section-tag">VAMOS TIRAR SUA IDEIA DO PAPEL?</span>
+                <h2 class="contact-title">Inicie Seu Projeto Conosco Hoje</h2>
+                <p class="contact-desc">
+                  Estamos prontos para analisar o briefing do seu projeto no <strong>99Freelas</strong>, WhatsApp ou por e-mail. Respondemos com proposta técnica detalhada em até 2 horas.
+                </p>
+
+                <div class="contact-methods-list">
+                  <a href="https://www.99freelas.com.br" target="_blank" rel="noopener noreferrer" class="contact-method-item">
+                    <span class="method-icon">💼</span>
+                    <div>
+                      <div class="method-name">99Freelas</div>
+                      <div class="method-detail">Contratação Segura com Garantia da Plataforma</div>
+                    </div>
+                  </a>
+
+                  <a href="https://wa.me/?text=Ol%C3%A1%20Lucas%20e%20Felipe!%20Vi%20o%20portf%C3%B3lio%203D%20de%20voc%C3%AAs%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="contact-method-item highlight">
+                    <span class="method-icon">💬</span>
+                    <div>
+                      <div class="method-name">WhatsApp Direto</div>
+                      <div class="method-detail">Conversa rápida com os desenvolvedores</div>
+                    </div>
+                  </a>
+
+                  <div class="contact-github-duo">
+                    <a href="https://github.com/blackxzin" target="_blank" rel="noopener noreferrer" class="contact-gh-badge">
+                      <span class="gh-icon">🐙</span> GitHub Lucas: <strong>@blackxzin</strong>
+                    </a>
+                    <a href="https://github.com/Felipe-Luvizotto" target="_blank" rel="noopener noreferrer" class="contact-gh-badge">
+                      <span class="gh-icon">🐙</span> GitHub Felipe: <strong>@Felipe-Luvizotto</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Message Form -->
+              <div class="contact-form-column">
+                <form class="quick-contact-form" id="quick-contact-form">
+                  <h3 class="form-title">Envie uma Mensagem Rápida</h3>
+                  <div class="form-group">
+                    <label for="form-name">Seu Nome ou Empresa:</label>
+                    <input type="text" id="form-name" required placeholder="Ex: Carlos Silva / Minha Empresa" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-contact">Seu WhatsApp ou E-mail:</label>
+                    <input type="text" id="form-contact" required placeholder="Ex: (11) 99999-9999 ou email@empresa.com" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-type">Tipo de Projeto:</label>
+                    <select id="form-type">
+                      <option value="Automação / Bot IA">Automação / Bot com IA</option>
+                      <option value="Sistema Web / SaaS">Sistema Web / SaaS / Dashboard</option>
+                      <option value="API / Backend">API REST / Microsserviços</option>
+                      <option value="App Mobile iOS/Android">Aplicativo Mobile (iOS / Android)</option>
+                      <option value="Landing Page">Landing Page de Alta Conversão</option>
+                      <option value="Outro">Outro projeto sob demanda</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-message">Breve Descrição do Projeto:</label>
+                    <textarea id="form-message" rows="3" required placeholder="Descreva brevemente o que você precisa construir..."></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block btn-lg" id="form-submit-btn">
+                    <span class="btn-icon">🚀</span> Enviar Proposta para a Dupla
+                  </button>
+
+                  <div class="form-feedback-message" id="form-feedback-msg" style="display: none;"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="container footer-container">
+          <div class="footer-col-brand">
+            <div class="brand-logo">
+              <span class="brand-symbol">⚡</span>
+              <span class="brand-name">NEXUS<span class="highlight">DUO</span></span>
+            </div>
+            <p class="footer-tagline">
+              Engenharia de Software, Automações com IA &amp; Desenvolvimento Full Stack de Alto Nível.
+            </p>
+            <div class="footer-github-links">
+              <a href="https://github.com/blackxzin" target="_blank" rel="noopener noreferrer">github.com/blackxzin</a>
+              <span>•</span>
+              <a href="https://github.com/Felipe-Luvizotto" target="_blank" rel="noopener noreferrer">github.com/Felipe-Luvizotto</a>
+            </div>
+          </div>
+
+          <div class="footer-col-nav">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#hero">Início</a></li>
+              <li><a href="#duo-team">A Dupla</a></li>
+              <li><a href="#projects">Projetos 3D</a></li>
+              <li><a href="#services">Serviços</a></li>
+              <li><a href="#budget-calculator">Calculadora 99Freelas</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col-platforms">
+            <h4>Plataformas de Contratação</h4>
+            <ul>
+              <li><span class="dot-status"></span> 99Freelas (Disponíveis)</li>
+              <li><span class="dot-status"></span> Upwork</li>
+              <li><span class="dot-status"></span> WhatsApp Direto</li>
+              <li><span class="dot-status"></span> GitHub Open Source</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar container">
+          <p>© 2026 Nexus Duo Studio. Desenvolvido por Lucas Gabriel &amp; Felipe Luvizotto. Todos os direitos reservados.</p>
+          <a href="#hero" class="back-to-top-btn" id="back-to-top-btn" title="Voltar ao Topo">↑ Ao Topo</a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Project Details Modal Component -->
+    <div id="project-detail-modal" class="project-modal" aria-hidden="true" role="dialog">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-dialog">
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Fechar modal">✕</button>
+        <div class="modal-dynamic-content" id="modal-dynamic-content">
+          <!-- Filled by projectModal.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Module Script -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
