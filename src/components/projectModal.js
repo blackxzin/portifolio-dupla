@@ -1,4 +1,5 @@
 import { iconSvg } from './icon.js';
+import { whatsappUrl } from '../data/contact.js';
 
 export function setupProjectModal() {
   const modal = document.getElementById('project-detail-modal');
@@ -47,7 +48,7 @@ export function setupProjectModal() {
           <div class="modal-meta-card">
             <span class="meta-icon">${iconSvg('zap')}</span>
             <div>
-              <div class="meta-label">Características</div>
+              <div class="meta-label">Fluxo</div>
               <div class="meta-value">${Object.values(project.metrics || {}).join(' · ') || project.categoryLabel}</div>
             </div>
           </div>
@@ -57,12 +58,12 @@ export function setupProjectModal() {
           <h4 class="section-subheading">Sobre este projeto</h4>
           <p class="modal-body-text">${project.longDesc}</p>
 
-          <h4 class="section-subheading">Como essa solução ajuda:</h4>
+          <h4 class="section-subheading">Como essa solução ajuda</h4>
           <div class="modal-business-card">
             <p>${project.businessValue}</p>
           </div>
 
-          <h4 class="section-subheading">Tecnologias Utilizadas:</h4>
+          <h4 class="section-subheading">Tecnologias</h4>
           <div class="modal-tech-pills">
             ${project.techs.map(t => `<span class="tech-pill">${t}</span>`).join('')}
           </div>
@@ -77,8 +78,8 @@ export function setupProjectModal() {
               Repositório complementar
             </a>
           ` : ''}
-          <a href="#budget-calculator" class="btn btn-secondary" id="modal-want-similar">
-            Quero conversar sobre algo parecido
+          <a href="${whatsappUrl(`Olá, Lucas e Felipe! Vi o projeto ${project.title} no portfólio e queria conversar sobre algo parecido.`)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            Quero algo parecido
           </a>
         </div>
       `;
@@ -86,16 +87,6 @@ export function setupProjectModal() {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
 
-      const wantSimilarBtn = document.getElementById('modal-want-similar');
-      if (wantSimilarBtn) {
-        wantSimilarBtn.addEventListener('click', () => {
-          closeModal();
-          const target = document.getElementById('budget-calculator');
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      }
     }
   };
 }

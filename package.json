@@ -12,8 +12,6 @@
     "vite": "^8.3.0"
   },
   "dependencies": {
-    "canvas-confetti": "^1.9.4",
-    "lucide": "^1.56.0",
     "three": "^0.186.1"
   }
 }

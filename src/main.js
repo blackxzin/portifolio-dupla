@@ -1,10 +1,16 @@
 import './style.css';
+import './styles/motion.css';
 import { duoProfile, projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
-import { Portfolio3DScene } from './three/scene.js';
 import { applyTiltEffect } from './components/tiltEffect.js';
 import { setupProjectModal } from './components/projectModal.js';
-import { setupBudgetCalculator } from './components/budgetCalculator.js';
 import { iconSvg } from './components/icon.js';
+import { bindWhatsappLinks, whatsappUrl } from './data/contact.js';
+import {
+  setupReveal, renderStackMarquee, typeTerminal, setupScrollEffects, setupMobileMenu
+} from './components/motion.js';
+
+const TILT_DEGREES = 5;
+const FEATURED_LIMIT = 6;
 
 // Application Controller
 class PortfolioApp {
@@ -13,18 +19,21 @@ class PortfolioApp {
     this.searchQuery = '';
     this.modalController = null;
     this.scene3d = null;
+    this.showAllProjects = false;
   }
 
   init() {
     // 1. Initialize Three.js 3D Background
     const canvasContainer = document.getElementById('webgl-canvas-container');
+    // Loaded on demand so text and layout show up before the 3D bundle.
     if (canvasContainer) {
-      this.scene3d = new Portfolio3DScene(canvasContainer);
+      import('./three/scene.js')
+        .then(({ Portfolio3DScene }) => { this.scene3d = new Portfolio3DScene(canvasContainer); })
+        .catch((error) => console.error('3D scene failed to load', error));
     }
 
     // 2. Initialize Subcomponents
     this.modalController = setupProjectModal();
-    setupBudgetCalculator();
 
     // 3. Render Dynamic Content
     this.renderServices();
@@ -39,11 +48,19 @@ class PortfolioApp {
 
     // 5. Apply 3D Tilt on initial cards
     this.refreshTiltCards();
+
+    // 6. Motion & contact links
+    renderStackMarquee();
+    bindWhatsappLinks();
+    setupMobileMenu();
+    setupScrollEffects();
+    setupReveal();
+    typeTerminal();
   }
 
   refreshTiltCards() {
     const tiltCards = document.querySelectorAll('.tilt-card');
-    applyTiltEffect(tiltCards, 10);
+    applyTiltEffect(tiltCards, TILT_DEGREES);
   }
 
   renderServices() {
@@ -88,7 +105,8 @@ class PortfolioApp {
     `).join('');
   }
 
-  renderProjects() {
+  // Cards from `animateFrom` on fade in; search keystrokes pass Infinity to avoid flicker.
+  renderProjects({ animateFrom = 0 } = {}) {
     const container = document.getElementById('projects-grid-container');
     const emptyState = document.getElementById('projects-empty-state');
     if (!container) return;
@@ -129,14 +147,23 @@ class PortfolioApp {
 
     if (filtered.length === 0) {
       container.innerHTML = '';
+      this.updateProjectsToggle(false, 0);
       if (emptyState) emptyState.style.display = 'block';
       return;
     }
 
     if (emptyState) emptyState.style.display = 'none';
 
-    container.innerHTML = filtered.map(p => `
-      <article class="project-card tilt-card" data-project-id="${p.id}">
+    // Without filter or search, lead with the featured projects.
+    const isBrowsingAll = this.currentFilter === 'all' && this.searchQuery.trim() === '';
+    const ordered = isBrowsingAll
+      ? [...filtered].sort((a, b) => Number(b.featured) - Number(a.featured))
+      : filtered;
+    const visible = isBrowsingAll && !this.showAllProjects ? ordered.slice(0, FEATURED_LIMIT) : ordered;
+    this.updateProjectsToggle(isBrowsingAll, filtered.length);
+
+    container.innerHTML = visible.map((p, index) => `
+      <article class="project-card tilt-card${index >= animateFrom ? ' is-entering' : ''}" data-project-id="${p.id}" style="--enter-i:${(index - animateFrom) % FEATURED_LIMIT}">
         <div class="card-top-row">
           <span class="project-author-pill">
             ${p.badge}
@@ -184,7 +211,27 @@ class PortfolioApp {
     this.refreshTiltCards();
   }
 
+  updateProjectsToggle(isBrowsingAll, total) {
+    const wrapper = document.getElementById('projects-more');
+    const button = document.getElementById('projects-toggle-all');
+    if (!wrapper || !button) return;
+    wrapper.style.display = isBrowsingAll && total > FEATURED_LIMIT ? '' : 'none';
+    button.textContent = this.showAllProjects ? 'Mostrar menos' : `Ver todos os ${total} projetos`;
+    button.setAttribute('aria-expanded', String(this.showAllProjects));
+  }
+
   bindFiltersAndSearch() {
+    const toggleAll = document.getElementById('projects-toggle-all');
+    if (toggleAll) {
+      toggleAll.addEventListener('click', () => {
+        this.showAllProjects = !this.showAllProjects;
+        this.renderProjects({ animateFrom: this.showAllProjects ? FEATURED_LIMIT : Infinity });
+        if (!this.showAllProjects) {
+          document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
     const filterTabs = document.querySelectorAll('.filter-tab');
     const searchInput = document.getElementById('project-search-input');
     const clearSearchBtn = document.getElementById('clear-search-btn');
@@ -205,7 +252,7 @@ class PortfolioApp {
         if (clearSearchBtn) {
           clearSearchBtn.style.display = this.searchQuery ? 'block' : 'none';
         }
-        this.renderProjects();
+        this.renderProjects({ animateFrom: Infinity });
       });
     }
 
@@ -238,22 +285,26 @@ class PortfolioApp {
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('form-name').value;
-      const contact = document.getElementById('form-contact').value;
+      const name = document.getElementById('form-name').value.trim();
+      const contact = document.getElementById('form-contact').value.trim();
       const type = document.getElementById('form-type').value;
-      const message = document.getElementById('form-message').value;
+      const message = document.getElementById('form-message').value.trim();
 
-      const formattedMsg = `Olá Lucas e Felipe! Me chamo ${name} (${contact}). Gostaria de conversar sobre um projeto de ${type}: "${message}".`;
-      const waUrl = `https://wa.me/?text=${encodeURIComponent(formattedMsg)}`;
+      const text = `Olá, Lucas e Felipe! Me chamo ${name} (${contact}). Gostaria de conversar sobre um projeto de ${type}: "${message}".`;
+      const url = whatsappUrl(text);
+      window.open(url, '_blank', 'noopener');
 
       if (feedback) {
+        // Built with DOM nodes: the visitor's name never goes through innerHTML.
+        const intro = document.createElement('span');
+        intro.textContent = `Obrigado, ${name}! O WhatsApp abriu com a sua mensagem pronta. `;
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'Não abriu? Clique aqui.';
         feedback.className = 'form-feedback-message success';
-        feedback.innerHTML = `
-          Obrigado, <strong>${name}</strong>. Sua mensagem está pronta.<br>
-          <a href="${waUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: bold; text-decoration: underline; margin-top: 6px; display: inline-block;">
-            Clique aqui para abrir no WhatsApp com a mensagem pronta →
-          </a>
-        `;
+        feedback.replaceChildren(intro, link);
         feedback.style.display = 'block';
       }
 

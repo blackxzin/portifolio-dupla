@@ -1030,320 +1030,6 @@ a {
 }
 
 /* ==========================================================================
-   99Freelas Budget Calculator Section
-   ========================================================================== */
-.calculator-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 2.2rem;
-  align-items: start;
-}
-
-.calc-inputs-column {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 2.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
-
-.calc-step-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.calc-step-label {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.step-num {
-  background: var(--accent-cyan);
-  color: #070b19;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 800;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.calc-options-grid, .calc-urgency-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0.7rem;
-}
-
-.calc-chip {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  padding: 0.85rem 1rem;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  transition: all var(--transition-fast);
-  font-family: var(--font-main);
-}
-
-.calc-chip:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.calc-chip.active {
-  background: rgba(6, 182, 212, 0.15);
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 16px rgba(6, 182, 212, 0.25);
-}
-
-.chip-title {
-  font-weight: 600;
-  font-size: 0.92rem;
-}
-
-.chip-stack {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--text-muted);
-}
-
-.calc-features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 0.6rem;
-}
-
-.calc-checkbox-chip {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  padding: 0.7rem 0.85rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  text-align: left;
-  transition: all var(--transition-fast);
-  font-family: var(--font-main);
-}
-
-.calc-checkbox-chip:hover {
-  background: rgba(255, 255, 255, 0.09);
-}
-
-.calc-checkbox-chip.active {
-  background: rgba(99, 102, 241, 0.18);
-  border-color: var(--accent-indigo);
-}
-
-.calc-check-box {
-  width: 18px;
-  height: 18px;
-  border: 1px solid var(--border-subtle);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  color: #38bdf8;
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.calc-checkbox-chip.active .calc-check-box {
-  background: var(--accent-indigo);
-  color: #ffffff;
-  border-color: var(--accent-indigo);
-}
-
-.feature-text {
-  font-size: 0.85rem;
-  line-height: 1.3;
-}
-
-/* Calculator Results Card */
-.calc-results-card {
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 27, 75, 0.6));
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glow);
-  border-radius: var(--radius-lg);
-  padding: 2.2rem;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.live-pulse-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.78rem;
-  font-family: var(--font-mono);
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-full);
-  margin-bottom: 0.8rem;
-}
-
-.pulse-dot {
-  width: 6px;
-  height: 6px;
-  background: #38bdf8;
-  border-radius: 50%;
-  animation: pulse-ring 2s infinite;
-}
-
-.calc-result-title {
-  font-size: 1.6rem;
-  margin-bottom: 1.5rem;
-}
-
-.calc-price-box {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  padding: 1.4rem;
-  margin-bottom: 1.5rem;
-}
-
-.price-label {
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 0.4rem;
-}
-
-.price-range {
-  font-size: 2rem;
-  font-weight: 800;
-  font-family: var(--font-mono);
-  color: #34d399;
-}
-
-.currency {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-}
-
-.price-separator {
-  color: var(--text-faint);
-  margin: 0 0.3rem;
-}
-
-.price-sub {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
-.calc-metrics-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.calc-metric-item {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.metric-icon {
-  font-size: 1.3rem;
-}
-
-.metric-val {
-  font-weight: 700;
-  font-size: 0.88rem;
-}
-
-.metric-lbl {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.calc-stack-suggested {
-  margin-bottom: 1.8rem;
-  font-size: 0.85rem;
-  color: #cbd5e1;
-}
-
-.calc-tag-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
-}
-
-.tag-pill {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid var(--border-subtle);
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-}
-
-.tag-pill.highlight {
-  background: rgba(6, 182, 212, 0.15);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-}
-
-.calc-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.btn-calc-copy {
-  width: 100%;
-}
-
-.calc-copied-msg {
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid #10b981;
-  color: #34d399;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.86rem;
-  text-align: center;
-  margin-top: 1rem;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ==========================================================================
    Agile Process Steps
    ========================================================================== */
 .process-steps-grid {
@@ -1884,9 +1570,6 @@ a {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .calculator-grid {
-    grid-template-columns: 1fr;
-  }
   .process-steps-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2011,7 +1694,7 @@ body {
 .section-title { letter-spacing: -.045em; font-size: clamp(2rem, 3.2vw, 3rem); }
 .section-subtitle { color: #66716a; font-size: 1.02rem; line-height: 1.7; }
 .developer-profile-card, .service-card, .project-card, .benefit-card, .process-step-card,
-.contact-card-wrapper, .calc-panel, .calc-results-card {
+.contact-card-wrapper {
   background: rgba(255,255,255,.78); border: 1px solid rgba(27,41,36,.1);
   box-shadow: 0 12px 36px rgba(35,48,40,.055); backdrop-filter: blur(12px);
 }
@@ -2148,7 +1831,7 @@ body {
 .interactive-hint-card { background: rgba(37,24,30,.88); border-color: var(--border-subtle); color: #d0bec0; box-shadow: 0 14px 38px rgba(0,0,0,.22); }
 .section-tag { color: #f1a099; background: rgba(240,140,131,.09); border-color: rgba(240,140,131,.22); }
 .developer-profile-card, .service-card, .project-card, .benefit-card, .process-step-card,
-.contact-card-wrapper, .calc-panel, .calc-results-card {
+.contact-card-wrapper {
   background: rgba(39,25,31,.86);
   border-color: rgba(255,221,214,.1);
   box-shadow: 0 14px 38px rgba(0,0,0,.18);
@@ -2196,8 +1879,6 @@ body {
 .check-icon::after { content: ''; width: 7px; height: 4px; border-left: 1.5px solid #f3a098; border-bottom: 1.5px solid #f3a098; transform: translateY(-1px) rotate(-45deg); }
 .clear-search-btn, .modal-close-btn { font-size: 0; }
 .clear-search-btn::before, .modal-close-btn::before { content: '×'; font-size: 1.2rem; }
-.calc-check-box { font-size: 0; }
-.calc-checkbox-chip.active .calc-check-box::after { content: ''; width: 7px; height: 4px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-1px) rotate(-45deg); }
 ::selection { background: #8f4b58; color: #fff4f0; }
 :focus-visible { outline-color: rgba(240,140,131,.75); }
 @media (max-width: 768px) {

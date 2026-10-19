@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lucas Gabriel & Felipe de Castro — Portfólio</title>
     <meta name="description" content="Portfólio de Lucas Gabriel e Felipe de Castro. Desenvolvimento web, APIs, automações e aplicativos com foco em soluções práticas para cada projeto." />
-    <meta name="keywords" content="desenvolvimento de software, desenvolvimento web, APIs, aplicativos, automação, Lucas Gabriel, Felipe de Castro" />
-    <meta name="author" content="Lucas Gabriel & Felipe de Castro" />
+        <meta name="author" content="Lucas Gabriel & Felipe de Castro" />
     <meta name="theme-color" content="#160f13" />
 
     <!-- Open Graph / Meta Social -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Lucas Gabriel & Felipe de Castro — Portfólio" />
     <meta property="og:description" content="Conheça projetos, tecnologias e formas de trabalho de Lucas Gabriel e Felipe de Castro." />
-    <meta property="og:url" content="https://github.com/blackxzin" />
+    <meta property="og:url" content="https://portifolio-dupla.vercel.app/" />
+    <meta property="og:image" content="https://portifolio-dupla.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,6 +26,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <script>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <!-- 3D Canvas Background Container -->
@@ -31,6 +36,7 @@
     <div class="app-layout">
       <!-- Header / Navigation Bar -->
       <header class="site-header" id="main-header">
+        <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
         <div class="header-inner container">
           <a href="#hero" class="brand-logo" id="brand-logo-btn">
             <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
@@ -40,9 +46,8 @@
           <nav class="site-nav" id="desktop-nav" aria-label="Navegação Principal">
             <a href="#hero" class="nav-link active">Início</a>
             <a href="#duo-team" class="nav-link">A Dupla</a>
-            <a href="#projects" class="nav-link">Projetos</a>
             <a href="#services" class="nav-link">Serviços</a>
-            <a href="#budget-calculator" class="nav-link">Estimativa</a>
+            <a href="#projects" class="nav-link">Projetos</a>
             <a href="#process" class="nav-link">Processo</a>
             <a href="#contact" class="nav-link">Contato</a>
           </nav>
@@ -52,8 +57,18 @@
             <a href="#contact" class="btn btn-sm btn-glow header-cta" id="header-contact-btn">
               Fale com a gente
             </a>
+            <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu">
+              <span></span><span></span>
+            </button>
           </div>
         </div>
+        <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação no celular">
+          <a href="#duo-team">A Dupla</a>
+          <a href="#services">Serviços</a>
+          <a href="#projects">Projetos</a>
+          <a href="#process">Processo</a>
+          <a href="#contact">Contato</a>
+        </nav>
       </header>
 
       <!-- Main Content -->
@@ -62,29 +77,31 @@
         <section class="hero-section" id="hero">
           <div class="container hero-container">
             <div class="hero-text-content">
-              <div class="hero-status-pill">
+              <div class="hero-status-pill hero-in" style="--d:0">
+                <span class="status-indicator" aria-hidden="true"></span>
                 <span class="status-text">Disponíveis para novos projetos</span>
               </div>
 
               <h1 class="hero-title">
-                Desenvolvimento feito <span class="gradient-text">de perto.</span>
+                <span class="title-line"><span style="--d:1">Desenvolvimento</span></span>
+                <span class="title-line"><span style="--d:2">feito <span class="gradient-text">de perto.</span></span></span>
               </h1>
 
-              <p class="hero-description">
+              <p class="hero-description hero-in" style="--d:3">
                 Somos <strong>Lucas Gabriel</strong> e <strong>Felipe de Castro</strong>. Criamos sistemas web, APIs e automações sob medida — com conversa direta, escopo claro e atenção ao que seu negócio precisa.
               </p>
 
-              <div class="hero-cta-group">
+              <div class="hero-cta-group hero-in" style="--d:4">
                 <a href="#projects" class="btn btn-primary btn-lg" id="hero-btn-projects">
                   Ver projetos
                 </a>
-                <a href="#contact" class="btn btn-secondary btn-lg" id="hero-btn-calculator">
+                <a href="#contact" class="btn btn-secondary btn-lg" id="hero-btn-contact">
                   Conversar sobre um projeto
                 </a>
               </div>
 
               <!-- Quick Stats Grid -->
-              <div class="hero-stats-row">
+              <div class="hero-stats-row hero-in" style="--d:5">
                 <div class="hero-stat-card">
                   <span class="stat-number">02</span>
                   <span class="stat-desc">Desenvolvedores</span>
@@ -111,23 +128,28 @@
                   <span class="terminal-controls" aria-hidden="true"><i></i><i></i><i></i></span>
                   <span>portfolio / stack</span>
                 </div>
-                <div class="terminal-content" aria-hidden="true">
-                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> cat stack.txt</p>
-                  <p class="terminal-output">Java · Python · React</p>
-                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> git status --short</p>
-                  <p class="terminal-output"><span class="terminal-cursor">▍</span> APIs · web · aplicativos</p>
+                <div class="terminal-content" id="hero-terminal" aria-hidden="true">
+                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> <span data-type="cat stack.txt"></span></p>
+                  <p class="terminal-output" data-out>Java · Python · React · Swift</p>
+                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> <span data-type="ls servicos/"></span></p>
+                  <p class="terminal-output" data-out>web/  apis/  apps/  automacoes/</p>
+                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> <span data-type="./novo-projeto --com voce"></span><span class="terminal-cursor">▍</span></p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        <div class="stack-marquee" aria-label="Tecnologias que usamos">
+          <div class="stack-marquee-track" id="stack-marquee-track"></div>
+        </div>
+
         <!-- Duo Profiles Section -->
         <section class="section team-section" id="duo-team">
           <div class="container">
             <div class="section-header text-center">
               <span class="section-tag">Quem somos</span>
-              <h2 class="section-title">A Dupla por Trás do Seu Projeto</h2>
+              <h2 class="section-title">A dupla por trás do seu projeto</h2>
               <p class="section-subtitle">
                 Somos dois desenvolvedores com experiências diferentes, trabalhando juntos do planejamento à entrega.
               </p>
@@ -255,13 +277,13 @@
             <div class="synergy-banner">
               <div class="synergy-index" aria-hidden="true"><span>02</span><i></i></div>
               <div class="synergy-content">
-                <h3 class="synergy-title">Por que contratar a dupla no 99Freelas?</h3>
+                <h3 class="synergy-title">Por que trabalhar com a dupla?</h3>
                 <p class="synergy-text">
                   Lucas trabalha principalmente com backend e segurança. Felipe se dedica a aplicativos, interfaces e projetos interativos. Conversamos sobre o escopo juntos e acompanhamos cada etapa do desenvolvimento.
                 </p>
               </div>
               <div class="synergy-action">
-                <a href="#budget-calculator" class="btn btn-primary">Fazer Orçamento Conosco</a>
+                <a href="#contact" class="btn btn-primary">Conversar sobre um projeto</a>
               </div>
             </div>
           </div>
@@ -272,9 +294,9 @@
           <div class="container">
             <div class="section-header text-center">
               <span class="section-tag">O que fazemos</span>
-              <h2 class="section-title">O Que Podemos Construir para Você</h2>
+              <h2 class="section-title">O que podemos construir para você</h2>
               <p class="section-subtitle">
-                Cuidamos de automações e sistemas web, de acordo com o escopo de cada projeto.
+                Do site ao aplicativo, passando pelas integrações que fazem tudo conversar.
               </p>
             </div>
 
@@ -290,9 +312,9 @@
             <div class="section-header">
               <div class="section-header-left">
                 <span class="section-tag">Projetos e código</span>
-                <h2 class="section-title">Projetos &amp; Trabalhos Realizados</h2>
+                <h2 class="section-title">Projetos e trabalhos</h2>
                 <p class="section-subtitle">
-                  Explore nossos repositórios no GitHub, arquitetura e soluções reais desenvolvidas por Lucas e Felipe.
+                  Repositórios públicos de Lucas e Felipe: sistemas, APIs, aplicativos e estudos.
                 </p>
               </div>
 
@@ -321,28 +343,14 @@
               <!-- Dynamically populated -->
             </div>
 
+            <div class="projects-more" id="projects-more">
+              <button type="button" class="btn btn-secondary" id="projects-toggle-all" aria-expanded="false">Ver todos os projetos</button>
+            </div>
+
             <div class="projects-empty-state" id="projects-empty-state" style="display: none;">
               <h3>Nenhum projeto encontrado</h3>
               <p>Tente buscar por outro termo ou limpe o filtro.</p>
               <button type="button" class="btn btn-secondary" id="reset-filter-btn">Redefinir Filtros</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- 99Freelas Budget Calculator Section -->
-        <section class="section calculator-section" id="budget-calculator">
-          <div class="container">
-            <div class="section-header text-center">
-              <span class="section-tag">Estimativa inicial</span>
-              <h2 class="section-title">Quanto pode custar seu projeto?</h2>
-              <p class="section-subtitle">
-                Escolha o tipo de projeto e as funcionalidades para consultar uma faixa inicial de prazo e investimento.
-              </p>
-            </div>
-
-            <!-- Budget Calculator Container -->
-            <div id="budget-calculator-app">
-              <!-- Rendered via src/components/budgetCalculator.js -->
             </div>
           </div>
         </section>
@@ -352,7 +360,7 @@
           <div class="container">
             <div class="section-header text-center">
               <span class="section-tag">Nosso processo</span>
-              <h2 class="section-title">Como Funciona a Contratação &amp; Desenvolvimento</h2>
+              <h2 class="section-title">Como funciona, do primeiro contato à entrega</h2>
               <p class="section-subtitle">
                 Alinhamos o escopo, dividimos o trabalho em etapas e compartilhamos o progresso ao longo do desenvolvimento.
               </p>
@@ -369,9 +377,9 @@
           <div class="container">
             <div class="section-header text-center">
               <span class="section-tag">No dia a dia</span>
-              <h2 class="section-title">Nossos Diferenciais Competitivos</h2>
+              <h2 class="section-title">Nossos diferenciais</h2>
               <p class="section-subtitle">
-                Alguns cuidados que fazem parte do nosso trabalho:
+                Cuidados que fazem parte de todo projeto.
               </p>
             </div>
 
@@ -387,25 +395,25 @@
             <div class="contact-card-wrapper">
               <div class="contact-left-info">
                 <span class="section-tag">Contato</span>
-                <h2 class="contact-title">Inicie Seu Projeto Conosco Hoje</h2>
+                <h2 class="contact-title">Vamos conversar sobre o seu projeto</h2>
                 <p class="contact-desc">
-                  Conte um pouco sobre o que você precisa. Podemos conversar pelo <strong>99Freelas</strong> ou pelo WhatsApp e definir os próximos passos juntos.
+                  Conte um pouco sobre o que você precisa. Respondemos pelo WhatsApp e definimos juntos os próximos passos.
                 </p>
 
                 <div class="contact-methods-list">
-                  <a href="https://www.99freelas.com.br" target="_blank" rel="noopener noreferrer" class="contact-method-item">
-                    <span class="method-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
-                    <div>
-                      <div class="method-name">99Freelas</div>
-                      <div class="method-detail">Acesse nosso perfil na plataforma</div>
-                    </div>
-                  </a>
-
-                  <a href="https://wa.me/?text=Ol%C3%A1%20Lucas%20e%20Felipe!%20Vi%20o%20portf%C3%B3lio%203D%20de%20voc%C3%AAs%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="contact-method-item highlight">
+                  <a data-wa class="contact-method-item highlight">
                     <span class="method-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></span>
                     <div>
                       <div class="method-name">WhatsApp Direto</div>
-                      <div class="method-detail">Conversa rápida com os desenvolvedores</div>
+                      <div class="method-detail">Fale direto com quem desenvolve</div>
+                    </div>
+                  </a>
+
+                  <a href="https://www.linkedin.com/in/lucas-gabriel-787b1934/" target="_blank" rel="noopener noreferrer" class="contact-method-item">
+                    <span class="method-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span>
+                    <div>
+                      <div class="method-name">LinkedIn</div>
+                      <div class="method-detail">Lucas Gabriel · Felipe de Castro</div>
                     </div>
                   </a>
 
@@ -416,6 +424,9 @@
                     <a href="https://github.com/Felipe-Luvizotto" target="_blank" rel="noopener noreferrer" class="contact-gh-badge">
                       GitHub Felipe: <strong>@Felipe-Luvizotto</strong>
                     </a>
+                    <a href="https://www.linkedin.com/in/felipe-de-castro-292696259/" target="_blank" rel="noopener noreferrer" class="contact-gh-badge">
+                      LinkedIn Felipe: <strong>Felipe de Castro</strong>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -423,19 +434,19 @@
               <!-- Quick Message Form -->
               <div class="contact-form-column">
                 <form class="quick-contact-form" id="quick-contact-form">
-                  <h3 class="form-title">Envie uma Mensagem Rápida</h3>
+                  <h3 class="form-title">Mensagem rápida</h3>
                   <div class="form-group">
-                    <label for="form-name">Seu Nome ou Empresa:</label>
+                    <label for="form-name">Seu nome ou empresa</label>
                     <input type="text" id="form-name" required placeholder="Ex: Carlos Silva / Minha Empresa" />
                   </div>
 
                   <div class="form-group">
-                    <label for="form-contact">Seu WhatsApp ou E-mail:</label>
+                    <label for="form-contact">Seu WhatsApp ou e-mail</label>
                     <input type="text" id="form-contact" required placeholder="Ex: (11) 99999-9999 ou email@empresa.com" />
                   </div>
 
                   <div class="form-group">
-                    <label for="form-type">Tipo de Projeto:</label>
+                    <label for="form-type">Tipo de projeto</label>
                     <select id="form-type">
                       <option value="Automação / Bot">Automação / Bot</option>
                       <option value="Sistema Web / SaaS">Sistema Web / SaaS / Dashboard</option>
@@ -447,15 +458,15 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="form-message">Breve Descrição do Projeto:</label>
+                    <label for="form-message">O que você precisa</label>
                     <textarea id="form-message" rows="3" required placeholder="Descreva brevemente o que você precisa construir..."></textarea>
                   </div>
 
                   <button type="submit" class="btn btn-primary btn-block btn-lg" id="form-submit-btn">
-                    Enviar mensagem
+                    Enviar pelo WhatsApp
                   </button>
 
-                  <div class="form-feedback-message" id="form-feedback-msg" style="display: none;"></div>
+                  <div class="form-feedback-message" id="form-feedback-msg" role="status" style="display: none;"></div>
                 </form>
               </div>
             </div>
@@ -488,17 +499,16 @@
               <li><a href="#duo-team">A Dupla</a></li>
               <li><a href="#projects">Projetos</a></li>
               <li><a href="#services">Serviços</a></li>
-              <li><a href="#budget-calculator">Estimativa de projeto</a></li>
+              <li><a href="#contact">Contato</a></li>
             </ul>
           </div>
 
           <div class="footer-col-platforms">
-            <h4>Plataformas de Contratação</h4>
+            <h4>Contato</h4>
             <ul>
-              <li><span class="dot-status"></span> 99Freelas (Disponíveis)</li>
-              <li><span class="dot-status"></span> Upwork</li>
-              <li><span class="dot-status"></span> WhatsApp Direto</li>
-              <li><span class="dot-status"></span> GitHub Open Source</li>
+              <li><span class="dot-status"></span> <a data-wa>WhatsApp</a></li>
+              <li><span class="dot-status"></span> <a href="https://www.linkedin.com/in/lucas-gabriel-787b1934/" target="_blank" rel="noopener noreferrer">LinkedIn · Lucas</a></li>
+              <li><span class="dot-status"></span> <a href="https://www.linkedin.com/in/felipe-de-castro-292696259/" target="_blank" rel="noopener noreferrer">LinkedIn · Felipe</a></li>
             </ul>
           </div>
         </div>
@@ -509,6 +519,10 @@
         </div>
       </footer>
     </div>
+
+    <a class="floating-wa" id="floating-wa" data-wa aria-label="Conversar no WhatsApp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2l-4.5 1.3Z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1-.4-2.4-1.8-2.8-2.8l.9-1-1-2L9 8.5Z"/></svg>
+    </a>
 
     <!-- Project Details Modal Component -->
     <div id="project-detail-modal" class="project-modal" aria-hidden="true" role="dialog">

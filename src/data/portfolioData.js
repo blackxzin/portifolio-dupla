@@ -3,7 +3,7 @@ export const duoProfile = {
   tagline: "Desenvolvimento de software",
   headline: "Desenvolvimento feito de perto.",
   subheadline: "Criamos sistemas web, APIs, aplicativos e automações sob medida, com escopo claro e acompanhamento próximo.",
-  availability: "Disponíveis para novos projetos no 99Freelas",
+  availability: "Disponíveis para novos projetos",
   rateStatus: "Orçamentos sob medida",
   stats: [
     { label: "Desenvolvedores", value: "2" },
@@ -39,7 +39,7 @@ export const duoProfile = {
     {
       id: "mobile-apps",
       icon: "smartphone",
-      title: "Aplicativos Mobile (iOS & Android)",
+      title: "Aplicativos mobile",
       desc: "Aplicativos para iOS e Android com SwiftUI ou Kotlin, integrados a serviços, mapas e notificações.",
       popular: false,
       deliverables: ["Apps iOS nativos com SwiftUI", "Apps Android em Kotlin", "Integração com Firebase e APIs", "Publicação e testes"]
@@ -126,14 +126,14 @@ export const projectsData = [
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "security",
     categoryLabel: "APIs & Cibersegurança",
-    techs: ["Java", "Spring Boot", "Risk Engine", "Webhooks", "REST API", "Docker"],
+    techs: ["Java", "Spring Boot", "Webhooks", "REST API", "Docker"],
     shortDesc: "Serviço em Java para registrar eventos, aplicar regras de risco e enviar alertas por webhook.",
     longDesc: "Construído com Spring Boot, o projeto recebe eventos, avalia regras configuradas e registra ocorrências para análise. Webhooks encaminham alertas a outros serviços.",
     businessValue: "Pode servir como ponto de partida para monitoramento de eventos em aplicações web.",
     github: "https://github.com/blackxzin/sentinel-security-platform",
     stars: 0,
     accentColor: "#10b981",
-    metrics: { latency: "< 5ms por análise", alerts: "Tempo Real" }
+    metrics: { workflow: "Eventos · regras · alertas" }
   },
   {
     id: "trading-agents",
@@ -164,8 +164,8 @@ export const projectsData = [
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "web",
     categoryLabel: "APIs & Microsserviços",
-    techs: ["Java", "Spring Boot", "Text Parsing", "ATS Engine", "REST API", "PostgreSQL"],
-    shortDesc: "API REST em Java para extração automática de dados de currículos, comparação semântica com vagas de emprego e geração de relatórios de compatibilidade para RH.",
+    techs: ["Java", "Spring Boot", "REST API", "PostgreSQL"],
+    shortDesc: "API REST em Java que extrai dados de currículos e compara competências com os requisitos de uma vaga.",
     longDesc: "A API recebe o conteúdo de um currículo, extrai campos de experiência e competências e compara esses dados com os requisitos de uma vaga.",
     businessValue: "Pode apoiar a organização inicial de currículos em um processo de recrutamento.",
     github: "https://github.com/blackxzin/cv-analyzer-api",
@@ -182,7 +182,7 @@ export const projectsData = [
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "ai",
-    categoryLabel: "Data Science & ML",
+    categoryLabel: "Dados e ML",
     techs: ["Python", "Jupyter Notebook", "Machine Learning", "Scikit-Learn", "Pandas"],
     shortDesc: "Projeto em Python que usa dados de transações para estudar padrões associados a fraude.",
     longDesc: "O notebook prepara os dados, treina um classificador e compara os resultados usando métricas de validação. É um projeto de estudo, não um serviço pronto para decisões financeiras.",
@@ -203,13 +203,13 @@ export const projectsData = [
     category: "mobile",
     categoryLabel: "Mobile & Desktop",
     techs: ["Python", "WebSocket", "Android", "H.264 Streaming", "Linux Display"],
-    shortDesc: "Software que transforma dispositivos móveis Android em monitores secundários estendidos para Linux via rede local (WiFi), com baixa latência usando compressão H.264.",
-    longDesc: "Solução que conecta o display server do Linux a um cliente móvel via WebSockets de alto débito. Captura a tela virtual em tempo real, codifica em H.264 por hardware e entrega taxa de quadros suave sem cabos.",
-    businessValue: "Demonstra competência avançada em protocolos de rede de baixa latência, streaming multimídia e integração entre diferentes sistemas operacionais.",
+    shortDesc: "Transforma um celular Android em segunda tela para Linux pela rede local, com transmissão em H.264.",
+    longDesc: "Conecta o servidor gráfico do Linux a um cliente Android por WebSocket. A tela virtual é capturada, codificada em H.264 e enviada pela rede local, sem cabos.",
+    businessValue: "Mostra experiência com transmissão de vídeo em rede local e integração entre sistemas operacionais diferentes.",
     github: "https://github.com/blackxzin/linuxdesk",
     stars: 0,
     accentColor: "#8b5cf6",
-    metrics: { latency: "Baixa latência WiFi", codec: "Hardware H.264" }
+    metrics: { workflow: "Captura · codificação · transmissão" }
   },
   {
     id: "swiftui-firebase",
@@ -220,16 +220,16 @@ export const projectsData = [
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "mobile",
-    categoryLabel: "Mobile Nativo (iOS)",
+    categoryLabel: "iOS",
     techs: ["Swift", "SwiftUI", "iOS", "Firebase Auth", "Firestore", "MapKit"],
-    shortDesc: "Aplicações nativas para ecossistema Apple em SwiftUI, com autenticação na nuvem, banco de dados em tempo real, suporte a geolocalização interativa e design Apple HIG.",
-    longDesc: "Aplicativos desenvolvidos com os padrões mais modernos da Apple, integrando Firebase Firestore para dados em tempo real, Firebase Authentication, permissões de sistema e renderização vetorial de mapas com MapKit.",
-    businessValue: "Desenvolvimento de aplicativos iOS rápidos, elegantes e prontos para publicação na App Store com conformidade total às diretrizes da Apple.",
+    shortDesc: "Aplicativos para iPhone em SwiftUI com login, dados em tempo real no Firebase e mapas com MapKit.",
+    longDesc: "Aplicativos em SwiftUI que usam Firebase Authentication para login, Firestore para dados em tempo real e MapKit para exibir mapas e localização.",
+    businessValue: "Base para aplicativos iOS que seguem as diretrizes de interface da Apple.",
     github: "https://github.com/Felipe-Luvizotto/SwiftUIFireBase",
     secondaryGithub: "https://github.com/Felipe-Luvizotto/mapInSwiftUI",
     stars: 0,
     accentColor: "#06b6d4",
-    metrics: { platform: "SwiftUI · iOS", backend: "Firebase" }
+    metrics: { workflow: "SwiftUI · Firebase · MapKit" }
   },
   {
     id: "btc-trading-bot",
@@ -240,15 +240,15 @@ export const projectsData = [
     authorHandle: "blackxzin",
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "ai",
-    categoryLabel: "Automação & Finanças",
-    techs: ["Python", "Crypto API", "Backtesting", "Risk Management", "Fast Execution"],
-    shortDesc: "Laboratório de pesquisa para geração de sinais técnicos e execução controlada de estratégias em Bitcoin com limites rigorosos de risco e validação estatística.",
+    categoryLabel: "Automação",
+    techs: ["Python", "APIs de mercado", "Indicadores técnicos", "Webhooks"],
+    shortDesc: "Projeto de estudo que calcula indicadores técnicos de Bitcoin e envia alertas conforme regras configuradas.",
     longDesc: "Sistema que monitora dados de mercado, calcula indicadores (RSI, médias móveis e Volume Profile) e envia alertas por webhook conforme as regras configuradas.",
     businessValue: "Organiza tarefas financeiras repetitivas e integra dados de serviços externos.",
     github: "https://github.com/blackxzin/btc-trading-bot",
     stars: 0,
     accentColor: "#f97316",
-    metrics: { protection: "Stop-Loss Automático", uptime: "24/7 Execução" }
+    metrics: { workflow: "Dados · indicadores · alertas" }
   },
   {
     id: "n8n-automation-lab",
@@ -259,15 +259,15 @@ export const projectsData = [
     authorHandle: "blackxzin",
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "ai",
-    categoryLabel: "Automações Corporativas",
+    categoryLabel: "Automação",
     techs: ["JavaScript", "n8n", "Webhooks", "CRMs", "WhatsApp / Telegram API"],
-    shortDesc: "Laboratório de integrações digitais e automação corporativa com n8n, sincronizando leads, planilhas, bancos de dados e canais de comunicação corporativos.",
-    longDesc: "Fluxos de trabalho que eliminam tarefas operacionais manuais: recebimento de leads de formulários, validação, enriquecimento de dados via APIs públicas e notificação imediata do time comercial.",
-    businessValue: "Redução de até 80% do trabalho manual em setores comerciais e administrativos de empresas que nos contratam no 99Freelas.",
+    shortDesc: "Fluxos no n8n que recebem contatos, organizam planilhas e avisam a equipe por WhatsApp ou Telegram.",
+    longDesc: "Fluxos que automatizam tarefas repetitivas: recebem contatos de formulários, validam e completam os dados com APIs públicas e avisam a equipe responsável.",
+    businessValue: "Menos trabalho manual em tarefas de rotina, como cadastro e repasse de contatos.",
     github: "https://github.com/blackxzin/n8n-automation-lab",
     stars: 0,
     accentColor: "#14b8a6",
-    metrics: { integration: "Zero Código Inútil", speed: "Notificação < 2s" }
+    metrics: { workflow: "Formulário · validação · aviso" }
   },
   {
     id: "marte-graphs-csharp",
@@ -278,16 +278,16 @@ export const projectsData = [
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "web",
-    categoryLabel: "Engenharia de Software & .NET",
+    categoryLabel: "Algoritmos & .NET",
     techs: ["C#", ".NET", "Algoritmos de Grafos", "Dijkstra", "SQL Server", "APIs"],
-    shortDesc: "Software de engenharia em C# para cálculo do menor caminho entre pontos geográficos utilizando algoritmos avançados de grafos e renderização visual bidimensional.",
-    longDesc: "Aplicação fundamentada na sólida base acadêmica do Cotuca/UNICAMP. Implementa matrizes de adjacência, buscas em profundidade/largura e caminho de custo mínimo com interface gráfica fluida e banco de dados relacional.",
-    businessValue: "Capacidade de resolver problemas lógicos e matemáticos de alta complexidade em logística, roteirização de entregas e otimização de frotas.",
+    shortDesc: "Aplicação em C# que calcula o menor caminho entre cidades usando grafos, com visualização do trajeto.",
+    longDesc: "Projeto do COTUCA/UNICAMP que implementa matriz de adjacência, buscas em profundidade e largura e caminho de custo mínimo, com interface gráfica e banco de dados relacional.",
+    businessValue: "A mesma lógica serve para problemas de rota, como planejamento de entregas.",
     github: "https://github.com/Felipe-Luvizotto/apCaminhosEmMarte",
     secondaryGithub: "https://github.com/Felipe-Luvizotto/BaseCRUD_API",
     stars: 0,
     accentColor: "#0ea5e9",
-    metrics: { complexity: "O(V + E log V)", engine: ".NET Framework & C#" }
+    metrics: { workflow: "Dijkstra · C# · SQL Server" }
   },
   {
     id: "jobpilot-saas",
@@ -298,16 +298,16 @@ export const projectsData = [
     authorHandle: "blackxzin",
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "web",
-    categoryLabel: "Sistemas Web & SaaS",
-    techs: ["Python", "FastAPI", "React", "PostgreSQL", "Docker", "Tailored SaaS"],
+    categoryLabel: "Sistemas web",
+    techs: ["Python", "FastAPI", "React", "PostgreSQL", "Docker"],
     shortDesc: "Base para produtos SaaS com autenticação, cobranças e processamento de dados.",
-    longDesc: "Base sólida para lançamento veloz de produtos no mercado. Contém estrutura modular em camadas, documentação OpenAPI automática, migrações de banco seguras e isolamento com Docker.",
-    businessValue: "Entrega do seu produto SaaS pronto para testes de validação com clientes reais em semanas, não meses.",
+    longDesc: "Estrutura em camadas com documentação OpenAPI gerada automaticamente, migrações de banco e ambiente em Docker.",
+    businessValue: "Encurta o caminho até uma primeira versão de um produto SaaS.",
     github: "https://github.com/blackxzin/jobpilot-ai",
     secondaryGithub: "https://github.com/blackxzin/saas-starter",
     stars: 0,
     accentColor: "#8b5cf6",
-    metrics: { architecture: "Clean Architecture", ready: "Pronto para Escala" }
+    metrics: { workflow: "FastAPI · React · Docker" }
   },
   {
     id: "unity-3d-sims",
@@ -318,16 +318,16 @@ export const projectsData = [
     authorHandle: "Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "mobile",
-    categoryLabel: "Interatividade 3D & Games",
-    techs: ["Unity 3D", "C#", "Física Gravitacional", "Render Pipelines", "Game Dev"],
-    shortDesc: "Simulação espacial interativa em Unity 3D com física newtoniana de corpos celestes em tempo real, iluminação dinâmica e controles de câmera orbitais.",
-    longDesc: "Desenvolvido com o motor Unity e programação orientada a objetos em C#. Trabalha com equações gravitacionais, cálculo de trajetórias orbitais em tempo de execução e shaders de superfície.",
-    businessValue: "Demonstra competência técnica em programação tridimensional, física em tempo real e criação de experiências imersivas.",
+    categoryLabel: "3D & Games",
+    techs: ["Unity 3D", "C#", "Física", "Game Dev"],
+    shortDesc: "Simulação do sistema solar em Unity 3D com gravidade em tempo real e câmera orbital.",
+    longDesc: "Feito em Unity com C#. Calcula a gravidade entre os corpos e as órbitas em tempo de execução.",
+    businessValue: "Mostra experiência com 3D, física em tempo real e experiências interativas.",
     github: "https://github.com/Felipe-Luvizotto/SolarSystemInUnity",
     secondaryGithub: "https://github.com/Felipe-Luvizotto/RollerMadness22129",
     stars: 0,
     accentColor: "#e11d48",
-    metrics: { engine: "Unity 3D" }
+    metrics: { workflow: "Unity · C# · física" }
   },
   {
     id: "cyber-security-hub",
@@ -339,15 +339,15 @@ export const projectsData = [
     authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
     category: "security",
     categoryLabel: "Cibersegurança",
-    techs: ["HTML5", "JavaScript", "Python", "OWASP 2025", "Defense in Depth"],
-    shortDesc: "Plataforma interativa com 72 laboratórios práticos cobrindo o OWASP Top 10 2025, auditoria de vulnerabilidades e assistente inteligente de segurança defensiva.",
-    longDesc: "Hub educacional e prático criado para disseminar boas práticas de segurança defensiva e testes controlados contra injeções SQL, XSS, CSRF, quebra de autenticação e vazamento de dados confidenciais.",
-    businessValue: "Segurança não é opcional: todo código desenvolvido pela dupla já nasce com princípios de Security by Design e validações rigorosas.",
+    techs: ["HTML5", "JavaScript", "Python", "OWASP"],
+    shortDesc: "Plataforma de estudo com laboratórios práticos sobre o OWASP Top 10 e boas práticas de segurança defensiva.",
+    longDesc: "Material prático sobre injeção de SQL, XSS, CSRF, falhas de autenticação e vazamento de dados, com exercícios em ambiente controlado.",
+    businessValue: "Reflete a atenção à segurança que levamos para os projetos que desenvolvemos.",
     github: "https://github.com/blackxzin/cybersecurity-learn",
     secondaryGithub: "https://github.com/blackxzin/cybersecurity-assistant",
     stars: 0,
     accentColor: "#059669",
-    metrics: { modules: "72 Aulas Práticas", standards: "OWASP Top 10" }
+    metrics: { workflow: "OWASP Top 10 · laboratórios" }
   },
   {
     id: "manga-ecosystem",
@@ -358,66 +358,66 @@ export const projectsData = [
     authorHandle: "blackxzin + Felipe-Luvizotto",
     authorAvatar: "https://avatars.githubusercontent.com/u/101439293?v=4",
     category: "web",
-    categoryLabel: "Frontend & Web Apps",
-    techs: ["TypeScript", "React", "Node.js", "CSS3 Moderno", "Cache Local"],
-    shortDesc: "Ecossistema web completo com catálogo digital, leitor dinâmico de páginas em alta resolução, sistema de favoritos offline e modo noturno.",
-    longDesc: "Plataforma focada em experiência do usuário com interface minimalista, consumo de APIs de mídia, paginação infinita e renderização veloz sem engasgos.",
-    businessValue: "Criação de interfaces elegantes, responsivas e confortáveis tanto no computador quanto no celular.",
+    categoryLabel: "Frontend",
+    techs: ["TypeScript", "React", "Node.js", "CSS"],
+    shortDesc: "Leitor de mangá na web com catálogo, favoritos salvos no navegador e modo noturno.",
+    longDesc: "Interface simples que consome APIs de mídia, com rolagem infinita e carregamento rápido das páginas.",
+    businessValue: "Interfaces confortáveis de usar no computador e no celular.",
     github: "https://github.com/Felipe-Luvizotto/my-manga-site",
     secondaryGithub: "https://github.com/blackxzin/manga-reader",
     stars: 2,
     accentColor: "#a855f7",
-    metrics: { ui: "Tema escuro", mobile: "Layout responsivo" }
+    metrics: { workflow: "Catálogo · leitor · favoritos" }
   }
 ];
 
 export const freelanceBenefits = [
   {
     icon: "zap",
-      title: "Duas áreas de experiência",
-      desc: "Lucas trabalha principalmente com backend e segurança; Felipe com aplicativos, interfaces e projetos interativos."
+    title: "Duas áreas de experiência",
+    desc: "Lucas trabalha principalmente com backend e segurança; Felipe com aplicativos, interfaces e projetos interativos."
   },
   {
     icon: "shield",
-      title: "Atenção à segurança",
-      desc: "Consideramos autenticação, permissões e validação de dados durante o desenvolvimento."
+    title: "Atenção à segurança",
+    desc: "Consideramos autenticação, permissões e validação de dados durante o desenvolvimento."
   },
   {
     icon: "clock",
-      title: "Acompanhamento do projeto",
-      desc: "Compartilhamos o progresso e alinhamos as próximas etapas durante o desenvolvimento."
+    title: "Acompanhamento do projeto",
+    desc: "Compartilhamos o progresso e alinhamos as próximas etapas durante o desenvolvimento."
   },
   {
     icon: "award",
-      title: "Orientação na entrega",
-      desc: "Ao final, explicamos como executar e publicar o que foi desenvolvido."
+    title: "Orientação na entrega",
+    desc: "Ao final, explicamos como executar e publicar o que foi desenvolvido."
   }
 ];
 
 export const processSteps = [
   {
     step: "01",
-      title: "Conversa inicial",
-      desc: "Entendemos a necessidade, esclarecemos dúvidas e combinamos o que será feito."
+    title: "Conversa inicial",
+    desc: "Entendemos a necessidade, esclarecemos dúvidas e combinamos o que será feito."
   },
   {
     step: "02",
-      title: "Escopo e planejamento",
-      desc: "Definimos etapas, tecnologias e uma previsão de prazo e investimento."
+    title: "Escopo e planejamento",
+    desc: "Definimos etapas, tecnologias e uma previsão de prazo e investimento."
   },
   {
     step: "03",
-    title: "Desenvolvimento & Testes",
-      desc: "Dividimos as tarefas conforme o projeto e compartilhamos versões de prévia para receber comentários."
+    title: "Desenvolvimento e testes",
+    desc: "Dividimos as tarefas conforme o projeto e compartilhamos versões de prévia para receber comentários."
   },
   {
     step: "04",
-    title: "Homologação & Segurança",
-      desc: "Revisamos os principais fluxos e ajustamos os problemas encontrados antes da publicação."
+    title: "Revisão e segurança",
+    desc: "Revisamos os principais fluxos e ajustamos os problemas encontrados antes da publicação."
   },
   {
     step: "05",
-    title: "Entrega Final & Suporte",
-      desc: "Entregamos o código e orientações para publicação e uso."
+    title: "Entrega e suporte",
+    desc: "Entregamos o código, publicamos e explicamos como usar e manter."
   }
 ];
