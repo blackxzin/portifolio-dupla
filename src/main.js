@@ -1,10 +1,12 @@
 import './style.css';
 import './styles/motion.css';
+import './styles/offer.css';
 import { duoProfile, projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
 import { applyTiltEffect } from './components/tiltEffect.js';
 import { setupProjectModal } from './components/projectModal.js';
 import { iconSvg } from './components/icon.js';
 import { bindWhatsappLinks, whatsappUrl } from './data/contact.js';
+import { setupOfferSection } from './components/offerSection.js';
 import {
   setupReveal, renderStackMarquee, typeTerminal, setupScrollEffects, setupMobileMenu
 } from './components/motion.js';
@@ -49,7 +51,8 @@ class PortfolioApp {
     // 5. Apply 3D Tilt on initial cards
     this.refreshTiltCards();
 
-    // 6. Motion & contact links
+    // 6. Offer, motion & contact links
+    setupOfferSection();
     renderStackMarquee();
     bindWhatsappLinks();
     setupMobileMenu();
