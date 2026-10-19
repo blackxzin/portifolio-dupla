@@ -223,6 +223,9 @@
 .contact-method-item:hover { transform: translateX(4px); }
 .footer-col-platforms a { color: inherit; transition: color 0.2s; }
 .footer-col-platforms a:hover { color: var(--salmon-soft); }
+.form-feedback-message.success {
+  background: rgba(240, 140, 131, 0.1); border-color: rgba(240, 140, 131, 0.4); color: #f3d4d0;
+}
 .form-feedback-message a { color: var(--salmon-soft); text-decoration: underline; }
 
 .floating-wa {
@@ -259,3 +262,61 @@
 .tech-chip:hover { background: rgba(240, 140, 131, 0.1); }
 .dot-status { background: var(--salmon); }
 .modal-business-card { background: rgba(240, 140, 131, 0.08); border-left-color: var(--salmon); }
+
+/* ---------- Project modal: sticky close button + bottom sheet on phones ---------- */
+.modal-close-btn {
+  position: sticky; top: 0; z-index: 3; float: right;
+  margin: -1.4rem -1.4rem 0 1rem;
+  background: rgba(48, 32, 39, 0.92); border: 1px solid var(--border-subtle);
+  width: 40px; height: 40px;
+}
+.modal-tags-row { flex-wrap: wrap; padding-right: 0.5rem; }
+
+@media (max-width: 640px) {
+  .project-modal { align-items: flex-end; padding: 0; }
+  .modal-dialog {
+    max-width: none; max-height: 88svh; padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
+    border-radius: 20px 20px 0 0; border-bottom: 0;
+    transform: translateY(40px);
+  }
+  .project-modal.active .modal-dialog { transform: none; }
+  .modal-close-btn { margin: -0.5rem -0.25rem 0 0.75rem; }
+  .modal-title { font-size: 1.55rem; }
+  .modal-meta-grid { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .modal-footer-actions { flex-direction: column; padding-top: 1.25rem; }
+  .modal-footer-actions .btn { width: 100%; padding-block: 0.9rem; }
+}
+
+/* ---------- Phones: comfortable tap targets ---------- */
+@media (max-width: 768px) {
+  .footer-col-nav a,
+  .footer-col-platforms a,
+  .footer-github-links a { display: inline-block; padding-block: 0.45rem; }
+  .back-to-top-btn { padding: 0.6rem 0; }
+  .project-card-actions .btn,
+  .dev-footer-actions .btn { min-height: 44px; }
+  .filter-tab { min-height: 38px; }
+}
+
+/* ---------- Phones: keep the hero inside the screen ---------- */
+@media (max-width: 1080px) {
+  .hero-container,
+  .contact-card-wrapper { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 768px) {
+  .footer-container { grid-template-columns: minmax(0, 1fr); }
+  .footer-github-links { flex-wrap: wrap; row-gap: 0.25rem; }
+}
+@media (max-width: 480px) {
+  .contact-card-wrapper { padding: 1.75rem 1.1rem; gap: 2rem; }
+  .quick-contact-form { padding: 1.4rem 1.1rem; }
+  .contact-gh-badge { flex-wrap: wrap; gap: 0.25rem 0.6rem; }
+  .contact-title { font-size: 1.7rem; }
+}
+@media (max-width: 768px) {
+  .hero-title { font-size: clamp(2rem, 10.6vw, 4rem); }
+}
+@media (max-width: 420px) {
+  .terminal-content p { white-space: normal; overflow-wrap: anywhere; }
+  .hero-cta-group .btn { width: 100%; }
+}
