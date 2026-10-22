@@ -314,7 +314,7 @@
   .contact-title { font-size: 1.7rem; }
 }
 @media (max-width: 768px) {
-  .hero-title { font-size: clamp(2rem, 10.6vw, 4rem); }
+  .hero-title { font-size: clamp(1.9rem, 9.4vw, 3.4rem); }
 }
 @media (max-width: 420px) {
   .terminal-content p { white-space: normal; overflow-wrap: anywhere; }

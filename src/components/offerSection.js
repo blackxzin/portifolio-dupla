@@ -7,6 +7,14 @@ const DAYS_PER_MONTH = 30;
 const PRICE_DROP_MS = 1400;
 const PRICE_DROP_DELAY_MS = 500;
 
+// Real deadline from the offer config; returns '' when unset, invalid or already past.
+function deadlineText() {
+  if (!OFFER.validUntil) return '';
+  const end = new Date(`${OFFER.validUntil}T23:59:59`);
+  if (Number.isNaN(end.getTime()) || end.getTime() < Date.now()) return '';
+  return `Oferta válida até ${end.toLocaleDateString('pt-BR')}`;
+}
+
 const brl = (value) => Math.round(value).toLocaleString('pt-BR');
 const brlCents = (value) => value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -29,6 +37,10 @@ function renderComparison() {
       ${column('Com o seu site', OFFER.comparison.with, 'with')}
     </div>
   `;
+}
+
+function scarcityLines() {
+  return [deadlineText(), OFFER.slotsNote].filter(Boolean);
 }
 
 function renderCard() {
@@ -78,7 +90,7 @@ function renderCard() {
           <span class="offer-cta-arrow" aria-hidden="true">→</span>
         </a>
         <p class="offer-cta-note">Sem compromisso: você conversa com a gente antes de decidir.</p>
-        ${OFFER.slotsNote ? `<p class="offer-slots"><span class="offer-slots-dot" aria-hidden="true"></span>${OFFER.slotsNote}</p>` : ''}
+        ${scarcityLines().map((line) => `<p class="offer-slots"><span class="offer-slots-dot" aria-hidden="true"></span>${line}</p>`).join('')}
       </div>
     </article>
   `;

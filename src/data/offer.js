@@ -1,13 +1,18 @@
 // Oferta da seção de preço. Mude valores e textos aqui.
+//
+// Gatilhos de venda só funcionam enquanto forem verdadeiros. Por isso:
+// - `validUntil`: data real (AAAA-MM-DD). Aparece como "válida até dd/mm/aaaa" e some sozinha
+//   quando a data passa. Deixe '' se a oferta não tem prazo.
+// - `slotsNote`: só preencha se o limite de vagas for real (ex.: 'Vagas para novembro: 3').
 export const OFFER = {
-  badge: 'Condição de lançamento',
+  badge: 'Oferta especial',
   oldPrice: 2000,
   price: 997,
   monthly: 147,
   ctaLabel: 'Quero meu site por R$\u00a0997',
   ctaMessage: 'Olá, Lucas e Felipe! Vi a oferta no portfólio e quero meu site por R$ 997 + R$ 147/mês. Podemos conversar?',
-  // Deixe vazio ('') para esconder o aviso de vagas.
-  slotsNote: 'Pegamos poucos projetos por mês para entregar cada um com atenção.',
+  validUntil: '',
+  slotsNote: '',
   siteIncludes: [
     'Site profissional feito sob medida para o seu negócio',
     'Layout que funciona no celular, tablet e computador',

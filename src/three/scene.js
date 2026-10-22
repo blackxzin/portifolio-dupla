@@ -1,11 +1,39 @@
-import * as THREE from 'three';
+import {
+  ACESFilmicToneMapping,
+  AdditiveBlending,
+  AmbientLight,
+  BufferAttribute,
+  BufferGeometry,
+  CanvasTexture,
+  Clock,
+  Color,
+  DirectionalLight,
+  FogExp2,
+  Group,
+  Line,
+  LineBasicMaterial,
+  Mesh,
+  MeshPhysicalMaterial,
+  PerspectiveCamera,
+  PointLight,
+  Points,
+  PointsMaterial,
+  SRGBColorSpace,
+  Scene,
+  SphereGeometry,
+  Sprite,
+  SpriteMaterial,
+  TorusGeometry,
+  Vector3,
+  WebGLRenderer
+} from 'three';
 
 export class Portfolio3DScene {
   constructor(canvasContainer) {
     this.container = canvasContainer;
     this.mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
     this.satellites = [];
-    this.clock = new THREE.Clock();
+    this.clock = new Clock();
     this.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     this.colorThemes = {
@@ -24,22 +52,22 @@ export class Portfolio3DScene {
 
   init() {
     // 1. Scene & Camera
-    this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.FogExp2(this.colorThemes.cyber.bg, 0.018);
+    this.scene = new Scene();
+    this.scene.fog = new FogExp2(this.colorThemes.cyber.bg, 0.018);
 
     const aspect = this.container.clientWidth / Math.max(this.container.clientHeight, 1);
-    this.camera = new THREE.PerspectiveCamera(55, aspect, 0.1, 1000);
+    this.camera = new PerspectiveCamera(55, aspect, 0.1, 1000);
     this.camera.position.set(0, 0, 18);
 
     // 2. Renderer
-    this.renderer = new THREE.WebGLRenderer({
+    this.renderer = new WebGLRenderer({
       antialias: true,
       alpha: true,
       powerPreference: 'high-performance'
     });
     this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.setPixelRatio(this.pixelRatio());
+    this.renderer.toneMapping = ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.2;
     this.container.appendChild(this.renderer.domElement);
 
@@ -57,32 +85,38 @@ export class Portfolio3DScene {
     this.animate();
   }
 
+  // Phones get a lower cap: the scene is a soft background, not worth the fill-rate cost.
+  pixelRatio() {
+    const cap = window.innerWidth < 768 ? 1.25 : 1.75;
+    return Math.min(window.devicePixelRatio, cap);
+  }
+
   setupLights() {
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    this.ambientLight = new AmbientLight(0xffffff, 0.6);
     this.scene.add(this.ambientLight);
 
-    this.coreLight = new THREE.PointLight(this.colorThemes.cyber.core, 3.5, 40);
+    this.coreLight = new PointLight(this.colorThemes.cyber.core, 3.5, 40);
     this.coreLight.position.set(3.65, 0.1, 0);
     this.scene.add(this.coreLight);
 
-    this.accentLight1 = new THREE.DirectionalLight(this.colorThemes.cyber.primary, 1.8);
+    this.accentLight1 = new DirectionalLight(this.colorThemes.cyber.primary, 1.8);
     this.accentLight1.position.set(10, 12, 10);
     this.scene.add(this.accentLight1);
 
-    this.accentLight2 = new THREE.DirectionalLight(this.colorThemes.cyber.secondary, 1.8);
+    this.accentLight2 = new DirectionalLight(this.colorThemes.cyber.secondary, 1.8);
     this.accentLight2.position.set(-10, -10, -10);
     this.scene.add(this.accentLight2);
   }
 
   createCentralCore() {
-    this.coreGroup = new THREE.Group();
+    this.coreGroup = new Group();
     this.coreGroup.position.set(3.65, 0.1, 0);
 
-    this.globeGroup = new THREE.Group();
+    this.globeGroup = new Group();
     this.coreGroup.add(this.globeGroup);
 
-    const innerGeo = new THREE.SphereGeometry(1.52, 48, 36);
-    this.innerMat = new THREE.MeshPhysicalMaterial({
+    const innerGeo = new SphereGeometry(1.52, 48, 36);
+    this.innerMat = new MeshPhysicalMaterial({
       color: 0x4d202d,
       roughness: 0.34,
       metalness: 0.42,
@@ -91,10 +125,10 @@ export class Portfolio3DScene {
       emissive: 0x2d111b,
       emissiveIntensity: 0.3
     });
-    this.innerCore = new THREE.Mesh(innerGeo, this.innerMat);
+    this.innerCore = new Mesh(innerGeo, this.innerMat);
     this.globeGroup.add(this.innerCore);
 
-    const gridMaterial = new THREE.LineBasicMaterial({
+    const gridMaterial = new LineBasicMaterial({
       color: 0xf08c83,
       transparent: true,
       opacity: 0.32
@@ -102,8 +136,8 @@ export class Portfolio3DScene {
     const radius = 1.535;
     const segments = 96;
     const addGridLine = (points) => {
-      const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      this.globeGroup.add(new THREE.Line(geometry, gridMaterial));
+      const geometry = new BufferGeometry().setFromPoints(points);
+      this.globeGroup.add(new Line(geometry, gridMaterial));
     };
 
     for (let latitude = -2; latitude <= 2; latitude++) {
@@ -112,7 +146,7 @@ export class Portfolio3DScene {
       const y = radius * Math.sin(angle);
       const points = Array.from({ length: segments }, (_, index) => {
         const theta = (index / segments) * Math.PI * 2;
-        return new THREE.Vector3(ringRadius * Math.cos(theta), y, ringRadius * Math.sin(theta));
+        return new Vector3(ringRadius * Math.cos(theta), y, ringRadius * Math.sin(theta));
       });
       addGridLine(points);
     }
@@ -121,7 +155,7 @@ export class Portfolio3DScene {
       const angle = (longitude / 8) * Math.PI;
       const points = Array.from({ length: segments }, (_, index) => {
         const theta = (index / segments) * Math.PI * 2;
-        return new THREE.Vector3(
+        return new Vector3(
           radius * Math.cos(theta) * Math.cos(angle),
           radius * Math.sin(theta),
           radius * Math.cos(theta) * Math.sin(angle)
@@ -130,24 +164,24 @@ export class Portfolio3DScene {
       addGridLine(points);
     }
 
-    const ring1Geo = new THREE.TorusGeometry(2.2, 0.035, 12, 160);
-    this.ring1Mat = new THREE.MeshPhysicalMaterial({
+    const ring1Geo = new TorusGeometry(2.2, 0.035, 12, 160);
+    this.ring1Mat = new MeshPhysicalMaterial({
       color: this.colorThemes.cyber.secondary,
       roughness: 0.24,
       metalness: 0.8,
       clearcoat: 0.65
     });
-    this.ring1 = new THREE.Mesh(ring1Geo, this.ring1Mat);
+    this.ring1 = new Mesh(ring1Geo, this.ring1Mat);
     this.coreGroup.add(this.ring1);
 
-    const ring2Geo = new THREE.TorusGeometry(2.85, 0.024, 10, 160);
-    this.ring2Mat = new THREE.MeshPhysicalMaterial({
+    const ring2Geo = new TorusGeometry(2.85, 0.024, 10, 160);
+    this.ring2Mat = new MeshPhysicalMaterial({
       color: this.colorThemes.cyber.accent,
       roughness: 0.3,
       metalness: 0.72,
       clearcoat: 0.55
     });
-    this.ring2 = new THREE.Mesh(ring2Geo, this.ring2Mat);
+    this.ring2 = new Mesh(ring2Geo, this.ring2Mat);
     this.ring2.rotation.x = Math.PI / 2.5;
     this.coreGroup.add(this.ring2);
 
@@ -155,7 +189,7 @@ export class Portfolio3DScene {
   }
 
   createSatellites() {
-    this.satellitesGroup = new THREE.Group();
+    this.satellitesGroup = new Group();
     this.coreGroup.add(this.satellitesGroup);
 
     const satelliteData = [
@@ -180,18 +214,18 @@ export class Portfolio3DScene {
       context.fillStyle = data.color;
       context.fillText(data.symbol, canvas.width / 2, canvas.height / 2);
 
-      const texture = new THREE.CanvasTexture(canvas);
-      texture.colorSpace = THREE.SRGBColorSpace;
-      const material = new THREE.SpriteMaterial({
+      const texture = new CanvasTexture(canvas);
+      texture.colorSpace = SRGBColorSpace;
+      const material = new SpriteMaterial({
         map: texture,
         transparent: true,
         depthWrite: false,
-        blending: THREE.AdditiveBlending
+        blending: AdditiveBlending
       });
-      const mesh = new THREE.Sprite(material);
+      const mesh = new Sprite(material);
       const size = data.symbol === '</>' ? 0.92 : 0.76;
       mesh.scale.set(size * 1.45, size, 1);
-      const pivot = new THREE.Group();
+      const pivot = new Group();
       pivot.rotation.x = data.tilt;
       pivot.rotation.y = (index * Math.PI) / 2.5;
       mesh.position.set(data.distance, 0, 0);
@@ -209,14 +243,14 @@ export class Portfolio3DScene {
 
   createStarfield() {
     const count = 140;
-    const geometry = new THREE.BufferGeometry();
+    const geometry = new BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     this.starDrift = new Float32Array(count);
 
-    const c1 = new THREE.Color(this.colorThemes.cyber.primary);
-    const c2 = new THREE.Color(this.colorThemes.cyber.secondary);
-    const c3 = new THREE.Color(this.colorThemes.cyber.accent);
+    const c1 = new Color(this.colorThemes.cyber.primary);
+    const c2 = new Color(this.colorThemes.cyber.secondary);
+    const c3 = new Color(this.colorThemes.cyber.accent);
 
     for (let i = 0; i < count; i++) {
       // Keep the dust inside the visible field so it reads as a moving backdrop.
@@ -233,19 +267,19 @@ export class Portfolio3DScene {
       colors[i * 3 + 2] = chosenColor.b;
     }
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('position', new BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new BufferAttribute(colors, 3));
 
     // Particle Material
-    const material = new THREE.PointsMaterial({
+    const material = new PointsMaterial({
       size: 0.045,
       vertexColors: true,
       transparent: true,
       opacity: 0.18,
-      blending: THREE.AdditiveBlending
+      blending: AdditiveBlending
     });
 
-    this.starfield = new THREE.Points(geometry, material);
+    this.starfield = new Points(geometry, material);
     this.scene.add(this.starfield);
   }
 
@@ -277,28 +311,46 @@ export class Portfolio3DScene {
 
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+      this.renderer.setPixelRatio(this.pixelRatio());
     };
 
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('resize', this.onResize);
     this.onVisibilityChange = () => {
-      if (document.hidden) {
-        cancelAnimationFrame(this.animationFrameId);
-        this.animationFrameId = null;
-      } else {
-        this.animate();
-      }
+      if (document.hidden) this.stopLoop();
+      else this.startLoop();
     };
     document.addEventListener('visibilitychange', this.onVisibilityChange);
+
+    // The canvas only matters near the top of the page; pause it once it scrolls away.
+    this.isInView = true;
+    if ('IntersectionObserver' in window) {
+      this.viewObserver = new IntersectionObserver(([entry]) => {
+        this.isInView = entry.isIntersecting;
+        if (this.isInView) this.startLoop();
+        else this.stopLoop();
+      });
+      this.viewObserver.observe(this.container);
+    }
 
     // Initial responsive check
     this.onResize();
 
   }
 
+  startLoop() {
+    if (this.animationFrameId || document.hidden || !this.isInView) return;
+    this.clock.getDelta();
+    this.animate();
+  }
+
+  stopLoop() {
+    if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+    this.animationFrameId = null;
+  }
+
   animate() {
-    if (document.hidden) return;
+    if (document.hidden || !this.isInView) return;
     if (this.reduceMotion) {
       this.renderer.render(this.scene, this.camera);
       return;
@@ -352,7 +404,8 @@ export class Portfolio3DScene {
   }
 
   destroy() {
-    if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+    this.stopLoop();
+    this.viewObserver?.disconnect();
     window.removeEventListener('mousemove', this.onMouseMove);
     window.removeEventListener('resize', this.onResize);
     document.removeEventListener('visibilitychange', this.onVisibilityChange);

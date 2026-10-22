@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página não encontrada | Lucas &amp; Felipe</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#160f13" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; }
+      body {
+        display: grid; place-items: center; padding: 1.5rem;
+        background: #160f13 radial-gradient(ellipse at 78% 10%, rgba(111, 49, 62, 0.3), transparent 45%);
+        color: #f7eeeb; font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6; -webkit-font-smoothing: antialiased;
+      }
+      main { max-width: 30rem; text-align: center; }
+      .code {
+        font-family: ui-monospace, 'DM Mono', monospace; font-size: clamp(4rem, 22vw, 7rem);
+        font-weight: 700; line-height: 1; letter-spacing: -0.04em;
+        background: linear-gradient(110deg, #f08c83 8%, #f5aaa0 64%, #d9858e 112%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      h1 { margin: 1rem 0 0.6rem; font-size: clamp(1.5rem, 5vw, 2rem); line-height: 1.2; }
+      p { margin: 0 0 1.8rem; color: #c0adae; }
+      .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+      a.btn {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0.75rem 1.4rem;
+        border-radius: 8px; border: 1px solid rgba(255, 221, 214, 0.22); color: #f7eeeb;
+        font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.2s;
+      }
+      a.btn:hover { background: rgba(240, 140, 131, 0.1); transform: translateY(-1px); }
+      a.btn.primary { background: linear-gradient(120deg, #f08c83, #d87679); border-color: transparent; color: #261518; }
+      a.btn.primary:hover { background: #f6a097; }
+      a:focus-visible { outline: 3px solid rgba(240, 140, 131, 0.75); outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="code" aria-hidden="true">404</div>
+      <h1>Essa página não existe</h1>
+      <p>O endereço pode ter mudado ou ter sido digitado errado. Volte para o início ou fale direto com a gente.</p>
+      <div class="actions">
+        <a class="btn primary" href="/">Voltar ao início</a>
+        <a class="btn" href="/#contact">Falar com a dupla</a>
+      </div>
+    </main>
+  </body>
+</html>
