@@ -171,21 +171,20 @@
               </div>
             </div>
 
-            <!-- 3D Core Interactive Callout / Anchor -->
+            <!-- Real site we built, shown on a phone -->
             <div class="hero-3d-callout" id="hero-3d-interactive-hint">
-              <div class="terminal-card" aria-label="Terminal decorativo com tecnologias do portfólio">
-                <div class="terminal-bar">
-                  <span class="terminal-controls" aria-hidden="true"><i></i><i></i><i></i></span>
-                  <span>portfolio / stack</span>
+              <figure class="hero-phone" id="hero-phone">
+                <div class="phone-frame">
+                  <span class="phone-notch" aria-hidden="true"></span>
+                  <div class="phone-screen">
+                    <img class="phone-scroll" src="/examples/novatech.webp" width="520" height="4000" alt="Loja NovaTech: página inicial e vitrine de produtos, rolando sozinha" fetchpriority="high" decoding="async" />
+                  </div>
                 </div>
-                <div class="terminal-content" id="hero-terminal" aria-hidden="true">
-                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> <span data-type="cat stack.txt"></span></p>
-                  <p class="terminal-output" data-out>Java · Python · React · Swift</p>
-                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> <span data-type="ls servicos/"></span></p>
-                  <p class="terminal-output" data-out>web/  apis/  apps/  automacoes/</p>
-                  <p><span class="terminal-path">~/portfolio</span> <span class="terminal-prompt">$</span> <span data-type="./novo-projeto --com voce"></span><span class="terminal-cursor">▍</span></p>
-                </div>
-              </div>
+                <figcaption class="phone-caption">
+                  <span class="phone-chip">Exemplo de site feito por nós</span>
+                  <a class="phone-link" href="https://loja-online-one-eta.vercel.app" target="_blank" rel="noopener noreferrer">Ver NovaTech ao vivo ↗</a>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
@@ -203,6 +202,47 @@
 
             <div class="services-grid" id="services-grid-container">
               <!-- Dynamically populated / styled -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Bot example: WhatsApp customer service -->
+        <section class="section bot-section" id="bot">
+          <div class="container bot-grid">
+            <div class="bot-copy">
+              <span class="section-tag">Atendimento automático</span>
+              <h2 class="bot-title">Ninguém fica sem resposta, <span class="gradient-text">nem na sexta à noite.</span></h2>
+              <p class="bot-lead">
+                Um assistente no WhatsApp que responde na hora, mostra o que você vende e já passa o pedido organizado para a sua equipe. Quando o assunto é mais delicado, o cliente fala com uma pessoa.
+              </p>
+              <ul class="bot-points">
+                <li><span class="check-icon" aria-hidden="true"></span><span>Responde em segundos, mesmo no horário de pico</span></li>
+                <li><span class="check-icon" aria-hidden="true"></span><span>Mostra cardápio, preços, horário e taxa de entrega</span></li>
+                <li><span class="check-icon" aria-hidden="true"></span><span>Anota o pedido e avisa a sua equipe</span></li>
+                <li><span class="check-icon" aria-hidden="true"></span><span>Chama uma pessoa quando o cliente pede</span></li>
+              </ul>
+              <a data-wa="Olá! Vi o exemplo de atendimento automático no site de vocês e queria saber como funcionaria no meu negócio." class="btn btn-primary btn-lg">Quero um atendimento assim</a>
+              <p class="bot-note">Conversa ilustrativa, com um negócio fictício. O fluxo real é montado de acordo com o seu negócio.</p>
+            </div>
+
+            <div class="bot-visual" id="bot-visual">
+              <div class="phone-frame" role="img" aria-label="Exemplo de conversa no WhatsApp: o cliente pergunta se a pizzaria está aberta, faz um pedido e o atendimento automático anota tudo e avisa a equipe.">
+                <span class="phone-notch" aria-hidden="true"></span>
+                <div class="phone-screen phone-screen--wa" aria-hidden="true">
+                  <div class="wa-screen">
+                    <div class="wa-head">
+                      <span class="wa-avatar">P</span>
+                      <span><span class="wa-name">Pizzaria Exemplo</span><span class="wa-status">online</span></span>
+                    </div>
+                    <div class="wa-log" id="wa-chat-log"></div>
+                    <div class="wa-input">Mensagem</div>
+                  </div>
+                </div>
+              </div>
+              <div class="bot-toast" id="bot-toast" aria-hidden="true">
+                <span class="bot-toast-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2l-4.5 1.3Z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1-.4-2.4-1.8-2.8-2.8l.9-1-1-2L9 8.5Z"/></svg></span>
+                <div class="bot-toast-text"><strong></strong><span></span></div>
+              </div>
             </div>
           </div>
         </section>

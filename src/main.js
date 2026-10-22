@@ -1,14 +1,17 @@
 import './style.css';
 import './styles/motion.css';
 import './styles/offer.css';
+import './styles/polish.css';
+import './styles/bot.css';
 import { duoProfile, projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
 import { applyTiltEffect } from './components/tiltEffect.js';
 import { setupProjectModal } from './components/projectModal.js';
 import { iconSvg } from './components/icon.js';
 import { bindWhatsappLinks, whatsappUrl } from './data/contact.js';
 import { setupOfferSection } from './components/offerSection.js';
+import { setupBotDemo } from './components/botDemo.js';
 import {
-  setupReveal, renderStackMarquee, typeTerminal, setupScrollEffects, setupMobileMenu
+  setupReveal, renderStackMarquee, setupHeroPhone, setupScrollEffects, setupMobileMenu
 } from './components/motion.js';
 
 const TILT_DEGREES = 5;
@@ -67,12 +70,13 @@ class PortfolioApp {
 
     // 6. Offer, motion & contact links
     setupOfferSection();
+    setupBotDemo();
     renderStackMarquee();
     bindWhatsappLinks();
     setupMobileMenu();
     setupScrollEffects();
     setupReveal();
-    typeTerminal();
+    setupHeroPhone();
 
     // Visit counter (cookieless). Production only, loaded after the page is interactive.
     if (import.meta.env.PROD) {
@@ -91,15 +95,22 @@ class PortfolioApp {
     const container = document.getElementById('services-grid-container');
     if (!container) return;
 
-    container.innerHTML = duoProfile.services.map(svc => `
-      <div class="service-card tilt-card">
-        <span class="service-icon">${iconSvg(svc.icon)}</span>
-        <h3 class="service-title">${svc.title}</h3>
-        <p class="service-desc">${svc.desc}</p>
+    container.innerHTML = duoProfile.services.map((svc, index) => `
+      <article class="service-row">
+        <div class="service-row-head">
+          <span class="service-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+          <div>
+            <div class="service-row-title">
+              <span class="service-icon">${iconSvg(svc.icon)}</span>
+              <h3 class="service-title">${svc.title}</h3>
+            </div>
+            <p class="service-desc">${svc.desc}</p>
+          </div>
+        </div>
         <ul class="service-deliverables-list">
           ${svc.deliverables.map(d => `<li>${d}</li>`).join('')}
         </ul>
-      </div>
+      </article>
     `).join('');
   }
 
@@ -212,8 +223,8 @@ class PortfolioApp {
           <button type="button" class="btn btn-secondary btn-sm btn-open-detail" data-detail-id="${p.id}">
             Detalhes
           </button>
-          <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-            GitHub
+          <a href="${p.demo || p.github}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+            ${p.demo ? 'Ver ao vivo ↗' : 'GitHub'}
           </a>
         </div>
       </article>

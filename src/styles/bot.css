@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Bot example: WhatsApp-style conversation inside the phone frame
+   ========================================================================== */
+
+.bot-section { position: relative; overflow-x: clip; }
+.bot-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 6vw, 5rem); align-items: center;
+}
+.bot-copy { display: grid; gap: 1.3rem; justify-items: start; }
+.bot-title { font-size: clamp(2rem, 3.4vw, 3rem); letter-spacing: -0.04em; line-height: 1.1; }
+.bot-lead { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; max-width: 34rem; }
+.bot-points { list-style: none; display: grid; gap: 0.85rem; margin: 0.3rem 0 0.4rem; }
+.bot-points li { display: flex; gap: 0.8rem; align-items: flex-start; color: #e8dcdd; font-size: 1.02rem; line-height: 1.5; }
+.bot-points .check-icon { margin-top: 4px; }
+.bot-note { color: var(--text-faint); font-size: 0.88rem; line-height: 1.5; max-width: 30rem; }
+
+.bot-visual { --phone-w: clamp(246px, 24vw, 300px); position: relative; display: grid; justify-items: center; padding: 0.5rem 0 1.5rem; }
+.bot-visual::before {
+  content: ''; position: absolute; z-index: -1; left: 50%; top: 46%; width: min(120%, 100vw); aspect-ratio: 1; translate: -50% -50%;
+  background:
+    radial-gradient(circle at 60% 55%, rgba(37, 211, 102, 0.1), transparent 45%),
+    radial-gradient(circle, rgba(189, 101, 112, 0.3), transparent 62%);
+  pointer-events: none;
+}
+.bot-visual.is-paused .phone-frame { animation-play-state: paused; }
+.bot-visual .phone-frame { width: var(--phone-w); aspect-ratio: 9 / 18.8; }
+
+/* ---------- WhatsApp screen ---------- */
+.phone-screen--wa { background: #0b141a; }
+.phone-screen--wa::before { background: #1f2c34; }
+.wa-screen { display: flex; flex-direction: column; height: 100%; color: #e9edef; font-family: 'DM Sans', system-ui, sans-serif; }
+.wa-head { display: flex; align-items: center; gap: 0.6rem; padding: 40px 12px 10px; background: #1f2c34; }
+.wa-avatar {
+  display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 50%;
+  background: linear-gradient(135deg, #f08c83, #bd6570); color: #2a1216; font-weight: 800; font-size: 0.95rem;
+}
+.wa-name { display: block; font-size: 0.86rem; font-weight: 600; line-height: 1.2; }
+.wa-status { display: block; font-size: 0.7rem; color: #8696a0; }
+.wa-log {
+  flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: 5px; padding: 12px 9px;
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+.wa-log::-webkit-scrollbar { display: none; }
+.wa-bubble {
+  position: relative; max-width: 84%; padding: 7px 10px 16px; border-radius: 8px;
+  font-size: 0.78rem; line-height: 1.38; overflow-wrap: anywhere;
+  animation: wa-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.wa-bubble--bot { align-self: flex-start; background: #202c33; border-top-left-radius: 2px; transform-origin: top left; }
+.wa-bubble--client { align-self: flex-end; background: #005c4b; border-top-right-radius: 2px; transform-origin: top right; }
+.wa-time { position: absolute; right: 8px; bottom: 3px; font-size: 0.6rem; color: #8696a0; }
+.wa-bubble--client .wa-time { color: #9bcfc4; }
+.wa-options { align-self: flex-start; display: grid; gap: 3px; width: 84%; animation: wa-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both; transform-origin: top left; }
+.wa-options span {
+  padding: 7px 8px; border-radius: 8px; background: #202c33; text-align: center;
+  font-size: 0.76rem; font-weight: 600; color: #53bdeb;
+}
+.wa-typing {
+  align-self: flex-start; display: flex; gap: 4px; padding: 10px 12px; border-radius: 8px; border-top-left-radius: 2px;
+  background: #202c33; animation: wa-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both; transform-origin: top left;
+}
+.wa-typing i { width: 6px; height: 6px; border-radius: 50%; background: #8696a0; animation: wa-dot 1s infinite; }
+.wa-typing i:nth-child(2) { animation-delay: 0.15s; }
+.wa-typing i:nth-child(3) { animation-delay: 0.3s; }
+.wa-input {
+  margin: 0 8px 10px; padding: 8px 12px; border-radius: 20px; background: #202c33; color: #8696a0; font-size: 0.74rem;
+}
+@keyframes wa-pop { from { opacity: 0; scale: 0.8; } }
+@keyframes wa-dot { 0%, 60%, 100% { translate: 0 0; opacity: 0.5; } 30% { translate: 0 -4px; opacity: 1; } }
+
+/* ---------- "New order" alert for the business owner ---------- */
+.bot-toast {
+  /* Sits beside the phone, overlapping only its edge so no message is covered. */
+  position: absolute; z-index: 3; right: calc(50% + var(--phone-w) / 2 - 16px); bottom: 22%; width: 224px;
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0.95rem 0.7rem 0.7rem;
+  border-radius: 14px; background: #fffaf4; color: #2a1a1f; font-size: 0.84rem; line-height: 1.35;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.6);
+  opacity: 0; translate: 0 14px; scale: 0.94; pointer-events: none;
+  transition: opacity 0.3s ease, translate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bot-toast.is-shown { opacity: 1; translate: 0 0; scale: 1; }
+.bot-toast-icon {
+  display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 10px; background: #25d366; color: #fff;
+}
+.bot-toast-icon .ui-icon { width: 20px; height: 20px; }
+.bot-toast-text { min-width: 0; }
+.bot-toast strong { display: block; font-size: 0.78rem; color: #6f5c61; font-weight: 700; }
+.bot-toast-text span { display: block; overflow-wrap: anywhere; }
+
+@media (max-width: 960px) {
+  .bot-grid { grid-template-columns: minmax(0, 1fr); }
+  .bot-copy { justify-items: start; }
+  .bot-toast { position: relative; right: auto; bottom: auto; margin-top: 1.1rem; width: min(300px, 100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-bubble, .wa-options, .wa-typing, .wa-typing i { animation: none; }
+  .bot-toast { transition: none; }
+}

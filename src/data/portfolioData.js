@@ -97,6 +97,26 @@ export const duoProfile = {
 
 export const projectsData = [
   {
+    id: "novatech-loja",
+    title: "NovaTech · Loja online",
+    badge: "Lucas Gabriel",
+    featured: true,
+    author: "Lucas Gabriel",
+    authorHandle: "blackxzin",
+    authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
+    category: "web",
+    categoryLabel: "Loja virtual",
+    techs: ["HTML", "CSS", "JavaScript", "Carrinho", "Tema claro e escuro"],
+    shortDesc: "Loja de tecnologia responsiva com catálogo, busca, favoritos, carrinho e cupons, feita sem framework.",
+    longDesc: "Loja virtual em HTML, CSS e JavaScript puros, com 24 produtos em 6 categorias, carrinho que guarda os itens, cupons de desconto, parcelamento, lista de desejos, busca e tema claro e escuro.",
+    businessValue: "Mostra o nível de acabamento de um site feito por nós: rápido, bonito no celular e pronto para vender.",
+    github: "https://github.com/blackxzin/loja-online",
+    demo: "https://loja-online-one-eta.vercel.app",
+    stars: 0,
+    accentColor: "#2e5bff",
+    metrics: { workflow: "Catálogo · carrinho · cupons" }
+  },
+  {
     id: "freelahunter-ai",
     title: "FreelaHunter",
     badge: "Colaboração da Dupla",

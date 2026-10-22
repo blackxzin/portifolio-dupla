@@ -204,3 +204,71 @@
 @media (prefers-reduced-motion: reduce) {
   .offer-card, .offer-glow, .offer-slots-dot, .offer-card.is-live .offer-discount { animation: none; }
 }
+
+/* ==========================================================================
+   Light (cream) variant: breaks the dark rhythm and makes the offer stand out.
+   Tokens are re-pointed locally; the price card keeps the dark palette.
+   ========================================================================== */
+.offer-section {
+  --salmon: #b8453d;
+  --salmon-soft: #8d3a45;
+  --text-main: #2a1a1f;
+  --text-muted: #5b4a4f;
+  --text-faint: #6f5c61;
+  background:
+    radial-gradient(70% 50% at 50% 0%, rgba(240, 140, 131, 0.16), transparent 70%),
+    #f6efe5;
+  color: var(--text-main);
+  border-block: 1px solid #e6d8c6;
+}
+.offer-section .section-subtitle { color: #5b4a4f; }
+.offer-section .section-tag { color: #8d3a45; background-image: linear-gradient(#b8453d, #b8453d); }
+.offer-section .gradient-text {
+  background-image: linear-gradient(110deg, #c4493f 8%, #8d3a45 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+.offer-glow { background: radial-gradient(circle, rgba(240, 140, 131, 0.3), transparent 62%); }
+
+.offer-include-group {
+  background: #fffaf4; border-color: #e8dac8;
+  box-shadow: 0 1px 0 #fff inset, 0 14px 32px -22px rgba(90, 45, 35, 0.35);
+}
+.offer-group-title { color: #2a1a1f; }
+.offer-group-title span { background: #f6e6d8; border-color: #e6cdb6; color: #8d3a45; }
+.offer-list li { color: #3d2b30; }
+.offer-section .check-icon { border-color: rgba(184, 69, 61, 0.45); }
+.offer-section .check-icon::after { border-color: #b8453d; }
+
+.offer-compare-col--without { background: #efe4d6; border-color: #e1d1bd; }
+.offer-compare-title { color: #6f5c61; }
+.offer-compare li { color: #5b4a4f; }
+.offer-compare-col--with { background: linear-gradient(160deg, #fde7e1, #fffaf4 70%); border-color: #e9a99f; }
+.offer-compare-col--with .offer-compare-title { color: #a73d36; }
+.offer-compare-col--with li { color: #2a1a1f; }
+.offer-compare-mark { border-color: rgba(42, 26, 31, 0.22); }
+.offer-compare-col--without .offer-compare-mark::before,
+.offer-compare-col--without .offer-compare-mark::after { background: #8d7479; }
+.offer-compare-col--with .offer-compare-mark { border-color: rgba(184, 69, 61, 0.55); background: rgba(184, 69, 61, 0.1); }
+.offer-compare-col--with .offer-compare-mark::after { border-color: #b8453d; }
+
+.offer-guarantee { background: #fffaf4; border-color: #e8dac8; }
+.offer-guarantee:hover { border-color: #d49a90; }
+.offer-guarantee-icon { background: #f8e4dd; color: #b8453d; }
+.offer-guarantee strong { color: #2a1a1f; }
+.offer-guarantee span { color: #5b4a4f; }
+
+/* The price card stays dark so it pops against the cream background. */
+.offer-card {
+  --salmon: #f08c83;
+  --salmon-soft: #f5a49b;
+  --text-main: #f7eeeb;
+  --text-muted: #d4c4c5;
+  color: var(--text-main);
+  box-shadow: 0 30px 70px -20px rgba(60, 20, 25, 0.55), 0 0 50px rgba(240, 140, 131, 0.18);
+}
+.offer-card .check-icon { border-color: rgba(240, 140, 131, 0.35); }
+.offer-card .check-icon::after { border-color: #f3a098; }
+.offer-card .offer-price-note,
+.offer-card .offer-timeline span,
+.offer-card .offer-cta-note { color: #cbb8ba; }
+.offer-card .offer-card-title { color: #ecdcdc; }

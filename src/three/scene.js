@@ -28,6 +28,9 @@ import {
   WebGLRenderer
 } from 'three';
 
+const CAMERA_Z = 17;
+const HALO_RADIUS_FACTOR = 0.9;
+
 export class Portfolio3DScene {
   constructor(canvasContainer) {
     this.container = canvasContainer;
@@ -110,7 +113,8 @@ export class Portfolio3DScene {
 
   createCentralCore() {
     this.coreGroup = new Group();
-    this.coreGroup.position.set(3.65, 0.1, 0);
+    this.baseY = 0.1;
+    this.coreGroup.position.set(3.65, this.baseY, 0);
 
     this.globeGroup = new Group();
     this.coreGroup.add(this.globeGroup);
@@ -301,12 +305,13 @@ export class Portfolio3DScene {
 
       if (width < 768) {
         this.camera.position.set(0, 0, 21);
-        this.coreGroup.position.set(0, 0.1, 0);
+        this.baseY = 0.1;
+        this.coreGroup.position.set(0, this.baseY, 0);
         this.coreGroup.scale.set(0.76, 0.76, 0.76);
       } else {
-        this.camera.position.set(0, 0, 17);
-        this.coreGroup.position.set(3.65, 0.1, 0);
-        this.coreGroup.scale.set(1, 1, 1);
+        this.camera.position.set(0, 0, CAMERA_Z);
+        this.camera.updateProjectionMatrix();
+        this.alignToAnchor(width, height);
       }
 
       this.camera.updateProjectionMatrix();
@@ -349,6 +354,33 @@ export class Portfolio3DScene {
     this.animationFrameId = null;
   }
 
+  // Centers the globe and its orbit rings on the hero phone so they frame it like a halo.
+  alignToAnchor(width, height) {
+    const anchor = document.getElementById('hero-phone');
+    const frame = anchor?.querySelector('.phone-frame');
+    if (!frame) {
+      this.baseY = 0.1;
+      this.coreGroup.position.set(3.65, this.baseY, 0);
+      this.coreGroup.scale.set(1, 1, 1);
+      return;
+    }
+    const box = this.container.getBoundingClientRect();
+    const rect = frame.getBoundingClientRect();
+    const halfHeight = Math.tan((this.camera.fov * Math.PI) / 360) * CAMERA_Z;
+    const halfWidth = halfHeight * (width / height);
+    const pxPerUnit = height / (2 * halfHeight);
+
+    const x = (((rect.left + rect.width / 2 - box.left) / width) * 2 - 1) * halfWidth;
+    this.baseY = -(((rect.top + rect.height / 2 - box.top) / height) * 2 - 1) * halfHeight;
+    this.coreGroup.position.set(x, this.baseY, 0);
+
+    // Outer ring radius is 2.85 units; make it clear the phone by ~60% of its width.
+    const ringRadiusPx = rect.width * HALO_RADIUS_FACTOR;
+    const scale = ringRadiusPx / (2.85 * pxPerUnit);
+    this.coreGroup.scale.setScalar(scale);
+    this.coreLight.position.copy(this.coreGroup.position);
+  }
+
   animate() {
     if (document.hidden || !this.isInView) return;
     if (this.reduceMotion) {
@@ -373,7 +405,7 @@ export class Portfolio3DScene {
       this.ring1.rotation.z += 0.11 * delta;
       this.ring2.rotation.y -= 0.075 * delta;
 
-      this.coreGroup.position.y = 0.1 + Math.sin(elapsedTime * 0.55) * 0.12;
+      this.coreGroup.position.y = this.baseY + Math.sin(elapsedTime * 0.55) * 0.12;
       this.coreGroup.rotation.y = this.mouse.x * 0.18 + Math.sin(elapsedTime * 0.17) * 0.06;
       this.coreGroup.rotation.x = this.mouse.y * 0.12 + Math.sin(elapsedTime * 0.22) * 0.035;
       this.coreLight.intensity = 2.7 + Math.sin(elapsedTime * 0.7) * 0.22;

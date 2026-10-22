@@ -5,6 +5,8 @@ const REVEAL_GROUPS = [
   '.services-grid > *',
   '.projects-filter-bar',
   '.projects-grid',
+  '.bot-copy',
+  '.bot-visual',
   '.offer-details > *',
   '.offer-card-column',
   '.offer-guarantees > *',
@@ -19,14 +21,9 @@ const STACK = [
   'C#', '.NET', 'Docker', 'PostgreSQL', 'Firebase', 'n8n', 'Unity 3D'
 ];
 
-const TYPE_DELAY_MS = 45;
-const LINE_PAUSE_MS = 380;
-const TERMINAL_START_MS = 900;
 
 export const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Fades/slides elements in as they enter the viewport, staggered per parent.
 export function setupReveal(root = document) {
@@ -65,31 +62,14 @@ export function renderStackMarquee() {
     + `<div class="stack-marquee-group" aria-hidden="true">${row}<i aria-hidden="true">/</i></div>`;
 }
 
-// Types the hero terminal commands one after another.
-export async function typeTerminal() {
-  const terminal = document.getElementById('hero-terminal');
-  if (!terminal) return;
-  const commands = [...terminal.querySelectorAll('[data-type]')];
-  const outputs = [...terminal.querySelectorAll('[data-out]')];
-
-  if (prefersReducedMotion()) {
-    commands.forEach((el) => { el.textContent = el.dataset.type; });
-    outputs.forEach((el) => el.classList.add('is-shown'));
-    return;
-  }
-
-  terminal.classList.add('is-typing');
-  await wait(TERMINAL_START_MS);
-  for (let i = 0; i < commands.length; i += 1) {
-    const text = commands[i].dataset.type;
-    for (let c = 1; c <= text.length; c += 1) {
-      commands[i].textContent = text.slice(0, c);
-      await wait(TYPE_DELAY_MS);
-    }
-    await wait(LINE_PAUSE_MS);
-    outputs[i]?.classList.add('is-shown');
-  }
-  terminal.classList.remove('is-typing');
+// Pause the hero phone animation while it is scrolled out of view.
+export function setupHeroPhone() {
+  const phone = document.getElementById('hero-phone');
+  if (!phone || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(([entry]) => {
+    phone.classList.toggle('is-paused', !entry.isIntersecting);
+  }, { threshold: 0.05 });
+  observer.observe(phone);
 }
 
 // Header shadow, scroll progress bar, floating button and 3D parallax in one rAF.

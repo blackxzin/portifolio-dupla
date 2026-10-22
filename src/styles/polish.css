@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Polish layer: readable text, hero phone, services as alternating rows
+   Loaded after style.css and motion.css.
+   ========================================================================== */
+
+/* ---------- 1. Readable text: lighter greys, slightly larger small print ---------- */
+:root {
+  --text-muted: #d4c4c5;
+  --text-faint: #b9a4a8;
+}
+.hero-description,
+.section-subtitle,
+.dev-bio,
+.service-desc,
+.project-card-desc,
+.benefit-desc,
+.step-card-desc,
+.footer-tagline,
+.footer-col-nav a,
+.footer-col-platforms li,
+.method-detail,
+.filter-tab,
+.contact-desc { color: var(--text-muted); }
+
+.stat-desc { color: #d0bfc1; font-size: 0.86rem; }
+.project-category-tag,
+.skills-title { color: var(--text-faint); font-size: 0.8rem; }
+.step-card-desc,
+.benefit-desc { font-size: 0.94rem; line-height: 1.65; }
+.dev-bio { font-size: 1rem; line-height: 1.7; }
+.project-card-desc { font-size: 0.95rem; line-height: 1.6; }
+.tech-chip { font-size: 0.82rem; }
+.tech-tag-sm { font-size: 0.78rem; }
+.highlight-item { color: #e4d6d7; }
+.form-group label { color: #e8dcdd; font-size: 0.9rem; }
+.footer-col-nav a,
+.footer-col-platforms li { font-size: 0.95rem; }
+.method-detail { font-size: 0.88rem; }
+.project-metrics-pill { font-size: 0.84rem; }
+.project-author-pill { font-size: 0.8rem; }
+
+/* Safety net: decorative glows may extend past the screen but must never widen the page
+   (on phones that widens the layout viewport, zooms the page out and breaks anchor scrolling). */
+html, body { overflow-x: clip; }
+.hero-section { overflow-x: clip; }
+
+/* ---------- 2. Hero: phone showing a real site we built ---------- */
+.hero-3d-callout { min-height: 0; padding: 0.5rem 0; }
+.hero-phone { position: relative; display: grid; justify-items: center; gap: 1.1rem; margin: 0; }
+.hero-phone::before {
+  content: ''; position: absolute; z-index: -1; left: 50%; top: 42%; width: min(130%, 100vw); aspect-ratio: 1; translate: -50% -50%;
+  background: radial-gradient(circle, rgba(189, 101, 112, 0.34), rgba(189, 101, 112, 0) 62%);
+  pointer-events: none;
+}
+.phone-frame {
+  position: relative; width: clamp(236px, 21vw, 280px); aspect-ratio: 9 / 18.4; padding: 9px;
+  border-radius: 42px; background: #0d080b;
+  box-shadow: inset 0 0 0 1.5px #3a2730, 0 40px 70px -30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 221, 214, 0.06);
+  animation: phone-float 7s ease-in-out infinite;
+}
+@keyframes phone-float { 50% { translate: 0 -8px; } }
+.phone-notch {
+  position: absolute; left: 50%; top: 16px; z-index: 3; width: 76px; height: 22px; translate: -50% 0;
+  border-radius: 999px; background: #0d080b;
+}
+.phone-screen {
+  position: relative; height: 100%; overflow: hidden; border-radius: 34px; background: #f1f2f7;
+  container-type: size;
+}
+.phone-screen::before {
+  content: ''; position: absolute; inset: 0 0 auto; z-index: 2; height: 34px; background: #f1f2f7;
+}
+.phone-scroll {
+  display: block; width: 100%; height: auto;
+  animation: phone-scroll 34s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes phone-scroll {
+  0%, 6% { transform: translateY(0); }
+  94%, 100% { transform: translateY(calc(-100% + 100cqh)); }
+}
+.hero-phone.is-paused .phone-scroll,
+.hero-phone.is-paused .phone-frame { animation-play-state: paused; }
+
+.phone-caption { display: flex; flex-wrap: wrap; gap: 0.6rem 0.9rem; align-items: center; justify-content: center; text-align: center; }
+.phone-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 999px;
+  background: rgba(240, 140, 131, 0.12); border: 1px solid rgba(240, 140, 131, 0.32);
+  color: #f6b0a8; font-size: 0.8rem; font-weight: 600;
+}
+.phone-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #f08c83; }
+.phone-link { color: var(--text-main); font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid rgba(240, 140, 131, 0.55); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+.phone-link:hover { color: #f5a49b; border-color: #f5a49b; }
+
+@media (max-width: 1080px) {
+  .hero-3d-callout { margin-top: 1.5rem; }
+  .phone-frame { width: clamp(232px, 62vw, 270px); }
+  .hero-phone::before { width: min(150%, 100vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone-frame, .phone-scroll { animation: none; }
+}
+
+/* ---------- 3. Services as alternating rows (no more identical cards) ---------- */
+.services-grid { display: block; border-top: 1px solid var(--border-subtle); }
+.service-row {
+  position: relative; display: grid; align-items: center; gap: 1.6rem 3.5rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  padding: 2.2rem 1rem; border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.4s ease;
+}
+.service-row:nth-child(even) { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+.service-row:nth-child(even) .service-row-head { order: 2; }
+.service-row::before {
+  content: ''; position: absolute; left: 0; top: -1px; height: 1px; width: 100%;
+  background: linear-gradient(90deg, #f08c83, transparent 60%);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-row:nth-child(even)::before { background: linear-gradient(270deg, #f08c83, transparent 60%); transform-origin: right; }
+.service-row:hover { background: linear-gradient(90deg, rgba(240, 140, 131, 0.06), transparent 75%); }
+.service-row:nth-child(even):hover { background: linear-gradient(270deg, rgba(240, 140, 131, 0.06), transparent 75%); }
+.service-row:hover::before { transform: scaleX(1); }
+
+.service-row-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.3rem; align-items: start; }
+.service-index {
+  min-width: 3.2rem; font-family: var(--font-mono); font-size: 2.4rem; font-weight: 500; line-height: 1;
+  color: rgba(240, 140, 131, 0.38); transition: color 0.4s;
+}
+.service-row:hover .service-index { color: #f5a49b; }
+.service-row-title { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; }
+.service-row-title .service-icon { margin: 0; font-size: 1rem; }
+.service-row-title .service-icon .ui-icon { width: 1.4rem; height: 1.4rem; }
+.service-row .service-title { margin: 0; font-size: 1.35rem; }
+.service-row .service-desc { max-width: 34rem; font-size: 1rem; line-height: 1.65; }
+.service-row .service-deliverables-list {
+  margin: 0; padding: 0; border: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem;
+}
+.service-row .service-deliverables-list li {
+  padding: 0.65rem 0.85rem; border-radius: 10px; font-size: 0.9rem; color: #e4d6d7;
+  background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(255, 221, 214, 0.08);
+  transition: border-color 0.3s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-row .service-deliverables-list li::before { color: #f08c83; }
+.service-row:hover .service-deliverables-list li { border-color: rgba(240, 140, 131, 0.22); }
+.service-row .service-deliverables-list li:hover { transform: translateX(3px); }
+
+@media (max-width: 860px) {
+  .service-row,
+  .service-row:nth-child(even) { grid-template-columns: minmax(0, 1fr); padding: 1.8rem 0.25rem; gap: 1.2rem; }
+  .service-row:nth-child(even) .service-row-head { order: 0; }
+  .service-index { font-size: 1.9rem; min-width: 2.4rem; }
+  .service-row-head { gap: 1rem; }
+}
+@media (max-width: 480px) {
+  .service-row .service-deliverables-list { grid-template-columns: minmax(0, 1fr); }
+}
