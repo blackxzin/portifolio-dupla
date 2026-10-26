@@ -46,14 +46,14 @@ html, body { overflow-x: clip; }
 
 /* ---------- 2. Hero: phone showing a real site we built ---------- */
 .hero-3d-callout { min-height: 0; padding: 0.5rem 0; }
-.hero-phone { position: relative; display: grid; justify-items: center; gap: 1.1rem; margin: 0; }
+.hero-phone { position: relative; display: grid; justify-items: center; gap: 0.85rem; margin: 0; }
 .hero-phone::before {
   content: ''; position: absolute; z-index: -1; left: 50%; top: 42%; width: min(130%, 100vw); aspect-ratio: 1; translate: -50% -50%;
   background: radial-gradient(circle, rgba(189, 101, 112, 0.34), rgba(189, 101, 112, 0) 62%);
   pointer-events: none;
 }
 .phone-frame {
-  position: relative; width: clamp(236px, 21vw, 280px); aspect-ratio: 9 / 18.4; padding: 9px;
+  position: relative; width: clamp(232px, 19.5vw, 262px); aspect-ratio: 9 / 18.4; padding: 9px;
   border-radius: 42px; background: #0d080b;
   box-shadow: inset 0 0 0 1.5px #3a2730, 0 40px 70px -30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 221, 214, 0.06);
   animation: phone-float 7s ease-in-out infinite;
@@ -72,9 +72,11 @@ html, body { overflow-x: clip; }
 }
 .phone-scroll {
   display: block; width: 100%; height: auto;
-  animation: phone-scroll 34s ease-in-out infinite alternate;
+  animation: phone-scroll var(--scroll-duration, 34s) ease-in-out infinite alternate;
   will-change: transform;
+  transition: opacity 0.18s ease;
 }
+.phone-scroll.is-swapping { opacity: 0; }
 @keyframes phone-scroll {
   0%, 6% { transform: translateY(0); }
   94%, 100% { transform: translateY(calc(-100% + 100cqh)); }
@@ -82,6 +84,16 @@ html, body { overflow-x: clip; }
 .hero-phone.is-paused .phone-scroll,
 .hero-phone.is-paused .phone-frame { animation-play-state: paused; }
 
+.phone-tabs {
+  display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 221, 214, 0.12);
+}
+.phone-tab {
+  min-height: 36px; padding: 0.35rem 1rem; border: 0; border-radius: 999px; background: transparent; color: var(--text-muted);
+  font: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: background 0.25s, color 0.25s;
+}
+.phone-tab:hover { color: var(--text-main); }
+.phone-tab[aria-pressed='true'] { background: linear-gradient(120deg, #f08c83, #d87679); color: #261518; }
 .phone-caption { display: flex; flex-wrap: wrap; gap: 0.6rem 0.9rem; align-items: center; justify-content: center; text-align: center; }
 .phone-chip {
   display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 999px;
@@ -154,3 +166,29 @@ html, body { overflow-x: clip; }
 @media (max-width: 480px) {
   .service-row .service-deliverables-list { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Short laptop screens: tighten the hero so the CTAs, phone and caption stay above the fold. */
+@media (min-width: 1081px) and (max-height: 800px) {
+  .hero-section { padding: 2.2rem 0 2.8rem; }
+  .hero-title { margin-bottom: 1.1rem; }
+  .hero-description { margin-bottom: 1.5rem; }
+  .hero-cta-group { margin-bottom: 2rem; }
+}
+
+/* ==========================================================================
+   Salmon is reserved for actions and the price; everything else stays warm neutral
+   ========================================================================== */
+:root { --neutral-accent: #e4d6d7; --neutral-line: rgba(255, 221, 214, 0.3); }
+.stat-number { color: var(--neutral-accent); }
+.section-tag { color: var(--neutral-accent); border-bottom-color: var(--neutral-line); }
+.terminal-cursor { color: var(--neutral-accent); }
+.filter-tab.active { background: #f7eeeb; color: #261518; }
+.service-index { color: rgba(255, 221, 214, 0.2); }
+.service-row:hover .service-index { color: var(--neutral-accent); }
+.service-row .service-deliverables-list li::before { color: #b9a4a8; }
+.service-row:hover .service-deliverables-list li { border-color: var(--neutral-line); }
+.service-row::before { background: linear-gradient(90deg, var(--neutral-line), transparent 60%); }
+.service-row:nth-child(even)::before { background: linear-gradient(270deg, var(--neutral-line), transparent 60%); }
+.service-row:hover,
+.service-row:nth-child(even):hover { background: rgba(255, 255, 255, 0.025); }
+.dev-card-glow { background: linear-gradient(90deg, #6a5459, #b9a4a8, #6a5459); }

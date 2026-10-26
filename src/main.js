@@ -10,6 +10,7 @@ import { iconSvg } from './components/icon.js';
 import { bindWhatsappLinks, whatsappUrl } from './data/contact.js';
 import { setupOfferSection } from './components/offerSection.js';
 import { setupBotDemo } from './components/botDemo.js';
+import { setupHeroExamples } from './components/heroExamples.js';
 import {
   setupReveal, renderStackMarquee, setupHeroPhone, setupScrollEffects, setupMobileMenu
 } from './components/motion.js';
@@ -77,6 +78,7 @@ class PortfolioApp {
     setupScrollEffects();
     setupReveal();
     setupHeroPhone();
+    setupHeroExamples();
 
     // Visit counter (cookieless). Production only, loaded after the page is interactive.
     if (import.meta.env.PROD) {

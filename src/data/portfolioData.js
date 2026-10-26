@@ -117,6 +117,26 @@ export const projectsData = [
     metrics: { workflow: "Catálogo · carrinho · cupons" }
   },
   {
+    id: "barbearia-demo",
+    title: "Barbearia Navalha · Demo",
+    badge: "Colaboração da Dupla",
+    featured: true,
+    author: "Lucas & Felipe",
+    authorHandle: "blackxzin + Felipe-Luvizotto",
+    authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
+    category: "web",
+    categoryLabel: "Site de exemplo",
+    techs: ["HTML", "CSS", "JavaScript", "Agendamento", "WhatsApp"],
+    shortDesc: "Site de exemplo de uma barbearia, com serviços e preços, agenda de horários e mensagem de agendamento pronta para o WhatsApp.",
+    longDesc: "Demo de um site para barbearia, com lista de serviços e preços, agenda dos próximos dias com horários ocupados e livres, e a prévia da mensagem que chegaria no WhatsApp do negócio. Nome, endereço e preços são fictícios.",
+    businessValue: "Mostra como um negócio local pode receber agendamentos organizados pelo WhatsApp, sem fila e sem troca de mensagens.",
+    github: "https://github.com/blackxzin/portifolio-dupla/tree/main/public/demos/barbearia",
+    demo: "/demos/barbearia/",
+    stars: 0,
+    accentColor: "#f08c83",
+    metrics: { workflow: "Serviços · agenda · WhatsApp" }
+  },
+  {
     id: "freelahunter-ai",
     title: "FreelaHunter",
     badge: "Colaboração da Dupla",

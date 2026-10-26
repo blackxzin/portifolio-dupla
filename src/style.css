@@ -4,39 +4,39 @@
    ========================================================================== */
 
 :root {
-  /* Core Color Palette */
-  --bg-primary: #070b19;
-  --bg-secondary: #0c1224;
-  --bg-card: rgba(15, 23, 42, 0.72);
-  --bg-card-hover: rgba(22, 33, 62, 0.85);
-  --bg-glass: rgba(13, 20, 38, 0.65);
-  
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(99, 102, 241, 0.35);
-  --border-active: rgba(6, 182, 212, 0.6);
+  /* Core Color Palette: burgundy surfaces, salmon accent */
+  --bg-primary: #160f13;
+  --bg-secondary: #201419;
+  --bg-card: rgba(39, 25, 31, .92);
+  --bg-card-hover: #302027;
+  --bg-glass: rgba(31, 20, 25, .92);
 
-  /* Neon Brand Accents */
-  --accent-cyan: #06b6d4;
-  --accent-cyan-glow: rgba(6, 182, 212, 0.4);
-  --accent-indigo: #6366f1;
-  --accent-indigo-glow: rgba(99, 102, 241, 0.4);
-  --accent-purple: #a855f7;
-  --accent-emerald: #10b981;
-  --accent-emerald-glow: rgba(16, 185, 129, 0.35);
-  --accent-amber: #f59e0b;
-  --accent-pink: #ec4899;
+  --border-subtle: rgba(255, 221, 214, .11);
+  --border-glow: rgba(240, 140, 131, .32);
+  --border-active: rgba(240, 140, 131, .58);
+
+  /* Brand Accents */
+  --accent-cyan: #f08c83;
+  --accent-cyan-glow: rgba(240, 140, 131, .2);
+  --accent-indigo: #bd6570;
+  --accent-indigo-glow: rgba(189, 101, 112, .18);
+  --accent-purple: #d18a87;
+  --accent-emerald: #d18a87;
+  --accent-emerald-glow: rgba(209, 138, 135, .18);
+  --accent-amber: #e8a17f;
+  --accent-pink: #f08c83;
 
   /* Typography */
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-faint: #64748b;
-  --text-highlight: #38bdf8;
+  --text-main: #f7eeeb;
+  --text-muted: #c0adae;
+  --text-faint: #967f84;
+  --text-highlight: #f5a49b;
 
-  --font-main: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-main: 'DM Sans', sans-serif;
   --font-mono: 'DM Mono', monospace;
 
   /* Spacing & Layout */
-  --container-max: 1240px;
+  --container-max: 1180px;
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
@@ -1618,32 +1618,6 @@ a {
 /* --------------------------------------------------------------------------
    Studio refresh: quieter surfaces, warmer paper tones and clearer hierarchy
    -------------------------------------------------------------------------- */
-:root {
-  --bg-primary: #f4f3ef;
-  --bg-secondary: #ecebe5;
-  --bg-card: rgba(255, 255, 255, 0.88);
-  --bg-card-hover: #fff;
-  --bg-glass: rgba(250, 249, 246, 0.92);
-  --border-subtle: rgba(27, 41, 36, 0.12);
-  --border-glow: rgba(33, 103, 82, 0.28);
-  --border-active: rgba(33, 103, 82, 0.48);
-  --accent-cyan: #216752;
-  --accent-cyan-glow: rgba(33, 103, 82, 0.18);
-  --accent-indigo: #527d68;
-  --accent-indigo-glow: rgba(82, 125, 104, 0.16);
-  --accent-purple: #a36e4f;
-  --accent-emerald: #39745a;
-  --accent-emerald-glow: rgba(57, 116, 90, 0.15);
-  --text-main: #1b2924;
-  --text-muted: #5e6963;
-  --text-faint: #7c8580;
-  --text-highlight: #216752;
-  --font-main: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-  --container-max: 1180px;
-}
-
-html { color-scheme: light; }
 body {
   background: var(--bg-primary);
   background-image: radial-gradient(ellipse at 78% 12%, rgba(204, 220, 207, .48), transparent 34%),
@@ -1759,31 +1733,6 @@ body {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-/* Dark burgundy and salmon palette */
-:root {
-  --bg-primary: #160f13;
-  --bg-secondary: #201419;
-  --bg-card: rgba(39, 25, 31, .92);
-  --bg-card-hover: #302027;
-  --bg-glass: rgba(31, 20, 25, .92);
-  --border-subtle: rgba(255, 221, 214, .11);
-  --border-glow: rgba(240, 140, 131, .32);
-  --border-active: rgba(240, 140, 131, .58);
-  --accent-cyan: #f08c83;
-  --accent-cyan-glow: rgba(240, 140, 131, .2);
-  --accent-indigo: #bd6570;
-  --accent-indigo-glow: rgba(189, 101, 112, .18);
-  --accent-purple: #d18a87;
-  --accent-emerald: #d18a87;
-  --accent-emerald-glow: rgba(209, 138, 135, .18);
-  --accent-amber: #e8a17f;
-  --accent-pink: #f08c83;
-  --text-main: #f7eeeb;
-  --text-muted: #c0adae;
-  --text-faint: #967f84;
-  --text-highlight: #f5a49b;
-}
-html { color-scheme: dark; }
 body {
   background-color: var(--bg-primary);
   background-image: radial-gradient(ellipse at 78% 10%, rgba(111, 49, 62, .28), transparent 36%),

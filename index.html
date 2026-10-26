@@ -177,12 +177,16 @@
                 <div class="phone-frame">
                   <span class="phone-notch" aria-hidden="true"></span>
                   <div class="phone-screen">
-                    <img class="phone-scroll" src="/examples/novatech.webp" width="520" height="4000" alt="Loja NovaTech: página inicial e vitrine de produtos, rolando sozinha" fetchpriority="high" decoding="async" />
+                    <img class="phone-scroll" id="phone-scroll" data-example="novatech" src="/examples/novatech.webp" width="520" height="4000" alt="Loja NovaTech: página inicial e vitrine de produtos, rolando sozinha" fetchpriority="high" decoding="async" />
                   </div>
                 </div>
+                <div class="phone-tabs" role="group" aria-label="Escolha um exemplo de site">
+                  <button type="button" class="phone-tab" data-example="novatech" aria-pressed="true">Loja virtual</button>
+                  <button type="button" class="phone-tab" data-example="barbearia" aria-pressed="false">Barbearia</button>
+                </div>
                 <figcaption class="phone-caption">
-                  <span class="phone-chip">Exemplo de site feito por nós</span>
-                  <a class="phone-link" href="https://loja-online-one-eta.vercel.app" target="_blank" rel="noopener noreferrer">Ver NovaTech ao vivo ↗</a>
+                  <span class="phone-chip" id="phone-chip">Exemplo de site feito por nós</span>
+                  <a class="phone-link" id="phone-link" href="https://loja-online-one-eta.vercel.app" target="_blank" rel="noopener noreferrer">Ver NovaTech ao vivo ↗</a>
                 </figcaption>
               </figure>
             </div>
