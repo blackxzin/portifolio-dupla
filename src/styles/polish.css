@@ -95,12 +95,7 @@ html, body { overflow-x: clip; }
 .phone-tab:hover { color: var(--text-main); }
 .phone-tab[aria-pressed='true'] { background: linear-gradient(120deg, #f08c83, #d87679); color: #261518; }
 .phone-caption { display: flex; flex-wrap: wrap; gap: 0.6rem 0.9rem; align-items: center; justify-content: center; text-align: center; }
-.phone-chip {
-  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 999px;
-  background: rgba(240, 140, 131, 0.12); border: 1px solid rgba(240, 140, 131, 0.32);
-  color: #f6b0a8; font-size: 0.8rem; font-weight: 600;
-}
-.phone-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #f08c83; }
+.phone-chip { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; }
 .phone-link { color: var(--text-main); font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid rgba(240, 140, 131, 0.55); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
 .phone-link:hover { color: #f5a49b; border-color: #f5a49b; }
 
