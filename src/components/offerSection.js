@@ -2,6 +2,8 @@ import { OFFER } from '../data/offer.js';
 import { whatsappUrl } from '../data/contact.js';
 import { iconSvg } from './icon.js';
 
+const brl = (value) => Math.round(value).toLocaleString('pt-BR');
+
 const checkList = (items, className) => `
   <ul class="${className}">
     ${items.map((item, i) => `<li style="--li:${i}"><span class="check-icon" aria-hidden="true"></span><span>${item}</span></li>`).join('')}
@@ -42,6 +44,14 @@ function renderCard() {
           <span class="offer-savings">${OFFER.reassurance}</span>
         </div>
 
+        <div class="offer-monthly">
+          <span class="offer-monthly-label">Depois, todo mês</span>
+          <div class="offer-monthly-row">
+            <strong>R$ ${brl(OFFER.monthly)}<small>/mês</small></strong>
+            <span>${OFFER.monthlyNote}</span>
+          </div>
+        </div>
+
         <ol class="offer-timeline">
           ${OFFER.steps.map((step) => `
             <li>
@@ -72,7 +82,7 @@ function renderDetails() {
         ${checkList(OFFER.siteIncludes, 'offer-list')}
       </div>
       <div class="offer-include-group">
-        <h3 class="offer-group-title"><span>Mensal · a combinar</span> O que a manutenção cobre</h3>
+        <h3 class="offer-group-title"><span>R$ ${brl(OFFER.monthly)}/mês</span> O que a mensalidade cobre</h3>
         ${checkList(OFFER.monthlyIncludes, 'offer-list')}
       </div>
       ${renderComparison()}

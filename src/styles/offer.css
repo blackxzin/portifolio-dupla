@@ -65,6 +65,13 @@
   background: rgba(130, 183, 140, 0.12); color: #b7dcb9; font-size: 0.82rem; font-weight: 600;
 }
 
+.offer-monthly { display: grid; gap: 0.35rem; padding: 1.1rem 0 1.2rem; border-bottom: 1px solid rgba(255, 221, 214, 0.1); }
+.offer-monthly-label { color: #a8949a; font-size: 0.9rem; }
+.offer-monthly-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.8rem; }
+.offer-monthly-row strong { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.03em; color: #f5a49b; }
+.offer-monthly-row small { font-size: 0.95rem; font-weight: 600; color: #cbb8ba; letter-spacing: 0; }
+.offer-monthly-row span { color: #cbb8ba; font-size: 0.88rem; }
+
 .offer-timeline { list-style: none; display: grid; gap: 1rem; margin: 1.4rem 0 1.6rem; position: relative; }
 .offer-timeline::before {
   content: ''; position: absolute; left: 6px; top: 10px; bottom: 10px; width: 1px;

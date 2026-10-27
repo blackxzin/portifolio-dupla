@@ -2,16 +2,18 @@
 export const OFFER = {
   badge: 'Orçamento sob medida',
   cardTitle: 'Site profissional completo',
-  priceLabel: 'Valor do site',
-  priceValue: 'A combinar',
-  priceNote: 'definido junto com você, de acordo com o seu orçamento e com o que o seu negócio precisa',
+  priceLabel: 'Criação do site',
+  priceValue: 'A negociar',
+  priceNote: 'valor combinado com você, de acordo com o seu orçamento e com o que o seu negócio precisa',
+  monthly: 147,
+  monthlyNote: 'a partir do mês seguinte, para manter tudo no ar',
   reassurance: 'Orçamento sem compromisso',
   ctaLabel: 'Pedir meu orçamento',
   ctaMessage: 'Olá, Lucas e Felipe! Vi o portfólio e quero um orçamento de site para o meu negócio. Podemos conversar?',
   steps: [
     { title: 'Você conta o que precisa', desc: 'E quanto pretende investir. Sem pressa e sem compromisso.' },
-    { title: 'Mandamos a proposta', desc: 'Um valor fechado dentro do seu orçamento, com tudo que está incluso.' },
-    { title: 'Você aprova e publicamos', desc: 'Mostramos uma prévia antes. A manutenção mensal é opcional e combinada junto.' }
+    { title: 'Negociamos a criação', desc: 'Um valor fechado dentro do seu orçamento, com tudo que está incluso.' },
+    { title: 'Você aprova e publicamos', desc: 'Mostramos uma prévia antes de colocar o site no ar.' }
   ],
   siteIncludes: [
     'Site profissional feito sob medida para o seu negócio',
