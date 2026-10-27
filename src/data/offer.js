@@ -1,18 +1,18 @@
-// Oferta da seção de preço. Mude valores e textos aqui.
-//
-// Gatilhos de venda só funcionam enquanto forem verdadeiros. Por isso:
-// - `validUntil`: data real (AAAA-MM-DD). Aparece como "válida até dd/mm/aaaa" e some sozinha
-//   quando a data passa. Deixe '' se a oferta não tem prazo.
-// - `slotsNote`: só preencha se o limite de vagas for real (ex.: 'Vagas para novembro: 3').
+// Conteúdo da seção de orçamento. O valor não é fixo: é combinado com o orçamento de cada cliente.
 export const OFFER = {
-  badge: 'Oferta especial',
-  oldPrice: 2000,
-  price: 997,
-  monthly: 147,
-  ctaLabel: 'Quero meu site por R$\u00a0997',
-  ctaMessage: 'Olá, Lucas e Felipe! Vi a oferta no portfólio e quero meu site por R$ 997 + R$ 147/mês. Podemos conversar?',
-  validUntil: '',
-  slotsNote: '',
+  badge: 'Orçamento sob medida',
+  cardTitle: 'Site profissional completo',
+  priceLabel: 'Valor do site',
+  priceValue: 'A combinar',
+  priceNote: 'definido junto com você, de acordo com o seu orçamento e com o que o seu negócio precisa',
+  reassurance: 'Orçamento sem compromisso',
+  ctaLabel: 'Pedir meu orçamento',
+  ctaMessage: 'Olá, Lucas e Felipe! Vi o portfólio e quero um orçamento de site para o meu negócio. Podemos conversar?',
+  steps: [
+    { title: 'Você conta o que precisa', desc: 'E quanto pretende investir. Sem pressa e sem compromisso.' },
+    { title: 'Mandamos a proposta', desc: 'Um valor fechado dentro do seu orçamento, com tudo que está incluso.' },
+    { title: 'Você aprova e publicamos', desc: 'Mostramos uma prévia antes. A manutenção mensal é opcional e combinada junto.' }
+  ],
   siteIncludes: [
     'Site profissional feito sob medida para o seu negócio',
     'Layout que funciona no celular, tablet e computador',

@@ -49,48 +49,21 @@
   background: rgba(240, 140, 131, 0.14); border: 1px solid rgba(240, 140, 131, 0.35);
   color: #f5a49b; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
 }
-.offer-discount {
-  display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%;
-  background: linear-gradient(135deg, #f08c83, #bd6570); color: #261518;
-  font-family: var(--font-mono); font-weight: 800; font-size: 0.9rem; letter-spacing: -0.05em;
-  box-shadow: 0 0 0 0 rgba(240, 140, 131, 0.5);
-  scale: 0.6; rotate: -20deg; opacity: 0;
-  transition: scale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), rotate 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
-}
-.offer-card.is-live .offer-discount { scale: 1; rotate: -8deg; opacity: 1; animation: offer-ping 2.6s ease-out 1.6s infinite; }
-@keyframes offer-ping {
-  0% { box-shadow: 0 0 0 0 rgba(240, 140, 131, 0.5); }
-  70%, 100% { box-shadow: 0 0 0 14px rgba(240, 140, 131, 0); }
-}
 .offer-card-title { font-size: 1.15rem; color: #e9d6d6; margin-bottom: 1rem; }
 
 .offer-price-block { display: grid; gap: 0.3rem; padding-bottom: 1.4rem; border-bottom: 1px solid rgba(255, 221, 214, 0.1); }
 .offer-old { color: #a8949a; font-size: 1rem; }
-.offer-old s { position: relative; text-decoration: none; color: #c9b4b6; }
-.offer-old s::after {
-  content: ''; position: absolute; left: -4%; right: -4%; top: 52%; height: 2px;
-  background: #f08c83; border-radius: 2px; rotate: -8deg;
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
-}
-.offer-card.is-live .offer-old s::after { transform: scaleX(1); }
 .offer-price { display: flex; align-items: flex-start; gap: 0.35rem; line-height: 1; }
-.offer-currency { margin-top: 0.55rem; font-size: 1.4rem; font-weight: 700; color: #f5a49b; }
 .offer-price-value {
-  font-size: clamp(3.6rem, 9vw, 5rem); font-weight: 800; letter-spacing: -0.05em;
-  font-variant-numeric: tabular-nums;
+  font-size: clamp(2.5rem, 7vw, 3.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
   background: linear-gradient(110deg, #f7eeeb 20%, #f5a49b 70%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.offer-card.is-dropped .offer-price-value { animation: offer-land 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-@keyframes offer-land { 40% { scale: 1.08; } }
 .offer-price-note { color: #b6a2a5; font-size: 0.88rem; }
 .offer-savings {
   justify-self: start; margin-top: 0.5rem; padding: 0.3rem 0.7rem; border-radius: 6px;
   background: rgba(130, 183, 140, 0.12); color: #b7dcb9; font-size: 0.82rem; font-weight: 600;
-  opacity: 0; translate: 0 6px; transition: opacity 0.4s, translate 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.offer-card.is-dropped .offer-savings { opacity: 1; translate: 0 0; }
 
 .offer-timeline { list-style: none; display: grid; gap: 1rem; margin: 1.4rem 0 1.6rem; position: relative; }
 .offer-timeline::before {
@@ -110,13 +83,6 @@
 .offer-cta-arrow { transition: translate 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 .offer-cta:hover .offer-cta-arrow { translate: 4px 0; }
 .offer-cta-note { margin-top: 0.75rem; text-align: center; font-size: 0.82rem; color: #a8949a; }
-.offer-slots {
-  display: flex; gap: 0.55rem; align-items: center; justify-content: center;
-  margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255, 221, 214, 0.12);
-  font-size: 0.8rem; color: #d7b9a6; text-align: center;
-}
-.offer-slots-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #e8a17f; animation: status-pulse 2.4s ease-out infinite; }
-
 /* ---------- Details column ---------- */
 .offer-details { display: grid; gap: 1.25rem; }
 .offer-include-group {
@@ -194,7 +160,6 @@
   .offer-card-inner { padding: 1.6rem 1.25rem 1.4rem; }
   .offer-include-group { padding: 1.3rem 1.15rem; }
   .offer-compare { grid-template-columns: minmax(0, 1fr); }
-  .offer-discount { width: 54px; height: 54px; font-size: 0.82rem; }
   .offer-cta { font-size: 0.95rem; padding-inline: 1rem; }
 }
 @media (max-width: 360px) {
@@ -202,7 +167,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .offer-card, .offer-glow, .offer-slots-dot, .offer-card.is-live .offer-discount { animation: none; }
+  .offer-card, .offer-glow { animation: none; }
 }
 
 /* ==========================================================================
