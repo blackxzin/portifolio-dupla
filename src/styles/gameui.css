@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Game-UI theme: pure black, hard red, condensed display type and techno labels.
+   Loaded last so it wins over the earlier layers.
+   ========================================================================== */
+:root {
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font-tech: 'Chakra Petch', 'DM Sans', sans-serif;
+  --red: #ec4b4b;
+  --red-soft: #ff7b75;
+}
+html { color-scheme: dark; }
+body { background-color: #050506; background-image: radial-gradient(ellipse at 85% 0%, rgba(120, 20, 28, 0.35), transparent 40%), radial-gradient(ellipse at 0% 60%, rgba(70, 14, 20, 0.22), transparent 35%); }
+.site-header { background: rgba(5, 5, 6, 0.88); border-bottom-color: rgba(255, 235, 232, 0.08); }
+
+/* ---------- Display type ---------- */
+.hero-title, .section-title, .bot-title {
+  font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.01em; line-height: 0.98;
+}
+.hero-title { font-size: clamp(3rem, 5.4vw, 5.2rem); max-width: 14ch; margin-bottom: 1.4rem; }
+.section-title, .bot-title { font-size: clamp(2.5rem, 5.2vw, 4.4rem); }
+.hero-title .gradient-text, .section-title .gradient-text {
+  background: none; -webkit-text-fill-color: var(--red); color: var(--red);
+}
+.stat-number, .service-index, .offer-price-value, .brand-name { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.02em; }
+.offer-price-value { font-size: clamp(3.2rem, 8vw, 5rem); text-transform: uppercase; background: none; -webkit-text-fill-color: var(--red); color: var(--red); }
+.stat-number { font-size: 2.2rem; color: #f7eeeb; }
+.service-index { font-size: 2.8rem; }
+
+/* ---------- Techno labels ---------- */
+.nav-link, .mobile-nav a, .btn, .filter-tab, .phone-tab, .section-tag, .stat-desc, .hero-status-pill,
+.phone-chip, .phone-link, .tech-chip, .tech-tag-sm, .popular-tag, .offer-ribbon, .offer-step-tag,
+.project-author-pill, .step-card-num, .footer-col-title {
+  font-family: var(--font-tech); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600;
+}
+.nav-link { font-size: 0.74rem; }
+.btn { font-size: 0.8rem; border-radius: 2px; }
+.btn-lg { font-size: 0.86rem; }
+.section-tag { font-size: 0.72rem; }
+.stat-desc { font-size: 0.68rem; }
+.filter-tab, .phone-tab { font-size: 0.7rem; border-radius: 2px; }
+.tech-chip, .tech-tag-sm { font-size: 0.66rem; letter-spacing: 0.08em; }
+
+/* ---------- Buttons: filled red for the main action, outlined red for the rest ---------- */
+.btn-primary { background: var(--red); color: #140607; box-shadow: 0 0 0 1px var(--red), 0 10px 30px -8px rgba(236, 75, 75, 0.55); }
+.btn-primary:hover { background: #ff5f5a; }
+.btn-secondary, .btn-outline, .btn-glow {
+  background: transparent; color: var(--red-soft); border: 1px solid rgba(236, 75, 75, 0.7); box-shadow: none; backdrop-filter: none;
+}
+.btn-secondary:hover, .btn-outline:hover, .btn-glow:hover { background: rgba(236, 75, 75, 0.14); color: #fff; border-color: var(--red); }
+.phone-tab[aria-pressed='true'] { background: var(--red); color: #140607; }
+.filter-tab.active { background: var(--red); color: #140607; }
+
+/* ---------- Sharper surfaces ---------- */
+.project-card, .developer-profile-card, .benefit-card, .process-step-card, .contact-card-wrapper, .terminal-card,
+.offer-include-group, .offer-guarantee, .offer-compare-col, .service-row .service-deliverables-list li,
+.project-modal .modal-dialog, .projects-filter-bar, .project-search-bar, .tech-chip, .tech-tag-sm, .hero-stat-card {
+  border-radius: 4px;
+}
+.offer-card, .offer-card-inner { border-radius: 6px; }
+.project-card, .developer-profile-card, .benefit-card, .process-step-card, .contact-card-wrapper, .offer-include-group {
+  background: rgba(12, 12, 14, 0.92); border: 1px solid rgba(255, 235, 232, 0.1);
+}
+.project-card:hover, .developer-profile-card:hover, .benefit-card:hover, .process-step-card:hover { border-color: rgba(236, 75, 75, 0.5); }
+.offer-ribbon { border-radius: 2px; }
+.section-tag { color: var(--red-soft); }
+.hud-index { color: var(--red); border-right-color: rgba(236, 75, 75, 0.6); }
+
+/* ---------- Details ---------- */
+.section-header .section-subtitle { font-size: 1.05rem; }
+::selection { background: var(--red); color: #140607; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+@media (max-width: 768px) {
+  .hero-title { font-size: clamp(3rem, 15vw, 4.4rem); max-width: none; }
+  .section-title, .bot-title { font-size: clamp(2.2rem, 10vw, 3rem); }
+}
+
+/* ==========================================================================
+   Intro screen: giant greeting + short briefing, like the reference's welcome page
+   ========================================================================== */
+.intro-section { position: relative; min-height: 100svh; display: flex; align-items: center; padding: 7rem 0 5rem; overflow-x: clip; }
+.intro-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.intro-hi {
+  position: relative; padding-top: 0.14em; display: flex; margin: 0; font-family: var(--font-display); text-transform: uppercase;
+  font-size: clamp(8rem, 21vw, 17rem); line-height: 0.82; letter-spacing: -0.01em; color: var(--red); user-select: none;
+}
+.intro-hi span { display: inline-block; animation: intro-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.intro-hi span:nth-child(2) { animation-delay: 0.18s; }
+.intro-hi::before, .intro-hi::after { content: 'OLÁ!'; position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.intro-hi::before { color: #fff; animation: intro-glitch-a 7s steps(1) infinite 2s; }
+.intro-hi::after { color: #7a1a20; animation: intro-glitch-b 7s steps(1) infinite 2s; }
+@keyframes intro-in { from { opacity: 0; translate: 0 40%; clip-path: inset(0 0 100% 0); } to { opacity: 1; translate: 0 0; clip-path: inset(-50% -10% -10% -10%); } }
+@keyframes intro-glitch-a { 0%, 90%, 100% { opacity: 0; } 91% { opacity: .85; clip-path: inset(12% 0 62% 0); translate: -8px 0; } 93% { opacity: .85; clip-path: inset(58% 0 18% 0); translate: 7px 0; } 95% { opacity: 0; } }
+@keyframes intro-glitch-b { 0%, 91%, 100% { opacity: 0; } 92% { opacity: .9; clip-path: inset(36% 0 40% 0); translate: 9px 0; } 94% { opacity: .9; clip-path: inset(70% 0 6% 0); translate: -6px 0; } 96% { opacity: 0; } }
+.intro-copy { display: grid; gap: 1.1rem; justify-items: start; max-width: 30rem; }
+.intro-copy p { margin: 0; font-family: var(--font-tech); font-size: 0.86rem; line-height: 1.85; letter-spacing: 0.1em; text-transform: uppercase; color: #cdbcbe; }
+.intro-copy b { color: #fff; font-weight: 600; }
+.intro-copy .intro-kicker { color: #fff; font-weight: 600; }
+.intro-copy > * { animation: intro-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.intro-copy > :nth-child(1) { animation-delay: 0.35s; } .intro-copy > :nth-child(2) { animation-delay: 0.45s; }
+.intro-copy > :nth-child(3) { animation-delay: 0.55s; } .intro-copy > :nth-child(4) { animation-delay: 0.7s; }
+.intro-enter { margin-top: 0.6rem; }
+.intro-scroll { position: absolute; left: 50%; bottom: 2.6rem; translate: -50% 0; display: grid; justify-items: center; gap: 0.5rem; text-decoration: none;
+  font-family: var(--font-tech); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #8f8083; }
+.intro-scroll i { width: 1px; height: 34px; background: linear-gradient(var(--red), transparent); animation: intro-cue 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes intro-cue { 0% { scale: 1 0; } 50% { scale: 1 1; } 100% { scale: 1 1; opacity: 0; } }
+@media (max-width: 860px) {
+  .intro-grid { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .intro-hi { font-size: clamp(7rem, 38vw, 11rem); }
+  .intro-section { padding: 6rem 0 5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-hi span, .intro-copy > *, .intro-scroll i { animation: none; }
+  .intro-hi::before, .intro-hi::after { display: none; }
+}
+
+.project-author-pill { letter-spacing: 0.06em; font-size: 0.64rem; }
+.project-card .project-category, .project-card [class*="category"] { letter-spacing: 0.06em; font-size: 0.62rem; }
+@media (max-width: 860px) {
+  .intro-copy > :nth-child(3) { display: none; }
+  .intro-copy p { font-size: 0.78rem; line-height: 1.7; }
+}
+
+/* Example tabs: flat squared buttons, no pill container */
+.phone-tabs { flex-wrap: wrap; justify-content: center; gap: 0.4rem; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; }
+.phone-tab { border: 1px solid rgba(236, 75, 75, 0.5); border-radius: 0; background: transparent; box-shadow: none; padding: 0.5rem 0.8rem; }
+.phone-tab:hover { background: rgba(236, 75, 75, 0.12); color: #fff; }
+.phone-tab[aria-pressed='true'] { background: var(--red); border-color: var(--red); color: #140607; }

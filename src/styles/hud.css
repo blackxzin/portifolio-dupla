@@ -1,0 +1,170 @@
+/* ==========================================================================
+   HUD layer: interface-style details (corner brackets, readout, scan line, cursor ring)
+   Decorative only, built on top of the existing wine/salmon palette.
+   ========================================================================== */
+:root {
+  --hud-line: rgba(236, 75, 75, 0.5);
+  --hud-line-strong: #ec4b4b;
+  --hud-dim: #b9a4a8;
+}
+
+/* ---------- Faint grid behind the whole page ---------- */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 235, 232, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 235, 232, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%);
+}
+
+/* ---------- Corner brackets + pointer spotlight on cards ---------- */
+.hud-card { position: relative; }
+.hud-corners {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(236, 75, 75, 0.1), transparent 70%);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.hud-card:hover > .hud-corners { opacity: 1; }
+.hud-corners i {
+  position: absolute; width: 14px; height: 14px; border: 0 solid var(--hud-line);
+  opacity: 0; scale: 0.4; transition: opacity 0.5s ease, scale 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s, height 0.35s, border-color 0.3s;
+}
+.hud-card.hud-on > .hud-corners i { opacity: 1; scale: 1; }
+.hud-corners i:nth-child(1) { top: 7px; left: 7px; border-top-width: 1.5px; border-left-width: 1.5px; transform-origin: top left; }
+.hud-corners i:nth-child(2) { top: 7px; right: 7px; border-top-width: 1.5px; border-right-width: 1.5px; transform-origin: top right; }
+.hud-corners i:nth-child(3) { bottom: 7px; left: 7px; border-bottom-width: 1.5px; border-left-width: 1.5px; transform-origin: bottom left; }
+.hud-corners i:nth-child(4) { bottom: 7px; right: 7px; border-bottom-width: 1.5px; border-right-width: 1.5px; transform-origin: bottom right; }
+.hud-card:hover > .hud-corners i { width: 22px; height: 22px; border-color: var(--hud-line-strong); }
+.hud-card.hud-on > .hud-corners i:nth-child(2) { transition-delay: 0.08s; }
+.hud-card.hud-on > .hud-corners i:nth-child(3) { transition-delay: 0.16s; }
+.hud-card.hud-on > .hud-corners i:nth-child(4) { transition-delay: 0.24s; }
+
+/* ---------- Section index and decoded label ---------- */
+.hud-index {
+  margin-right: 0.55rem; padding-right: 0.55rem; border-right: 1px solid var(--hud-line);
+  color: var(--hud-line-strong); font-variant-numeric: tabular-nums;
+}
+.section-tag { font-variant-numeric: tabular-nums; }
+
+/* ---------- Scan line over the hero phone ---------- */
+.phone-screen::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 38%; z-index: 3; pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(236, 75, 75, 0.16) 80%, rgba(245, 164, 155, 0.5) 100%);
+  border-bottom: 1px solid rgba(245, 164, 155, 0.55);
+  translate: 0 -110%; animation: hud-scan 5.5s cubic-bezier(0.45, 0, 0.25, 1) infinite 1.2s;
+}
+@keyframes hud-scan { 0% { translate: 0 -110%; opacity: 1; } 55% { translate: 0 270%; opacity: 1; } 56%, 100% { translate: 0 270%; opacity: 0; } }
+.hero-phone.is-paused .phone-screen::after,
+.bot-visual.is-paused .phone-screen::after { animation-play-state: paused; }
+.bot-visual .phone-screen::after { animation-delay: 2.4s; }
+
+/* ---------- Game shell: screens, top bar, player card, active-quest panel, viewport brackets ---------- */
+.hud-frame, .app-top, .hud-panel { display: none; }
+.app-top, .hud-panel, .hud-frame { font-family: var(--font-tech); text-transform: uppercase; letter-spacing: 0.12em; }
+.hud-field { display: grid; gap: 0.25rem; padding-bottom: 0.7rem; margin-bottom: 0.7rem; border-bottom: 1px solid rgba(255, 235, 232, 0.08); }
+.hud-field span { font-size: 0.58rem; color: #8f8083; }
+.hud-field strong, .hud-field p { font-size: 0.74rem; font-weight: 700; color: var(--red, #ec4b4b); line-height: 1.35; letter-spacing: 0.08em; margin: 0; }
+.hud-field p { font-weight: 600; color: #e9d9d9; text-transform: none; letter-spacing: 0.02em; font-family: var(--font-main); font-size: 0.78rem; }
+.hud-talk {
+  display: block; margin-top: 0.4rem; padding: 0.6rem 0.5rem; text-align: center; text-decoration: none; pointer-events: auto;
+  font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em; color: #ff7b75; border: 1px solid rgba(236, 75, 75, 0.7);
+  transition: background 0.25s, color 0.25s;
+}
+.hud-talk:hover { background: rgba(236, 75, 75, 0.16); color: #fff; }
+
+/* Screen mode: the page becomes a fixed interface and each group of sections is its own screen. */
+.app-mode, .app-mode body { height: 100%; overflow: hidden; }
+.app-mode .site-header, .app-mode #floating-wa { display: none; }
+.app-mode .hud-frame { display: block; position: fixed; inset: 10px; z-index: 60; pointer-events: none; }
+.app-mode .hud-frame i { position: absolute; width: 26px; height: 26px; border: 0 solid var(--red, #ec4b4b); }
+.app-mode .hud-frame i:nth-child(1) { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; }
+.app-mode .hud-frame i:nth-child(2) { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; }
+.app-mode .hud-frame i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; }
+.app-mode .hud-frame i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; }
+.app-mode .app-top {
+  display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 50px; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0 40px; background: #050506; border-bottom: 1px solid rgba(255, 235, 232, 0.08); font-size: 0.6rem; color: #8f8083;
+}
+.app-brand { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 0.04em; color: #fff; text-decoration: none; white-space: nowrap; }
+.app-brand span { color: var(--red, #ec4b4b); }
+.app-tabs { display: flex; gap: 0.2rem; }
+.app-tab {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.5rem 0.75rem; border: 1px solid transparent; text-decoration: none;
+  font-size: 0.64rem; font-weight: 600; letter-spacing: 0.14em; color: #a89a9d; transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.app-tab i { font-style: normal; color: var(--red, #ec4b4b); font-variant-numeric: tabular-nums; }
+.app-tab:hover { color: #fff; }
+.app-tab.is-active { color: #fff; border-color: rgba(236, 75, 75, 0.7); background: rgba(236, 75, 75, 0.1); }
+.app-stats { display: flex; gap: 1.2rem; white-space: nowrap; }
+.app-stats b { color: #f7eeeb; font-weight: 600; font-variant-numeric: tabular-nums; }
+.app-mode main#main-content { position: fixed; top: 58px; bottom: 24px; left: 40px; right: 40px; }
+.app-mode .app-view {
+  position: absolute; inset: 0; display: none; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--red, #ec4b4b) #0b0b0d;
+}
+.app-mode .app-view.is-active { display: block; }
+.app-mode .app-view.is-entering { animation: app-view-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes app-view-in { 0% { opacity: 0; clip-path: inset(0 0 100% 0); } 30% { opacity: 1; } 100% { clip-path: inset(0); } }
+.app-mode .container { width: 100%; max-width: none; padding-inline: clamp(1rem, 2.4vw, 2.4rem); }
+.app-mode .section { padding: 3.2rem 0; }
+.app-mode .hero-section { min-height: 0; padding: 2.4rem 0 2rem; }
+.app-mode .intro-section { min-height: 100%; padding: 1rem 0; }
+.app-mode .intro-scroll { display: none; }
+.app-mode .site-footer { margin-top: 2rem; }
+.app-mode [id] { scroll-margin-top: 0; }
+.app-mode .offer-section { background: none; border: 0; }
+.app-mode .offer-price-value { white-space: nowrap; font-size: clamp(2.4rem, 3.6vw, 3.6rem); }
+
+@media (min-width: 1380px) {
+  .app-mode main#main-content { left: 250px; right: 250px; }
+  .app-mode .hud-panel {
+    display: block; position: fixed; top: 74px; z-index: 44; width: 190px; padding: 0.9rem 0.85rem 0.6rem;
+    background: linear-gradient(180deg, rgba(10, 10, 12, 0.88), rgba(10, 10, 12, 0.62)); pointer-events: none;
+    max-height: calc(100vh - 100px); overflow: hidden;
+  }
+  .app-mode .hud-player { left: 40px; border-left: 2px solid var(--red, #ec4b4b); }
+  .app-mode .hud-quest { right: 40px; border-right: 2px solid var(--red, #ec4b4b); }
+  .hud-portraits { display: flex; gap: 0.5rem; margin-bottom: 0.8rem; }
+  .hud-portrait { flex: 1; aspect-ratio: 1; border: 1px solid rgba(236, 75, 75, 0.7); padding: 2px; background: #0b0b0d; }
+  .hud-portrait img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.4) contrast(1.1) sepia(0.25) hue-rotate(-30deg) saturate(1.6); }
+  .hud-open { display: inline-block; justify-self: start; padding: 0.25rem 0.45rem; border: 1px solid rgba(236, 75, 75, 0.7); font-size: 0.6rem; font-weight: 700; color: #ff7b75; }
+  .hud-motto { margin: 0.9rem 0 0; font-size: 0.56rem; letter-spacing: 0.1em; line-height: 1.6; color: #8f8083; }
+  .hud-quest-head { display: grid; gap: 0.25rem; margin: -0.9rem -0.85rem 0.9rem; padding: 0.45rem 0.85rem; background: var(--red, #ec4b4b); }
+  .hud-quest-head b { font-size: 0.66rem; color: #140607; letter-spacing: 0.14em; }
+  .hud-quest-head span { font-size: 0.56rem; color: rgba(20, 6, 7, 0.75); }
+  .hud-rewards { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .hud-rewards em { font-style: normal; padding: 0.22rem 0.4rem; border: 1px solid rgba(236, 75, 75, 0.5); font-size: 0.58rem; font-weight: 600; color: #ff9b96; }
+  .hud-quest.is-swap .hud-field { animation: hud-swap 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hud-quest.is-swap .hud-field:nth-of-type(2) { animation-delay: 0.06s; }
+  .hud-quest.is-swap .hud-field:nth-of-type(3) { animation-delay: 0.12s; }
+}
+@media (max-width: 1379px) { .app-stat-time { display: none; } }
+@keyframes hud-swap { from { opacity: 0; translate: 0 8px; } }
+
+/* ---------- Cursor ring ---------- */
+.hud-cursor {
+  position: fixed; left: 0; top: 0; z-index: 9999; width: 30px; height: 30px; margin: -15px 0 0 -15px; pointer-events: none;
+  border: 1px solid rgba(236, 75, 75, 0.65); border-radius: 50%; opacity: 0;
+  transition: opacity 0.3s, width 0.25s, height 0.25s, margin 0.25s, background 0.25s, border-color 0.25s;
+}
+.hud-cursor::after { content: ''; position: absolute; left: 50%; top: 50%; width: 3px; height: 3px; margin: -1.5px; border-radius: 50%; background: #ec4b4b; }
+.hud-cursor.is-on { opacity: 1; }
+.hud-cursor.is-active { width: 52px; height: 52px; margin: -26px 0 0 -26px; background: rgba(236, 75, 75, 0.1); border-color: #ec4b4b; }
+@media (hover: none), (pointer: coarse) { .hud-cursor { display: none; } }
+
+/* ---------- Hero entrance: boot lines ---------- */
+.hero-stat-card, .hero-stats-row > * { position: relative; }
+.hero-stats-row > *::before {
+  content: ''; position: absolute; left: 0; top: -1px; width: 28px; height: 2px; background: var(--hud-line-strong);
+  transform-origin: left; animation: hud-tick 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+}
+@keyframes hud-tick { from { scale: 0 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-screen::after, .hero-stats-row > *::before { animation: none; }
+  .phone-screen::after { display: none; }
+  .hud-corners i { transition: none; opacity: 1; scale: 1; }
+  .hud-cursor { display: none; }
+}

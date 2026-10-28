@@ -6,14 +6,15 @@ export const OFFER = {
   priceValue: 'A negociar',
   priceNote: 'valor combinado com você, de acordo com o seu orçamento e com o que o seu negócio precisa',
   monthly: 147,
-  monthlyNote: 'a partir do mês seguinte, para manter tudo no ar',
+  monthlyNote: 'só a partir do 3º mês, para manter tudo no ar',
   reassurance: 'Orçamento sem compromisso',
   ctaLabel: 'Pedir meu orçamento',
   ctaMessage: 'Olá, Lucas e Felipe! Vi o portfólio e quero um orçamento de site para o meu negócio. Podemos conversar?',
+  // Linha do tempo de pagamento: o 2º mês não tem mensalidade.
   steps: [
-    { title: 'Você conta o que precisa', desc: 'E quanto pretende investir. Sem pressa e sem compromisso.' },
-    { title: 'Negociamos a criação', desc: 'Um valor fechado dentro do seu orçamento, com tudo que está incluso.' },
-    { title: 'Você aprova e publicamos', desc: 'Mostramos uma prévia antes de colocar o site no ar.' }
+    { tag: 'Mês 1', title: 'Criação do site', desc: 'Valor negociado de acordo com o seu orçamento. Você aprova a prévia antes de publicar.' },
+    { tag: 'Mês 2', title: 'Sem mensalidade', desc: 'O site já está no ar e você não paga nada neste mês.' },
+    { tag: 'Mês 3 em diante', title: 'R$ 147 por mês', desc: 'Hospedagem, manutenção e suporte para manter tudo funcionando.' }
   ],
   siteIncludes: [
     'Site profissional feito sob medida para o seu negócio',

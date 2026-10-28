@@ -370,7 +370,6 @@
         var form = byId('booking-form');
         form.addEventListener('change', function (event) {
           if (event.target.name === 'day') renderTimes(Number(event.target.value));
-          byId('form-error').textContent = '';
         });
 
         // Renders *bold* markers the way WhatsApp does, without touching innerHTML.
@@ -386,9 +385,8 @@
           var service = data.get('service');
           var dayIndex = data.get('day');
           var time = data.get('time');
-          var error = byId('form-error');
           if (!service || dayIndex === null || !time) {
-            error.textContent = 'Escolha o serviço, o dia e o horário para continuar.';
+            byId('form-error').textContent = 'Escolha o serviço, o dia e o horário para continuar.';
             return;
           }
           var day = openDays[Number(dayIndex)];
@@ -396,6 +394,7 @@
           var name = String(data.get('name') || '').trim();
           var message = 'Olá! Gostaria de agendar *' + service + '* para *' + dayText + '* às *' + time + '*.' + (name ? ' Meu nome é ' + name + '.' : '');
 
+          byId('form-error').textContent = '';
           var preview = byId('wa-preview');
           preview.replaceChildren();
           var bubble = el('div', 'bubble');

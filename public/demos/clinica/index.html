@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínica Vitalis | Site de exemplo</title>
+    <meta name="description" content="Site de exemplo de uma clínica médica, com especialidades, equipe e agendamento de consulta pelo WhatsApp. Feito por Lucas e Felipe." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0f766e" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f766e'/%3E%3Cpath d='M26 14h12v12h12v12H38v12H26V38H14V26h12z' fill='%23f0fdfa'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" />
+    <style>
+      :root {
+        --bg: #f4f9f8;
+        --surface: #ffffff;
+        --line: #dbe9e6;
+        --teal: #0f766e;
+        --teal-2: #14b8a6;
+        --mint: #ccfbf1;
+        --ink: #0f2a2e;
+        --muted: #4f6b6e;
+        --radius: 18px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: 52px; }
+      body {
+        margin: 0; background: var(--bg); color: var(--ink);
+        font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6;
+        -webkit-font-smoothing: antialiased; overflow-x: clip;
+      }
+      h1, h2, h3 { line-height: 1.12; margin: 0; letter-spacing: -0.025em; font-weight: 800; }
+      p { margin: 0; }
+      a { color: inherit; }
+      ul { list-style: none; margin: 0; padding: 0; }
+      button, input { font: inherit; color: inherit; }
+      :focus-visible { outline: 3px solid var(--teal-2); outline-offset: 3px; border-radius: 8px; }
+      .wrap { width: min(1080px, 100% - 40px); margin-inline: auto; }
+
+      /* ---------- Demo ribbon ---------- */
+      .ribbon {
+        position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; align-items: center; justify-content: center;
+        padding: 0.5rem 1rem; background: var(--ink); color: #e6fffb; font-size: 0.82rem; font-weight: 600; text-align: center;
+      }
+      .ribbon a { text-decoration: underline; text-underline-offset: 3px; }
+
+      /* ---------- Top bar ---------- */
+      .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; }
+      .brand { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+      .brand i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--teal); }
+      .brand svg { width: 18px; height: 18px; color: #f0fdfa; }
+      .top nav { display: none; gap: 1.6rem; font-size: 0.93rem; font-weight: 600; color: var(--muted); }
+      .top nav a { text-decoration: none; transition: color 0.2s; }
+      .top nav a:hover { color: var(--teal); }
+      @media (min-width: 780px) { .top nav { display: flex; } }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 48px; padding: 0.7rem 1.4rem;
+        border-radius: 14px; border: 1.5px solid var(--teal); background: var(--teal); color: #f0fdfa;
+        font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer;
+        transition: transform 0.25s var(--ease), background 0.2s, box-shadow 0.25s;
+      }
+      .btn:hover { background: #0d6961; transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(15, 118, 110, 0.7); }
+      .btn:active { transform: translateY(0); }
+      .btn.ghost { background: transparent; color: var(--teal); border-color: #9fd3cc; }
+      .btn.ghost:hover { background: #e9f7f4; box-shadow: none; }
+
+      /* ---------- Hero ---------- */
+      .hero { display: grid; gap: 2.2rem; padding: 2rem 0 3.4rem; align-items: center; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 860px) { .hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); padding: 3.4rem 0 4.6rem; } }
+      .eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem; border-radius: 999px; background: var(--mint); color: var(--teal); font-size: 0.8rem; font-weight: 700; }
+      .hero h1 { font-size: clamp(2.4rem, 7.6vw, 4.2rem); margin: 1rem 0 1.1rem; }
+      .hero h1 span { color: var(--teal); }
+      .lead { color: var(--muted); font-size: 1.08rem; max-width: 32rem; }
+      .actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.7rem; }
+      .trust { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2rem; color: var(--muted); font-size: 0.88rem; }
+      .trust b { display: block; color: var(--ink); font-size: 1.35rem; letter-spacing: -0.02em; }
+
+      /* Hero card: next free slot + heartbeat line */
+      .next-card {
+        position: relative; padding: 1.5rem; border-radius: 24px; background: var(--surface); border: 1px solid var(--line);
+        box-shadow: 0 30px 60px -30px rgba(15, 80, 75, 0.35);
+      }
+      .next-card small { color: var(--muted); font-weight: 600; font-size: 0.82rem; }
+      .next-card strong { display: block; margin: 0.2rem 0 0.9rem; font-size: 1.6rem; letter-spacing: -0.02em; }
+      .ecg { width: 100%; height: 90px; color: var(--teal-2); }
+      .ecg path { stroke-dasharray: 620; stroke-dashoffset: 620; animation: trace 2.6s linear infinite; }
+      @keyframes trace { 60%, 100% { stroke-dashoffset: 0; } }
+      .next-card ul { display: grid; gap: 0.55rem; margin-top: 0.8rem; }
+      .next-card li { display: flex; gap: 0.6rem; align-items: center; font-size: 0.92rem; font-weight: 600; }
+      .next-card li::before { content: ''; width: 18px; height: 18px; flex: none; border-radius: 50%; background: var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f766e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l4 4 10-10'/%3E%3C/svg%3E") center / 11px no-repeat; }
+      .pulse { position: absolute; top: 1.3rem; right: 1.3rem; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); animation: ping 2s ease-out infinite; }
+      @keyframes ping { 70%, 100% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); } }
+
+      /* ---------- Sections ---------- */
+      section { padding: 3.6rem 0; }
+      .section-head { display: grid; gap: 0.6rem; margin-bottom: 2rem; max-width: 38rem; }
+      .section-head h2 { font-size: clamp(1.9rem, 5.4vw, 2.6rem); }
+      .section-head p { color: var(--muted); }
+      .kicker { color: var(--teal); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+
+      .specialties { display: grid; gap: 0.9rem; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 620px) { .specialties { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (min-width: 940px) { .specialties { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .spec { padding: 1.3rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); transition: transform 0.3s var(--ease), border-color 0.25s, box-shadow 0.3s; }
+      .spec:hover { transform: translateY(-4px); border-color: #9fd3cc; box-shadow: 0 18px 34px -24px rgba(15, 80, 75, 0.5); }
+      .spec i { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 0.9rem; border-radius: 12px; background: var(--mint); color: var(--teal); }
+      .spec i svg { width: 22px; height: 22px; }
+      .spec h3 { font-size: 1.12rem; margin-bottom: 0.3rem; }
+      .spec p { color: var(--muted); font-size: 0.92rem; }
+
+      /* Team */
+      .team { display: grid; gap: 0.9rem; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 760px) { .team { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .doc { display: flex; gap: 1rem; align-items: center; padding: 1.1rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+      .avatar { display: grid; place-items: center; width: 56px; height: 56px; flex: none; border-radius: 50%; background: linear-gradient(135deg, var(--teal-2), var(--teal)); color: #f0fdfa; font-weight: 800; }
+      .doc h3 { font-size: 1rem; }
+      .doc p { color: var(--muted); font-size: 0.86rem; }
+
+      /* Booking */
+      .booking { display: grid; gap: 1.6rem; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 920px) { .booking { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: start; } }
+      .panel { min-width: 0; padding: 1.5rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+      fieldset { border: 0; margin: 0 0 1.4rem; padding: 0; min-width: 0; }
+      legend { padding: 0; margin-bottom: 0.7rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      .chip span {
+        display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 64px; min-height: 44px; padding: 0.45rem 0.9rem;
+        border: 1px solid var(--line); border-radius: 12px; background: #f7fbfa; font-size: 0.9rem; font-weight: 600; line-height: 1.2; cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .chip span small { color: var(--muted); font-size: 0.72rem; font-weight: 500; }
+      .chip:hover input:not(:disabled) + span { border-color: var(--teal-2); }
+      .chip input:checked + span { background: var(--teal); border-color: var(--teal); color: #f0fdfa; }
+      .chip input:checked + span small { color: #ccfbf1; }
+      .chip input:focus-visible + span { outline: 3px solid var(--teal-2); outline-offset: 2px; }
+      .chip input:disabled + span { opacity: 0.38; cursor: not-allowed; text-decoration: line-through; }
+      .field { display: grid; gap: 0.4rem; margin-bottom: 1.3rem; }
+      .field label { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+      .field input { min-height: 48px; padding: 0.6rem 0.9rem; border-radius: 12px; border: 1px solid var(--line); background: #f7fbfa; }
+      .field input:focus-visible { outline-offset: 1px; border-color: var(--teal); }
+      .hint { color: var(--muted); font-size: 0.9rem; }
+      .error { min-height: 1.4em; margin-bottom: 0.6rem; color: #c2410c; font-size: 0.88rem; font-weight: 600; }
+
+      .preview { position: sticky; top: 64px; }
+      .preview h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+      .preview > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+      .wa {
+        min-height: 210px; padding: 1rem; border-radius: 14px; background: #0b141a;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px); background-size: 14px 14px;
+        display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem;
+      }
+      .wa .empty { color: #8696a0; font-size: 0.88rem; text-align: center; margin: auto; max-width: 16rem; }
+      .bubble { align-self: flex-end; max-width: 92%; padding: 0.55rem 0.7rem 1.1rem; border-radius: 10px; border-top-right-radius: 2px; background: #005c4b; color: #e9edef; font-size: 0.9rem; line-height: 1.4; position: relative; animation: pop 0.35s var(--ease) both; }
+      .bubble .time { position: absolute; right: 0.55rem; bottom: 0.25rem; font-size: 0.66rem; color: #9bcfc4; }
+      @keyframes pop { from { opacity: 0; transform: scale(0.9) translateY(6px); } }
+      .sent-note { margin-top: 1rem; padding: 0.8rem 1rem; border-radius: 12px; border: 1px dashed #9fd3cc; background: #f0fbf9; font-size: 0.86rem; }
+      .sent-note a { color: var(--teal); font-weight: 700; }
+
+      /* FAQ + visit */
+      .faq { display: grid; gap: 0.6rem; }
+      .faq details { border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+      .faq summary { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; cursor: pointer; font-weight: 700; list-style: none; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: '+'; color: var(--teal); font-size: 1.3rem; line-height: 1; transition: rotate 0.3s var(--ease); }
+      .faq details[open] summary::after { rotate: 45deg; }
+      .faq details p { padding: 0 1.2rem 1.1rem; color: var(--muted); }
+      .visit { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 860px) { .visit { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+      .hours { width: 100%; border-collapse: collapse; }
+      .hours th, .hours td { padding: 0.7rem 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 600; }
+      .hours td { text-align: right; color: var(--muted); font-weight: 500; }
+      .address { margin-top: 1.2rem; color: var(--muted); }
+      .address strong { color: var(--ink); display: block; }
+      .sr { position: absolute; left: -9999px; }
+
+      footer { padding: 2.2rem 0 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
+      footer .wrap { display: grid; gap: 0.8rem; }
+      footer a { color: var(--teal); font-weight: 700; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .ecg path { animation: none; stroke-dashoffset: 0; }
+        .pulse, .bubble { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ribbon" role="note">
+      <span>Site de exemplo feito por Lucas &amp; Felipe</span>
+      <a href="/">Voltar ao portfólio</a>
+    </div>
+
+    <div class="wrap">
+      <header class="top">
+        <a class="brand" href="#" aria-label="Clínica Vitalis, início">
+          <i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></i>
+          Vitalis
+        </a>
+        <nav aria-label="Seções"><a href="#especialidades">Especialidades</a><a href="#equipe">Equipe</a><a href="#agendar">Agendar</a><a href="#duvidas">Dúvidas</a></nav>
+        <a class="btn" href="#agendar">Agendar consulta</a>
+      </header>
+
+      <main>
+        <div class="hero">
+          <div>
+            <span class="eyebrow">Clínica médica · Centro</span>
+            <h1>Consulta marcada <span>sem fila no telefone.</span></h1>
+            <p class="lead">Escolha a especialidade, o dia e o horário. A clínica recebe o pedido pronto no WhatsApp e confirma com você.</p>
+            <div class="actions">
+              <a class="btn" href="#agendar">Agendar consulta</a>
+              <a class="btn ghost" href="#especialidades">Ver especialidades</a>
+            </div>
+            <div class="trust" aria-label="Informações rápidas">
+              <span><b>6</b>especialidades</span>
+              <span><b>Seg a Sáb</b>atendimento</span>
+              <span><b>Particular</b>e convênios</span>
+            </div>
+          </div>
+          <div class="next-card" aria-live="polite">
+            <span class="pulse" aria-hidden="true"></span>
+            <small>Próximo horário livre</small>
+            <strong id="next-slot">Calculando…</strong>
+            <svg class="ecg" viewBox="0 0 300 90" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 50h70l12-22 14 46 16-62 14 50 10-12h164"/></svg>
+            <ul>
+              <li>Confirmação pelo WhatsApp</li>
+              <li>Lembrete um dia antes</li>
+              <li>Remarcação sem complicação</li>
+            </ul>
+          </div>
+        </div>
+
+        <section id="especialidades" aria-labelledby="t-esp">
+          <div class="section-head">
+            <span class="kicker">Especialidades</span>
+            <h2 id="t-esp">Cuidado completo em um só lugar</h2>
+            <p>Atendimento com hora marcada, sem sala de espera lotada.</p>
+          </div>
+          <ul class="specialties">
+            <li class="spec"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 12 0V3M12 15v3a3 3 0 0 0 6 0v-2"/><circle cx="18" cy="14" r="2"/></svg></i><h3>Clínico geral</h3><p>Check-up, exames de rotina e encaminhamentos.</p></li>
+            <li class="spec"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg></i><h3>Pediatria</h3><p>Acompanhamento do bebê à adolescência.</p></li>
+            <li class="spec"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c4 4 6 7 6 10a6 6 0 0 1-12 0c0-3 2-6 6-10z"/></svg></i><h3>Dermatologia</h3><p>Pele, cabelo e unhas, clínica e estética.</p></li>
+            <li class="spec"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1z"/></svg></i><h3>Cardiologia</h3><p>Consulta, eletrocardiograma e acompanhamento.</p></li>
+            <li class="spec"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg></i><h3>Ginecologia</h3><p>Saúde da mulher, preventivo e pré-natal.</p></li>
+            <li class="spec"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-3-3-8-1-8 4 0 6 5 10 8 10s8-4 8-10c0-5-5-7-8-4zM12 7c0-2 1-4 3-4"/></svg></i><h3>Nutrição</h3><p>Plano alimentar e reeducação sem dieta da moda.</p></li>
+          </ul>
+        </section>
+
+        <section id="equipe" aria-labelledby="t-equipe">
+          <div class="section-head">
+            <span class="kicker">Equipe</span>
+            <h2 id="t-equipe">Quem cuida de você</h2>
+            <p>Nomes fictícios, usados só neste exemplo.</p>
+          </div>
+          <ul class="team">
+            <li class="doc"><span class="avatar" aria-hidden="true">AS</span><div><h3>Dra. Ana Souza</h3><p>Clínica geral · CRM fictício</p></div></li>
+            <li class="doc"><span class="avatar" aria-hidden="true">RM</span><div><h3>Dr. Rafael Melo</h3><p>Cardiologia · CRM fictício</p></div></li>
+            <li class="doc"><span class="avatar" aria-hidden="true">JP</span><div><h3>Dra. Júlia Prado</h3><p>Dermatologia · CRM fictício</p></div></li>
+          </ul>
+        </section>
+
+        <section id="agendar" aria-labelledby="t-agendar">
+          <div class="section-head">
+            <span class="kicker">Agendamento</span>
+            <h2 id="t-agendar">Marque sua consulta em 1 minuto</h2>
+            <p>Escolha abaixo e veja, ao lado, a mensagem que chega no WhatsApp da clínica.</p>
+          </div>
+          <div class="booking">
+            <form class="panel" id="booking-form" novalidate>
+              <fieldset><legend>1. Especialidade</legend><div class="chips" id="service-chips"></div></fieldset>
+              <fieldset><legend>2. Dia</legend><div class="chips" id="day-chips"></div></fieldset>
+              <fieldset><legend>3. Horário</legend><div class="chips" id="time-chips"></div></fieldset>
+              <fieldset><legend>4. Atendimento</legend><div class="chips" id="plan-chips"></div></fieldset>
+              <div class="field">
+                <label for="client-name">Nome do paciente (opcional)</label>
+                <input id="client-name" name="name" type="text" maxlength="40" autocomplete="name" placeholder="Ex.: Maria Silva" />
+              </div>
+              <p class="error" id="form-error" role="alert"></p>
+              <button class="btn" type="submit">Agendar pelo WhatsApp</button>
+            </form>
+
+            <aside class="panel preview" aria-live="polite">
+              <h3>Como chega no WhatsApp</h3>
+              <p>A recepção recebe o pedido completo e só precisa confirmar.</p>
+              <div class="wa" id="wa-preview"><p class="empty">Escolha a especialidade, o dia e o horário para ver a mensagem.</p></div>
+              <div class="sent-note" id="sent-note" hidden>
+                Isto é só um exemplo: num site de verdade, o botão abre o WhatsApp da sua clínica com esta mensagem pronta.
+                <a href="/#pricing">Quero um site assim →</a>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="duvidas" aria-labelledby="t-duvidas">
+          <div class="section-head">
+            <span class="kicker">Dúvidas frequentes</span>
+            <h2 id="t-duvidas">Antes de vir</h2>
+          </div>
+          <div class="faq">
+            <details><summary>Vocês atendem convênio?</summary><p>Sim. Ao agendar, escolha "Convênio" e a recepção confirma a cobertura do seu plano antes da consulta.</p></details>
+            <details><summary>Preciso chegar com antecedência?</summary><p>Chegue 10 minutos antes para o cadastro. Traga um documento com foto e a carteirinha do convênio, se tiver.</p></details>
+            <details><summary>Como faço para remarcar?</summary><p>Responda a mensagem de confirmação no WhatsApp pedindo outro horário. Sem ligação e sem espera.</p></details>
+          </div>
+        </section>
+
+        <section id="visite" aria-labelledby="t-visite">
+          <div class="section-head">
+            <span class="kicker">Onde estamos</span>
+            <h2 id="t-visite">Fácil de chegar, fácil de estacionar</h2>
+          </div>
+          <div class="visit">
+            <table class="hours">
+              <caption class="sr">Horário de atendimento</caption>
+              <tbody>
+                <tr><th scope="row">Segunda a sexta</th><td>8h às 18h</td></tr>
+                <tr><th scope="row">Sábado</th><td>8h às 12h</td></tr>
+                <tr><th scope="row">Domingo e feriados</th><td>Fechado</td></tr>
+              </tbody>
+            </table>
+            <p class="address"><strong>Av. Exemplo, 450 · Sala 12 · Centro</strong>Endereço fictício, usado apenas neste exemplo.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <div class="wrap">
+        <p>Este é um site de exemplo criado por <strong>Lucas &amp; Felipe</strong> para mostrar como pode ficar o site de uma clínica.</p>
+        <p><a href="/#pricing">Pedir orçamento</a> · <a href="/">Voltar ao portfólio</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        'use strict';
+        var SPECIALTIES = ['Clínico geral', 'Pediatria', 'Dermatologia', 'Cardiologia', 'Ginecologia', 'Nutrição'];
+        var PLANS = ['Particular', 'Convênio'];
+        var DAYS_AHEAD = 6;
+        var SLOT_MINUTES = 30;
+        var WEEKDAY_HOURS = { open: 8, close: 18 };
+        var SATURDAY_HOURS = { open: 8, close: 12 };
+        var SUNDAY = 0;
+        var SATURDAY = 6;
+
+        var byId = function (id) { return document.getElementById(id); };
+        var el = function (tag, className, text) {
+          var node = document.createElement(tag);
+          if (className) node.className = className;
+          if (text !== undefined) node.textContent = text;
+          return node;
+        };
+        var capitalize = function (text) { return text.charAt(0).toUpperCase() + text.slice(1); };
+        var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+
+        // Stable pseudo-random "busy" slots so the demo looks like a real agenda.
+        var isBusy = function (date, minutes) {
+          var seed = date.getDate() * 37 + date.getMonth() * 11 + minutes * 7;
+          return (seed * 2654435761 >>> 0) % 100 < 34;
+        };
+
+        var buildChip = function (name, value, label, sub, disabled) {
+          var wrapper = el('label', 'chip');
+          var input = el('input');
+          input.type = 'radio'; input.name = name; input.value = value;
+          if (disabled) input.disabled = true;
+          var face = el('span', '', label);
+          if (sub) face.appendChild(el('small', '', sub));
+          wrapper.append(input, face);
+          return wrapper;
+        };
+
+        var openDays = [];
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        for (var i = 0; i < DAYS_AHEAD + 3 && openDays.length < DAYS_AHEAD; i += 1) {
+          var date = new Date(today); date.setDate(today.getDate() + i);
+          if (date.getDay() !== SUNDAY) openDays.push({ date: date, offset: i });
+        }
+
+        var slotsFor = function (day) {
+          var hours = day.date.getDay() === SATURDAY ? SATURDAY_HOURS : WEEKDAY_HOURS;
+          var now = new Date();
+          var nowMinutes = now.getHours() * 60 + now.getMinutes();
+          var list = [];
+          for (var m = hours.open * 60; m < hours.close * 60; m += SLOT_MINUTES) {
+            var isPast = day.offset === 0 && m <= nowMinutes;
+            list.push({ label: pad(Math.floor(m / 60)) + ':' + pad(m % 60), disabled: isPast || isBusy(day.date, m) });
+          }
+          return list;
+        };
+
+        var dayLabel = function (day) {
+          if (day.offset === 0) return 'Hoje';
+          if (day.offset === 1) return 'Amanhã';
+          return capitalize(day.date.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', ''));
+        };
+
+        // Hero card: first free slot from the same agenda used by the form.
+        (function showNextSlot() {
+          for (var d = 0; d < openDays.length; d += 1) {
+            var free = slotsFor(openDays[d]).filter(function (slot) { return !slot.disabled; })[0];
+            if (free) { byId('next-slot').textContent = dayLabel(openDays[d]) + ', ' + free.label; return; }
+          }
+          byId('next-slot').textContent = 'Consulte a agenda';
+        })();
+
+        SPECIALTIES.forEach(function (name) { byId('service-chips').appendChild(buildChip('service', name, name)); });
+        PLANS.forEach(function (name) { byId('plan-chips').appendChild(buildChip('plan', name, name)); });
+        openDays.forEach(function (day, index) {
+          var sub = day.date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+          byId('day-chips').appendChild(buildChip('day', String(index), dayLabel(day), sub));
+        });
+
+        var renderTimes = function (dayIndex) {
+          var box = byId('time-chips');
+          box.replaceChildren();
+          var day = openDays[dayIndex];
+          if (!day) { box.appendChild(el('p', 'hint', 'Escolha um dia para ver os horários.')); return; }
+          slotsFor(day).forEach(function (slot) { box.appendChild(buildChip('time', slot.label, slot.label, null, slot.disabled)); });
+        };
+        renderTimes(-1);
+
+        var form = byId('booking-form');
+        form.addEventListener('change', function (event) {
+          if (event.target.name === 'day') renderTimes(Number(event.target.value));
+        });
+
+        // Renders *bold* markers the way WhatsApp does, without touching innerHTML.
+        var renderWhatsappText = function (target, text) {
+          text.split('*').forEach(function (part, index) {
+            target.appendChild(index % 2 ? el('strong', '', part) : document.createTextNode(part));
+          });
+        };
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var data = new FormData(form);
+          var service = data.get('service');
+          var dayIndex = data.get('day');
+          var time = data.get('time');
+          var plan = data.get('plan');
+          if (!service || dayIndex === null || !time || !plan) {
+            byId('form-error').textContent = 'Escolha a especialidade, o dia, o horário e o tipo de atendimento.';
+            return;
+          }
+          var day = openDays[Number(dayIndex)];
+          var dayText = capitalize(day.date.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: '2-digit' }));
+          var name = String(data.get('name') || '').replace(/\*/g, '').trim();
+          var message = 'Olá! Gostaria de agendar uma consulta de *' + service + '* para *' + dayText + '* às *' + time + '* (' + plan.toLowerCase() + ').'
+            + (name ? ' Paciente: ' + name + '.' : '');
+
+          byId('form-error').textContent = '';
+          var preview = byId('wa-preview');
+          preview.replaceChildren();
+          var bubble = el('div', 'bubble');
+          renderWhatsappText(bubble, message);
+          bubble.appendChild(el('span', 'time', new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + ' ✓✓'));
+          preview.appendChild(bubble);
+          byId('sent-note').hidden = false;
+          preview.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        });
+      })();
+    </script>
+  </body>
+</html>

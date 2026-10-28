@@ -7,7 +7,7 @@
     <meta name="description" content="Sites, sistemas e automações de WhatsApp sob medida, por Lucas Gabriel e Felipe de Castro. Veja os projetos, peça um orçamento e fale direto com quem desenvolve." />
     <meta name="author" content="Lucas Gabriel e Felipe de Castro" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="theme-color" content="#160f13" />
+    <meta name="theme-color" content="#050506" />
     <link rel="canonical" href="https://portifolio-dupla.vercel.app/" />
 
     <!-- Open Graph / Meta Social -->
@@ -68,17 +68,14 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" /></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=DM+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=DM+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" /></noscript>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <script>document.documentElement.classList.add('js')</script>
   </head>
   <body>
-    <!-- 3D Canvas Background Container -->
-    <div id="webgl-canvas-container" class="webgl-container" aria-hidden="true"></div>
-
     <!-- UI Overlay Wrapper -->
     <div class="app-layout">
       <!-- Header / Navigation Bar -->
@@ -122,6 +119,20 @@
 
       <!-- Main Content -->
       <main id="main-content">
+        <!-- Intro screen -->
+        <section class="intro-section" id="intro" aria-label="Boas-vindas">
+          <div class="container intro-grid">
+            <p class="intro-hi" aria-hidden="true"><span>OLÁ</span><span>!</span></p>
+            <div class="intro-copy">
+              <p class="intro-kicker">Bem-vindo ao site da dupla Lucas &amp; Felipe.</p>
+              <p>Criamos sites, sistemas e automações que levam clientes para o WhatsApp do seu negócio.</p>
+              <p>Montamos este site como uma interface de sistema. Aqui você encontra nossas <b>“habilidades”</b> e as <b>“missões”</b> que já concluímos: o que fazemos e o que já construímos.</p>
+              <a href="#hero" class="btn btn-outline btn-lg intro-enter" id="intro-enter">Entrar no sistema</a>
+            </div>
+          </div>
+          <a href="#hero" class="intro-scroll" aria-label="Rolar para baixo"><span>Role para baixo</span><i aria-hidden="true"></i></a>
+        </section>
+
         <!-- Hero Section -->
         <section class="hero-section" id="hero">
           <div class="container hero-container">
@@ -180,8 +191,10 @@
                   </div>
                 </div>
                 <div class="phone-tabs" role="group" aria-label="Escolha um exemplo de site">
-                  <button type="button" class="phone-tab" data-example="novatech" aria-pressed="true">Loja virtual</button>
+                  <button type="button" class="phone-tab" data-example="novatech" aria-pressed="true">Loja</button>
                   <button type="button" class="phone-tab" data-example="barbearia" aria-pressed="false">Barbearia</button>
+                  <button type="button" class="phone-tab" data-example="clinica" aria-pressed="false">Clínica</button>
+                  <button type="button" class="phone-tab" data-example="advocacia" aria-pressed="false">Advocacia</button>
                 </div>
                 <figcaption class="phone-caption">
                   <span class="phone-chip" id="phone-chip">Exemplo de site feito por nós</span>
@@ -196,7 +209,7 @@
         <section class="section services-section" id="services">
           <div class="container">
             <div class="section-header text-center">
-              <span class="section-tag">O que fazemos</span>
+              <span class="section-tag">Habilidades</span>
               <h2 class="section-title">O que podemos construir para você</h2>
               <p class="section-subtitle">
                 Do site ao aplicativo, passando pelas integrações que fazem tudo conversar.
@@ -258,7 +271,7 @@
               <span class="section-tag">Orçamento sob medida</span>
               <h2 class="section-title">Um site do tamanho do <span class="gradient-text">seu orçamento</span></h2>
               <p class="section-subtitle">
-                A criação do site é negociada de acordo com o seu orçamento. Depois de publicado, você paga só R$ 147 por mês para manter tudo no ar. Conte o que precisa e a gente monta uma proposta que cabe no seu bolso.
+                A criação do site é negociada de acordo com o seu orçamento. Depois de publicado, o 2º mês é por nossa conta e a mensalidade de R$ 147 só começa no 3º mês. Conte o que precisa e a gente monta uma proposta que cabe no seu bolso.
               </p>
             </div>
             <div id="offer-app"></div>
@@ -269,7 +282,7 @@
         <section class="section process-section" id="process">
           <div class="container">
             <div class="section-header text-center">
-              <span class="section-tag">Nosso processo</span>
+              <span class="section-tag">Fases da missão</span>
               <h2 class="section-title">Como funciona, do primeiro contato à entrega</h2>
               <p class="section-subtitle">
                 Alinhamos o escopo, dividimos o trabalho em etapas e compartilhamos o progresso ao longo do desenvolvimento.
@@ -286,7 +299,7 @@
         <section class="section team-section" id="duo-team">
           <div class="container">
             <div class="section-header text-center">
-              <span class="section-tag">Quem somos</span>
+              <span class="section-tag">Os jogadores</span>
               <h2 class="section-title">A dupla por trás do seu projeto</h2>
               <p class="section-subtitle">
                 Somos dois desenvolvedores com experiências diferentes, trabalhando juntos do planejamento à entrega.
@@ -453,7 +466,7 @@
           <div class="container">
             <div class="section-header">
               <div class="section-header-left">
-                <span class="section-tag">Experiência técnica</span>
+                <span class="section-tag">Missões concluídas</span>
                 <h2 class="section-title">Projetos técnicos</h2>
                 <p class="section-subtitle">
                   Repositórios públicos de Lucas e Felipe: sistemas, APIs, aplicativos e estudos.
@@ -502,7 +515,7 @@
           <div class="container">
             <div class="contact-card-wrapper">
               <div class="contact-left-info">
-                <span class="section-tag">Contato</span>
+                <span class="section-tag">Aceitar missão</span>
                 <h2 class="contact-title">Vamos conversar sobre o seu projeto</h2>
                 <p class="contact-desc">
                   Conte um pouco sobre o que você precisa. Respondemos pelo WhatsApp e definimos juntos os próximos passos.

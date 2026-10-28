@@ -4,15 +4,15 @@
 
 :root {
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --salmon: #f08c83;
-  --salmon-soft: #f5a49b;
-  --wine: #bd6570;
+  --salmon: #ec4b4b;
+  --salmon-soft: #ff7b75;
+  --wine: #b83a40;
 }
 
 /* ---------- Header: progress bar, scrolled state, mobile menu ---------- */
 .site-header { position: sticky; }
 .site-header.is-scrolled {
-  background: rgba(22, 15, 19, 0.94);
+  background: rgba(5, 5, 6, 0.94);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
 }
 .scroll-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
@@ -82,8 +82,8 @@
 /* ---------- Hero entrance ---------- */
 .status-indicator { border-radius: 50%; animation: status-pulse 2.4s ease-out infinite; }
 @keyframes status-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(240, 140, 131, 0.55); }
-  70%, 100% { box-shadow: 0 0 0 9px rgba(240, 140, 131, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(236, 75, 75, 0.55); }
+  70%, 100% { box-shadow: 0 0 0 9px rgba(236, 75, 75, 0); }
 }
 
 .hero-in { animation: hero-rise 0.9s var(--ease-out) calc(var(--d, 0) * 110ms + 100ms) both; }
@@ -116,7 +116,7 @@
 .js .terminal-content [data-out] { opacity: 0; translate: 0 4px; transition: opacity 0.4s ease, translate 0.4s var(--ease-out); }
 .js .terminal-content [data-out].is-shown { opacity: 1; translate: 0 0; }
 .terminal-card { transition: border-color 0.3s, box-shadow 0.3s; }
-.terminal-card:hover { border-color: rgba(240, 140, 131, 0.45); box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32), 0 0 30px rgba(240, 140, 131, 0.08); }
+.terminal-card:hover { border-color: rgba(236, 75, 75, 0.45); box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32), 0 0 30px rgba(236, 75, 75, 0.08); }
 
 /* 3D background drifts and fades as the hero scrolls away. */
 .webgl-container {
@@ -128,7 +128,7 @@
 .stack-marquee {
   position: relative; overflow: hidden; padding: 1.1rem 0;
   border-block: 1px solid var(--border-subtle);
-  background: rgba(22, 15, 19, 0.6);
+  background: rgba(5, 5, 6, 0.6);
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 .stack-marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
@@ -163,7 +163,7 @@
 
 /* ---------- Cards: salmon spotlight that follows the cursor ---------- */
 .tilt-card::before {
-  background: radial-gradient(420px circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(240, 140, 131, 0.13), transparent 45%);
+  background: radial-gradient(420px circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(236, 75, 75, 0.13), transparent 45%);
   opacity: 0;
   transition: opacity 0.35s ease;
 }
@@ -178,12 +178,12 @@
 .service-deliverables-list li:hover { transform: translateX(4px); color: var(--text-main); }
 
 .dev-avatar { transition: transform 0.5s var(--ease-out), box-shadow 0.4s; }
-.developer-profile-card:hover .dev-avatar { transform: scale(1.05) rotate(-3deg); box-shadow: 0 0 0 4px #2a1c22, 0 0 24px rgba(240, 140, 131, 0.25); }
+.developer-profile-card:hover .dev-avatar { transform: scale(1.05) rotate(-3deg); box-shadow: 0 0 0 4px #2a1c22, 0 0 24px rgba(236, 75, 75, 0.25); }
 
 .tech-chip,
 .tech-tag-sm { transition: border-color 0.25s, color 0.25s, transform 0.25s var(--ease-out); }
 .tech-chip:hover,
-.tech-tag-sm:hover { border-color: rgba(240, 140, 131, 0.45); color: #fff; transform: translateY(-1px); }
+.tech-tag-sm:hover { border-color: rgba(236, 75, 75, 0.45); color: #fff; transform: translateY(-1px); }
 
 /* Projects re-enter with a short stagger whenever the filter changes. */
 .project-card.is-entering { animation: card-in 0.6s var(--ease-out) calc(var(--enter-i, 0) * 70ms) both; }
@@ -224,7 +224,7 @@
 .footer-col-platforms a { color: inherit; transition: color 0.2s; }
 .footer-col-platforms a:hover { color: var(--salmon-soft); }
 .form-feedback-message.success {
-  background: rgba(240, 140, 131, 0.1); border-color: rgba(240, 140, 131, 0.4); color: #f3d4d0;
+  background: rgba(236, 75, 75, 0.1); border-color: rgba(236, 75, 75, 0.4); color: #f3d4d0;
 }
 .form-feedback-message a { color: var(--salmon-soft); text-decoration: underline; }
 
@@ -256,12 +256,12 @@
 }
 
 /* ---------- Remaining leftovers from the old cyan/indigo palette ---------- */
-::-webkit-scrollbar-thumb { background: rgba(240, 140, 131, 0.35); }
+::-webkit-scrollbar-thumb { background: rgba(236, 75, 75, 0.35); }
 ::-webkit-scrollbar-thumb:hover { background: var(--salmon); }
-.service-card:hover { box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26), 0 0 25px rgba(240, 140, 131, 0.06); }
-.tech-chip:hover { background: rgba(240, 140, 131, 0.1); }
+.service-card:hover { box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26), 0 0 25px rgba(236, 75, 75, 0.06); }
+.tech-chip:hover { background: rgba(236, 75, 75, 0.1); }
 .dot-status { background: var(--salmon); }
-.modal-business-card { background: rgba(240, 140, 131, 0.08); border-left-color: var(--salmon); }
+.modal-business-card { background: rgba(236, 75, 75, 0.08); border-left-color: var(--salmon); }
 
 /* ---------- Project modal: sticky close button + bottom sheet on phones ---------- */
 .modal-close-btn {

@@ -49,13 +49,13 @@ html, body { overflow-x: clip; }
 .hero-phone { position: relative; display: grid; justify-items: center; gap: 0.85rem; margin: 0; }
 .hero-phone::before {
   content: ''; position: absolute; z-index: -1; left: 50%; top: 42%; width: min(130%, 100vw); aspect-ratio: 1; translate: -50% -50%;
-  background: radial-gradient(circle, rgba(189, 101, 112, 0.34), rgba(189, 101, 112, 0) 62%);
+  background: radial-gradient(circle, rgba(184, 58, 64, 0.34), rgba(184, 58, 64, 0) 62%);
   pointer-events: none;
 }
 .phone-frame {
   position: relative; width: clamp(232px, 19.5vw, 262px); aspect-ratio: 9 / 18.4; padding: 9px;
   border-radius: 42px; background: #0d080b;
-  box-shadow: inset 0 0 0 1.5px #3a2730, 0 40px 70px -30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 221, 214, 0.06);
+  box-shadow: inset 0 0 0 1.5px #3a2730, 0 40px 70px -30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 235, 232, 0.06);
   animation: phone-float 7s ease-in-out infinite;
 }
 @keyframes phone-float { 50% { translate: 0 -8px; } }
@@ -86,18 +86,18 @@ html, body { overflow-x: clip; }
 
 .phone-tabs {
   display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 221, 214, 0.12);
+  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 235, 232, 0.12);
 }
 .phone-tab {
   min-height: 36px; padding: 0.35rem 1rem; border: 0; border-radius: 999px; background: transparent; color: var(--text-muted);
   font: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: background 0.25s, color 0.25s;
 }
 .phone-tab:hover { color: var(--text-main); }
-.phone-tab[aria-pressed='true'] { background: linear-gradient(120deg, #f08c83, #d87679); color: #261518; }
+.phone-tab[aria-pressed='true'] { background: linear-gradient(120deg, #ec4b4b, #c93a3f); color: #261518; }
 .phone-caption { display: flex; flex-wrap: wrap; gap: 0.6rem 0.9rem; align-items: center; justify-content: center; text-align: center; }
 .phone-chip { color: var(--text-muted); font-size: 0.82rem; font-weight: 500; }
-.phone-link { color: var(--text-main); font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid rgba(240, 140, 131, 0.55); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
-.phone-link:hover { color: #f5a49b; border-color: #f5a49b; }
+.phone-link { color: var(--text-main); font-size: 0.9rem; font-weight: 600; border-bottom: 1px solid rgba(236, 75, 75, 0.55); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+.phone-link:hover { color: #ff7b75; border-color: #ff7b75; }
 
 @media (max-width: 1080px) {
   .hero-3d-callout { margin-top: 1.5rem; }
@@ -120,20 +120,20 @@ html, body { overflow-x: clip; }
 .service-row:nth-child(even) .service-row-head { order: 2; }
 .service-row::before {
   content: ''; position: absolute; left: 0; top: -1px; height: 1px; width: 100%;
-  background: linear-gradient(90deg, #f08c83, transparent 60%);
+  background: linear-gradient(90deg, #ec4b4b, transparent 60%);
   transform: scaleX(0); transform-origin: left; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.service-row:nth-child(even)::before { background: linear-gradient(270deg, #f08c83, transparent 60%); transform-origin: right; }
-.service-row:hover { background: linear-gradient(90deg, rgba(240, 140, 131, 0.06), transparent 75%); }
-.service-row:nth-child(even):hover { background: linear-gradient(270deg, rgba(240, 140, 131, 0.06), transparent 75%); }
+.service-row:nth-child(even)::before { background: linear-gradient(270deg, #ec4b4b, transparent 60%); transform-origin: right; }
+.service-row:hover { background: linear-gradient(90deg, rgba(236, 75, 75, 0.06), transparent 75%); }
+.service-row:nth-child(even):hover { background: linear-gradient(270deg, rgba(236, 75, 75, 0.06), transparent 75%); }
 .service-row:hover::before { transform: scaleX(1); }
 
 .service-row-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.3rem; align-items: start; }
 .service-index {
   min-width: 3.2rem; font-family: var(--font-mono); font-size: 2.4rem; font-weight: 500; line-height: 1;
-  color: rgba(240, 140, 131, 0.38); transition: color 0.4s;
+  color: rgba(236, 75, 75, 0.38); transition: color 0.4s;
 }
-.service-row:hover .service-index { color: #f5a49b; }
+.service-row:hover .service-index { color: #ff7b75; }
 .service-row-title { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; }
 .service-row-title .service-icon { margin: 0; font-size: 1rem; }
 .service-row-title .service-icon .ui-icon { width: 1.4rem; height: 1.4rem; }
@@ -144,11 +144,11 @@ html, body { overflow-x: clip; }
 }
 .service-row .service-deliverables-list li {
   padding: 0.65rem 0.85rem; border-radius: 10px; font-size: 0.9rem; color: #e4d6d7;
-  background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(255, 221, 214, 0.08);
+  background: rgba(255, 255, 255, 0.035); border: 1px solid rgba(255, 235, 232, 0.08);
   transition: border-color 0.3s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.service-row .service-deliverables-list li::before { color: #f08c83; }
-.service-row:hover .service-deliverables-list li { border-color: rgba(240, 140, 131, 0.22); }
+.service-row .service-deliverables-list li::before { color: #ec4b4b; }
+.service-row:hover .service-deliverables-list li { border-color: rgba(236, 75, 75, 0.22); }
 .service-row .service-deliverables-list li:hover { transform: translateX(3px); }
 
 @media (max-width: 860px) {
@@ -173,12 +173,12 @@ html, body { overflow-x: clip; }
 /* ==========================================================================
    Salmon is reserved for actions and the price; everything else stays warm neutral
    ========================================================================== */
-:root { --neutral-accent: #e4d6d7; --neutral-line: rgba(255, 221, 214, 0.3); }
+:root { --neutral-accent: #e4d6d7; --neutral-line: rgba(255, 235, 232, 0.3); }
 .stat-number { color: var(--neutral-accent); }
 .section-tag { color: var(--neutral-accent); border-bottom-color: var(--neutral-line); }
 .terminal-cursor { color: var(--neutral-accent); }
 .filter-tab.active { background: #f7eeeb; color: #261518; }
-.service-index { color: rgba(255, 221, 214, 0.2); }
+.service-index { color: rgba(255, 235, 232, 0.2); }
 .service-row:hover .service-index { color: var(--neutral-accent); }
 .service-row .service-deliverables-list li::before { color: #b9a4a8; }
 .service-row:hover .service-deliverables-list li { border-color: var(--neutral-line); }

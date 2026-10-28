@@ -3,6 +3,8 @@ import './styles/motion.css';
 import './styles/offer.css';
 import './styles/polish.css';
 import './styles/bot.css';
+import './styles/hud.css';
+import './styles/gameui.css';
 import { duoProfile, projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
 import { applyTiltEffect } from './components/tiltEffect.js';
 import { setupProjectModal } from './components/projectModal.js';
@@ -11,13 +13,14 @@ import { bindWhatsappLinks, whatsappUrl } from './data/contact.js';
 import { setupOfferSection } from './components/offerSection.js';
 import { setupBotDemo } from './components/botDemo.js';
 import { setupHeroExamples } from './components/heroExamples.js';
+import { setupHud } from './components/hud.js';
+import { setupAppShell } from './components/appShell.js';
 import {
   setupReveal, renderStackMarquee, setupHeroPhone, setupScrollEffects, setupMobileMenu
 } from './components/motion.js';
 
 const TILT_DEGREES = 5;
 const FEATURED_LIMIT = 6;
-const SCENE_MIN_WIDTH = 768;
 
 // Application Controller
 class PortfolioApp {
@@ -25,33 +28,10 @@ class PortfolioApp {
     this.currentFilter = 'all';
     this.searchQuery = '';
     this.modalController = null;
-    this.scene3d = null;
     this.showAllProjects = false;
   }
 
   init() {
-    // 1. Initialize Three.js 3D Background
-    const canvasContainer = document.getElementById('webgl-canvas-container');
-    // The 3D background is decorative and costs ~140 KB plus GPU time, so it is skipped on phones
-    // (narrower than SCENE_MIN_WIDTH) and loaded after the page is interactive elsewhere.
-    if (canvasContainer) {
-      const wideScreen = window.matchMedia(`(min-width: ${SCENE_MIN_WIDTH}px)`);
-      let started = false;
-      const startScene = () => {
-        if (started || !wideScreen.matches) return;
-        started = true;
-        import('./three/scene.js')
-          .then(({ Portfolio3DScene }) => { this.scene3d = new Portfolio3DScene(canvasContainer); })
-          .catch((error) => console.error('3D scene failed to load', error));
-      };
-      const whenIdle = () => ('requestIdleCallback' in window
-        ? window.requestIdleCallback(startScene, { timeout: 2000 })
-        : setTimeout(startScene, 400));
-      if (document.readyState === 'complete') whenIdle();
-      else window.addEventListener('load', whenIdle, { once: true });
-      wideScreen.addEventListener('change', startScene);
-    }
-
     // 2. Initialize Subcomponents
     this.modalController = setupProjectModal();
 
@@ -79,6 +59,8 @@ class PortfolioApp {
     setupReveal();
     setupHeroPhone();
     setupHeroExamples();
+    setupAppShell();
+    setupHud();
 
     // Visit counter (cookieless). Production only, loaded after the page is interactive.
     if (import.meta.env.PROD) {

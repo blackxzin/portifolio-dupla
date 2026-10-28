@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moraes &amp; Lima Advocacia | Site de exemplo</title>
+    <meta name="description" content="Site de exemplo de um escritório de advocacia, com áreas de atuação, equipe e primeiro contato pelo WhatsApp. Feito por Lucas e Felipe." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#13213c" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2313213c'/%3E%3Cpath d='M32 12v38M20 50h24M14 22h36M20 22l-7 14h14zM44 22l-7 14h14z' fill='none' stroke='%23c9a35f' stroke-width='3.5' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" />
+    <style>
+      :root {
+        --ivory: #f7f3ea;
+        --paper: #fffdf8;
+        --navy: #13213c;
+        --navy-2: #1d2f52;
+        --bronze: #a8783a;
+        --bronze-2: #c9a35f;
+        --line: #e4dccb;
+        --muted: #5d6273;
+        --radius: 6px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: 52px; }
+      body {
+        margin: 0; background: var(--ivory); color: var(--navy);
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.65;
+        -webkit-font-smoothing: antialiased; overflow-x: clip;
+      }
+      h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; line-height: 1.08; margin: 0; letter-spacing: -0.01em; }
+      p { margin: 0; }
+      a { color: inherit; }
+      ul, ol { list-style: none; margin: 0; padding: 0; }
+      button, input, textarea { font: inherit; color: inherit; }
+      :focus-visible { outline: 3px solid var(--bronze-2); outline-offset: 3px; }
+      .wrap { width: min(1080px, 100% - 40px); margin-inline: auto; }
+
+      /* ---------- Demo ribbon ---------- */
+      .ribbon {
+        position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; align-items: center; justify-content: center;
+        padding: 0.5rem 1rem; background: var(--bronze-2); color: #1b1408; font-size: 0.82rem; font-weight: 600; text-align: center;
+      }
+      .ribbon a { text-decoration: underline; text-underline-offset: 3px; }
+
+      /* ---------- Dark top area ---------- */
+      .masthead { background: var(--navy); color: #f1ece1; position: relative; overflow: hidden; }
+      .masthead::after {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(60% 80% at 85% 10%, rgba(201, 163, 95, 0.18), transparent 60%);
+      }
+      .top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid rgba(241, 236, 225, 0.12); }
+      .brand { display: grid; text-decoration: none; line-height: 1.05; }
+      .brand b { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.01em; }
+      .brand small { font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--bronze-2); }
+      .top nav { display: none; gap: 1.8rem; font-size: 0.9rem; color: #c8c3b6; }
+      .top nav a { text-decoration: none; transition: color 0.2s; }
+      .top nav a:hover { color: var(--bronze-2); }
+      @media (min-width: 820px) { .top nav { display: flex; } }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 48px; padding: 0.75rem 1.5rem;
+        border-radius: var(--radius); border: 1px solid var(--bronze-2); background: var(--bronze-2); color: #1b1408;
+        font-weight: 600; font-size: 0.93rem; letter-spacing: 0.02em; text-decoration: none; cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.25s var(--ease);
+      }
+      .btn:hover { background: #d8b678; transform: translateY(-2px); }
+      .btn.ghost { background: transparent; color: #f1ece1; border-color: rgba(241, 236, 225, 0.35); }
+      .btn.ghost:hover { border-color: var(--bronze-2); color: var(--bronze-2); }
+      .btn.dark { background: var(--navy); border-color: var(--navy); color: #f1ece1; }
+      .btn.dark:hover { background: var(--navy-2); }
+
+      .hero { position: relative; z-index: 1; display: grid; gap: 2.4rem; padding: 3rem 0 3.6rem; grid-template-columns: minmax(0, 1fr); align-items: end; }
+      @media (min-width: 880px) { .hero { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); padding: 4.6rem 0 5rem; } }
+      .eyebrow { display: inline-flex; align-items: center; gap: 0.7rem; color: var(--bronze-2); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; }
+      .eyebrow::before { content: ''; width: 34px; height: 1px; background: currentColor; }
+      .hero h1 { font-size: clamp(2.6rem, 8vw, 4.8rem); margin: 1.1rem 0 1.2rem; }
+      .hero h1 em { font-style: italic; color: var(--bronze-2); font-weight: 600; }
+      .lead { color: #c8c3b6; font-size: 1.06rem; max-width: 34rem; }
+      .actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.9rem; }
+      .seal {
+        display: grid; gap: 1rem; padding: 1.5rem; border: 1px solid rgba(201, 163, 95, 0.4); border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .seal svg { width: 54px; height: 54px; color: var(--bronze-2); }
+      .seal svg .beam { transform-origin: 32px 18px; animation: balance 5s ease-in-out infinite; }
+      @keyframes balance { 0%, 100% { rotate: -4deg; } 50% { rotate: 4deg; } }
+      .seal p { color: #c8c3b6; font-size: 0.92rem; }
+      .seal strong { color: #f1ece1; }
+
+      /* ---------- Sections ---------- */
+      section { padding: 3.8rem 0; }
+      .section-head { display: grid; gap: 0.7rem; margin-bottom: 2.2rem; max-width: 38rem; }
+      .section-head .eyebrow { color: var(--bronze); }
+      .section-head h2 { font-size: clamp(2.1rem, 5.6vw, 3rem); }
+      .section-head p { color: var(--muted); }
+
+      .areas { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 640px) { .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (min-width: 960px) { .areas { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .area { position: relative; padding: 1.6rem 1.5rem; background: var(--paper); transition: background 0.3s; }
+      .area::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--bronze); transform: scaleY(0); transform-origin: top; transition: transform 0.45s var(--ease); }
+      .area:hover { background: #fffaf0; }
+      .area:hover::before { transform: scaleY(1); }
+      .area span { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; color: var(--bronze); font-weight: 700; }
+      .area h3 { font-size: 1.55rem; margin: 0.2rem 0 0.45rem; }
+      .area p { color: var(--muted); font-size: 0.93rem; }
+
+      .steps { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1fr); counter-reset: step; }
+      @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .steps li { padding-top: 1.1rem; border-top: 2px solid var(--navy); counter-increment: step; }
+      .steps li::before { content: '0' counter(step); display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.4rem; font-weight: 700; color: var(--bronze); line-height: 1; margin-bottom: 0.4rem; }
+      .steps h3 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+      .steps p { color: var(--muted); font-size: 0.94rem; }
+
+      .team { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 760px) { .team { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      .lawyer { display: flex; gap: 1.1rem; align-items: center; padding: 1.3rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+      .monogram { display: grid; place-items: center; width: 64px; height: 64px; flex: none; border: 1px solid var(--bronze-2); border-radius: 50%; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: var(--bronze); }
+      .lawyer h3 { font-size: 1.35rem; }
+      .lawyer p { color: var(--muted); font-size: 0.88rem; }
+
+      /* Contact form */
+      .intake { display: grid; gap: 1.6rem; grid-template-columns: minmax(0, 1fr); }
+      @media (min-width: 920px) { .intake { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: start; } }
+      .panel { min-width: 0; padding: 1.6rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+      fieldset { border: 0; margin: 0 0 1.4rem; padding: 0; min-width: 0; }
+      legend, .field label { padding: 0; margin-bottom: 0.7rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze); }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      .chip span {
+        display: inline-flex; align-items: center; min-height: 44px; padding: 0.45rem 0.95rem; border: 1px solid var(--line); border-radius: var(--radius);
+        background: var(--ivory); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s;
+      }
+      .chip:hover input + span { border-color: var(--bronze-2); }
+      .chip input:checked + span { background: var(--navy); border-color: var(--navy); color: #f1ece1; }
+      .chip input:focus-visible + span { outline: 3px solid var(--bronze-2); outline-offset: 2px; }
+      .field { display: grid; gap: 0.1rem; margin-bottom: 1.2rem; }
+      .field input, .field textarea { width: 100%; min-height: 48px; padding: 0.7rem 0.9rem; border-radius: var(--radius); border: 1px solid var(--line); background: var(--ivory); }
+      .field textarea { min-height: 110px; resize: vertical; }
+      .field input:focus-visible, .field textarea:focus-visible { outline-offset: 1px; border-color: var(--bronze); }
+      .counter { justify-self: end; margin-top: 0.3rem; color: var(--muted); font-size: 0.78rem; }
+      .privacy { margin-bottom: 1rem; padding: 0.75rem 0.9rem; border-left: 2px solid var(--bronze-2); background: #fbf6ea; color: var(--muted); font-size: 0.85rem; }
+      .error { min-height: 1.4em; margin-bottom: 0.6rem; color: #b42318; font-size: 0.88rem; font-weight: 600; }
+
+      .preview { position: sticky; top: 64px; }
+      .preview h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+      .preview > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+      .wa {
+        min-height: 220px; padding: 1rem; border-radius: 12px; background: #0b141a;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px); background-size: 14px 14px;
+        display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem;
+      }
+      .wa .empty { color: #8696a0; font-size: 0.88rem; text-align: center; margin: auto; max-width: 16rem; }
+      .bubble { align-self: flex-end; max-width: 94%; padding: 0.55rem 0.7rem 1.1rem; border-radius: 10px; border-top-right-radius: 2px; background: #005c4b; color: #e9edef; font-size: 0.88rem; line-height: 1.45; position: relative; white-space: pre-line; animation: pop 0.35s var(--ease) both; }
+      .bubble .time { position: absolute; right: 0.55rem; bottom: 0.25rem; font-size: 0.66rem; color: #9bcfc4; }
+      @keyframes pop { from { opacity: 0; transform: scale(0.9) translateY(6px); } }
+      .sent-note { margin-top: 1rem; padding: 0.8rem 1rem; border: 1px dashed var(--bronze-2); border-radius: var(--radius); font-size: 0.86rem; }
+      .sent-note a { color: var(--bronze); font-weight: 700; }
+
+      .faq { display: grid; border-top: 1px solid var(--line); }
+      .faq details { border-bottom: 1px solid var(--line); }
+      .faq summary { display: flex; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; cursor: pointer; list-style: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 700; }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after { content: '+'; color: var(--bronze); transition: rotate 0.3s var(--ease); }
+      .faq details[open] summary::after { rotate: 45deg; }
+      .faq details p { padding-bottom: 1.2rem; color: var(--muted); max-width: 46rem; }
+
+      footer { padding: 2.4rem 0 3rem; background: var(--navy); color: #c8c3b6; font-size: 0.88rem; }
+      footer .wrap { display: grid; gap: 0.8rem; }
+      footer a { color: var(--bronze-2); font-weight: 600; }
+      footer .fine { font-size: 0.78rem; color: #9a978e; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .seal svg .beam, .bubble { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ribbon" role="note">
+      <span>Site de exemplo feito por Lucas &amp; Felipe</span>
+      <a href="/">Voltar ao portfólio</a>
+    </div>
+
+    <div class="masthead">
+      <div class="wrap">
+        <header class="top">
+          <a class="brand" href="#" aria-label="Moraes e Lima Advocacia, início"><b>Moraes &amp; Lima</b><small>Advocacia</small></a>
+          <nav aria-label="Seções"><a href="#areas">Áreas de atuação</a><a href="#como">Como funciona</a><a href="#equipe">Equipe</a><a href="#contato">Contato</a></nav>
+          <a class="btn" href="#contato">Fale conosco</a>
+        </header>
+        <div class="hero">
+          <div>
+            <span class="eyebrow">Escritório de advocacia</span>
+            <h1>Orientação jurídica <em>clara</em>, do primeiro contato até a solução.</h1>
+            <p class="lead">Explicamos seus direitos em linguagem simples, sem juridiquês. Conte o seu caso e marque uma conversa inicial pelo WhatsApp.</p>
+            <div class="actions">
+              <a class="btn" href="#contato">Contar meu caso</a>
+              <a class="btn ghost" href="#areas">Ver áreas de atuação</a>
+            </div>
+          </div>
+          <div class="seal">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M32 14v38M22 52h20"/>
+              <g class="beam"><path d="M12 18h40"/><path d="M18 18l-7 14h14zM46 18l-7 14h14z"/></g>
+            </svg>
+            <p><strong>Atendimento sigiloso.</strong> Tudo o que você contar fica entre você e o escritório.</p>
+            <p><strong>Seg a sex, 9h às 18h</strong> · presencial ou online.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="wrap">
+        <section id="areas" aria-labelledby="t-areas">
+          <div class="section-head">
+            <span class="eyebrow">Áreas de atuação</span>
+            <h2 id="t-areas">Onde podemos ajudar</h2>
+            <p>Atuação consultiva e contenciosa, com acompanhamento de perto em cada etapa.</p>
+          </div>
+          <ul class="areas">
+            <li class="area"><span>I.</span><h3>Trabalhista</h3><p>Rescisão, horas extras, verbas e acordos.</p></li>
+            <li class="area"><span>II.</span><h3>Família</h3><p>Divórcio, guarda, pensão e inventário.</p></li>
+            <li class="area"><span>III.</span><h3>Previdenciário</h3><p>Aposentadoria, auxílios e revisão de benefícios.</p></li>
+            <li class="area"><span>IV.</span><h3>Consumidor</h3><p>Cobranças indevidas, negativação e contratos.</p></li>
+            <li class="area"><span>V.</span><h3>Cível</h3><p>Contratos, indenizações e cobranças.</p></li>
+            <li class="area"><span>VI.</span><h3>Empresarial</h3><p>Contratos, abertura de empresa e consultoria.</p></li>
+          </ul>
+        </section>
+
+        <section id="como" aria-labelledby="t-como">
+          <div class="section-head">
+            <span class="eyebrow">Como funciona</span>
+            <h2 id="t-como">Do primeiro contato ao acompanhamento</h2>
+          </div>
+          <ol class="steps">
+            <li><h3>Você conta o caso</h3><p>Um resumo rápido pelo formulário abaixo chega organizado no WhatsApp do escritório.</p></li>
+            <li><h3>Conversa inicial</h3><p>Entendemos a situação, explicamos os caminhos possíveis e os documentos necessários.</p></li>
+            <li><h3>Acompanhamento</h3><p>Com tudo combinado por escrito, você recebe atualizações a cada movimentação.</p></li>
+          </ol>
+        </section>
+
+        <section id="equipe" aria-labelledby="t-equipe">
+          <div class="section-head">
+            <span class="eyebrow">Equipe</span>
+            <h2 id="t-equipe">Sócios</h2>
+            <p>Nomes e registros fictícios, usados só neste exemplo.</p>
+          </div>
+          <ul class="team">
+            <li class="lawyer"><span class="monogram" aria-hidden="true">CM</span><div><h3>Carolina Moraes</h3><p>Família e Previdenciário · OAB fictícia</p></div></li>
+            <li class="lawyer"><span class="monogram" aria-hidden="true">PL</span><div><h3>Pedro Lima</h3><p>Trabalhista e Empresarial · OAB fictícia</p></div></li>
+          </ul>
+        </section>
+
+        <section id="contato" aria-labelledby="t-contato">
+          <div class="section-head">
+            <span class="eyebrow">Contato</span>
+            <h2 id="t-contato">Conte o seu caso</h2>
+            <p>Responda abaixo e veja, ao lado, a mensagem que chega no WhatsApp do escritório.</p>
+          </div>
+          <div class="intake">
+            <form class="panel" id="intake-form" novalidate>
+              <fieldset><legend>1. Assunto</legend><div class="chips" id="area-chips"></div></fieldset>
+              <fieldset><legend>2. Urgência</legend><div class="chips" id="urgency-chips"></div></fieldset>
+              <fieldset><legend>3. Como prefere a conversa</legend><div class="chips" id="mode-chips"></div></fieldset>
+              <div class="field">
+                <label for="case-text">4. Resumo do caso</label>
+                <textarea id="case-text" name="summary" maxlength="280" placeholder="Ex.: Fui demitido sem receber as verbas da rescisão."></textarea>
+                <span class="counter" id="case-counter" aria-live="polite">0/280</span>
+              </div>
+              <div class="field">
+                <label for="client-name">Seu nome (opcional)</label>
+                <input id="client-name" name="name" type="text" maxlength="40" autocomplete="name" placeholder="Ex.: João Pereira" />
+              </div>
+              <p class="privacy">Não envie documentos ou dados sensíveis por aqui. Na conversa inicial o escritório pede só o necessário.</p>
+              <p class="error" id="form-error" role="alert"></p>
+              <button class="btn dark" type="submit">Enviar pelo WhatsApp</button>
+            </form>
+
+            <aside class="panel preview" aria-live="polite">
+              <h3>Como chega no WhatsApp</h3>
+              <p>O escritório recebe o caso resumido e já sabe com quem falar.</p>
+              <div class="wa" id="wa-preview"><p class="empty">Escolha o assunto, a urgência e escreva o resumo para ver a mensagem.</p></div>
+              <div class="sent-note" id="sent-note" hidden>
+                Isto é só um exemplo: num site de verdade, o botão abre o WhatsApp do seu escritório com esta mensagem pronta.
+                <a href="/#pricing">Quero um site assim →</a>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="duvidas" aria-labelledby="t-duvidas">
+          <div class="section-head">
+            <span class="eyebrow">Dúvidas frequentes</span>
+            <h2 id="t-duvidas">Antes da primeira conversa</h2>
+          </div>
+          <div class="faq">
+            <details><summary>Como são definidos os honorários?</summary><p>Os honorários seguem a tabela da OAB e são combinados por escrito antes de qualquer serviço, depois da conversa inicial.</p></details>
+            <details><summary>O atendimento pode ser online?</summary><p>Sim. A conversa pode ser por videochamada, e os documentos são enviados por um canal seguro indicado pelo escritório.</p></details>
+            <details><summary>Quais documentos devo separar?</summary><p>Depende do assunto. Na conversa inicial você recebe a lista exata, sem precisar juntar papel à toa.</p></details>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p>Este é um site de exemplo criado por <strong>Lucas &amp; Felipe</strong> para mostrar como pode ficar o site de um escritório de advocacia.</p>
+        <p class="fine">Conteúdo informativo, sem promessa de resultado, no tom pedido pelas regras de publicidade da OAB (Provimento 205/2021).</p>
+        <p><a href="/#pricing">Pedir orçamento</a> · <a href="/">Voltar ao portfólio</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        'use strict';
+        var AREAS = ['Trabalhista', 'Família', 'Previdenciário', 'Consumidor', 'Cível', 'Empresarial'];
+        var URGENCY = ['Hoje', 'Esta semana', 'Sem pressa'];
+        var MODES = ['Presencial', 'Online'];
+        var SUMMARY_MAX = 280;
+
+        var byId = function (id) { return document.getElementById(id); };
+        var el = function (tag, className, text) {
+          var node = document.createElement(tag);
+          if (className) node.className = className;
+          if (text !== undefined) node.textContent = text;
+          return node;
+        };
+        var buildChip = function (name, value) {
+          var wrapper = el('label', 'chip');
+          var input = el('input');
+          input.type = 'radio'; input.name = name; input.value = value;
+          wrapper.append(input, el('span', '', value));
+          return wrapper;
+        };
+
+        AREAS.forEach(function (v) { byId('area-chips').appendChild(buildChip('area', v)); });
+        URGENCY.forEach(function (v) { byId('urgency-chips').appendChild(buildChip('urgency', v)); });
+        MODES.forEach(function (v) { byId('mode-chips').appendChild(buildChip('mode', v)); });
+
+        var form = byId('intake-form');
+        var summary = byId('case-text');
+        summary.addEventListener('input', function () { byId('case-counter').textContent = summary.value.length + '/' + SUMMARY_MAX; });
+
+        // Renders *bold* markers the way WhatsApp does, without touching innerHTML.
+        var renderWhatsappText = function (target, text) {
+          text.split('*').forEach(function (part, index) {
+            target.appendChild(index % 2 ? el('strong', '', part) : document.createTextNode(part));
+          });
+        };
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var data = new FormData(form);
+          var area = data.get('area');
+          var urgency = data.get('urgency');
+          var mode = data.get('mode');
+          // Asterisks would break the WhatsApp bold markers, so they are stripped from free text.
+          var text = String(data.get('summary') || '').replace(/\*/g, '').trim();
+          var name = String(data.get('name') || '').replace(/\*/g, '').trim();
+          if (!area || !urgency || !mode || text.length < 10) {
+            byId('form-error').textContent = 'Escolha o assunto, a urgência, o tipo de conversa e escreva um resumo (mín. 10 letras).';
+            return;
+          }
+          var message = 'Olá! Gostaria de uma conversa inicial sobre *' + area + '*.'
+            + '\nUrgência: *' + urgency + '* · Conversa ' + mode.toLowerCase() + '.'
+            + '\nResumo: ' + text
+            + (name ? '\nNome: ' + name : '');
+
+          byId('form-error').textContent = '';
+          var preview = byId('wa-preview');
+          preview.replaceChildren();
+          var bubble = el('div', 'bubble');
+          renderWhatsappText(bubble, message);
+          bubble.appendChild(el('span', 'time', new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + ' ✓✓'));
+          preview.appendChild(bubble);
+          byId('sent-note').hidden = false;
+          preview.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        });
+      })();
+    </script>
+  </body>
+</html>

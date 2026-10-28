@@ -44,19 +44,12 @@ function renderCard() {
           <span class="offer-savings">${OFFER.reassurance}</span>
         </div>
 
-        <div class="offer-monthly">
-          <span class="offer-monthly-label">Depois, todo mês</span>
-          <div class="offer-monthly-row">
-            <strong>R$ ${brl(OFFER.monthly)}<small>/mês</small></strong>
-            <span>${OFFER.monthlyNote}</span>
-          </div>
-        </div>
-
         <ol class="offer-timeline">
           ${OFFER.steps.map((step) => `
             <li>
               <span class="offer-timeline-dot" aria-hidden="true"></span>
               <div>
+                <em class="offer-step-tag">${step.tag}</em>
                 <strong>${step.title}</strong>
                 <span>${step.desc}</span>
               </div>
@@ -82,7 +75,7 @@ function renderDetails() {
         ${checkList(OFFER.siteIncludes, 'offer-list')}
       </div>
       <div class="offer-include-group">
-        <h3 class="offer-group-title"><span>R$ ${brl(OFFER.monthly)}/mês</span> O que a mensalidade cobre</h3>
+        <h3 class="offer-group-title"><span>R$ ${brl(OFFER.monthly)}/mês · a partir do 3º mês</span> O que a mensalidade cobre</h3>
         ${checkList(OFFER.monthlyIncludes, 'offer-list')}
       </div>
       ${renderComparison()}

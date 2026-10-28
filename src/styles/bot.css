@@ -20,7 +20,7 @@
   content: ''; position: absolute; z-index: -1; left: 50%; top: 46%; width: min(120%, 100vw); aspect-ratio: 1; translate: -50% -50%;
   background:
     radial-gradient(circle at 60% 55%, rgba(37, 211, 102, 0.1), transparent 45%),
-    radial-gradient(circle, rgba(189, 101, 112, 0.3), transparent 62%);
+    radial-gradient(circle, rgba(184, 58, 64, 0.3), transparent 62%);
   pointer-events: none;
 }
 .bot-visual.is-paused .phone-frame { animation-play-state: paused; }
@@ -33,7 +33,7 @@
 .wa-head { display: flex; align-items: center; gap: 0.6rem; padding: 40px 12px 10px; background: #1f2c34; }
 .wa-avatar {
   display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 50%;
-  background: linear-gradient(135deg, #f08c83, #bd6570); color: #2a1216; font-weight: 800; font-size: 0.95rem;
+  background: linear-gradient(135deg, #ec4b4b, #b83a40); color: #2a1216; font-weight: 800; font-size: 0.95rem;
 }
 .wa-name { display: block; font-size: 0.86rem; font-weight: 600; line-height: 1.2; }
 .wa-status { display: block; font-size: 0.7rem; color: #8696a0; }
