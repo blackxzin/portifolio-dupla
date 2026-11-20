@@ -5,7 +5,10 @@ import './styles/polish.css';
 import './styles/bot.css';
 import './styles/hud.css';
 import './styles/gameui.css';
-import { duoProfile, projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
+import './styles/scene.css';
+import './styles/strip.css';
+import './styles/novatech.css';
+import { projectsData, freelanceBenefits, processSteps } from './data/portfolioData.js';
 import { applyTiltEffect } from './components/tiltEffect.js';
 import { setupProjectModal } from './components/projectModal.js';
 import { iconSvg } from './components/icon.js';
@@ -15,6 +18,11 @@ import { setupBotDemo } from './components/botDemo.js';
 import { setupHeroExamples } from './components/heroExamples.js';
 import { setupHud } from './components/hud.js';
 import { setupAppShell } from './components/appShell.js';
+import { setupTechScene } from './components/techScene.js';
+import { setupStatsPanel } from './components/statsPanel.js';
+import { setupLogo3d } from './components/logo3d.js';
+import { setupStackOrbit } from './components/stackOrbit.js';
+import { PILLARS } from './data/novatech.js';
 import {
   setupReveal, renderStackMarquee, setupHeroPhone, setupScrollEffects, setupMobileMenu
 } from './components/motion.js';
@@ -59,8 +67,12 @@ class PortfolioApp {
     setupReveal();
     setupHeroPhone();
     setupHeroExamples();
+    setupStatsPanel();
+    setupLogo3d();
+    setupStackOrbit();
     setupAppShell();
     setupHud();
+    setupTechScene();
 
     // Visit counter (cookieless). Production only, loaded after the page is interactive.
     if (import.meta.env.PROD) {
@@ -79,21 +91,21 @@ class PortfolioApp {
     const container = document.getElementById('services-grid-container');
     if (!container) return;
 
-    container.innerHTML = duoProfile.services.map((svc, index) => `
-      <article class="service-row">
-        <div class="service-row-head">
+    container.innerHTML = PILLARS.map((pillar, index) => `
+      <article class="pillar-card tilt-card" id="pillar-${pillar.id}">
+        <div class="pillar-depth" aria-hidden="true"></div>
+        <header class="pillar-head">
+          <span class="pillar-icon">${iconSvg(pillar.icon)}</span>
           <span class="service-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
-          <div>
-            <div class="service-row-title">
-              <span class="service-icon">${iconSvg(svc.icon)}</span>
-              <h3 class="service-title">${svc.title}</h3>
-            </div>
-            <p class="service-desc">${svc.desc}</p>
-          </div>
+        </header>
+        <h3 class="pillar-title">${pillar.title}</h3>
+        <p class="pillar-what">${pillar.what}</p>
+        <p class="pillar-for"><span>Para quem</span>${pillar.forWho}</p>
+        <div class="pillar-block">
+          <span class="pillar-label">O que você recebe</span>
+          <ul class="service-deliverables-list">${pillar.delivers.map((d) => `<li>${d}</li>`).join('')}</ul>
         </div>
-        <ul class="service-deliverables-list">
-          ${svc.deliverables.map(d => `<li>${d}</li>`).join('')}
-        </ul>
+        <div class="pillar-tools" aria-label="Ferramentas">${pillar.tools.map((t) => `<span>${t}</span>`).join('')}</div>
       </article>
     `).join('');
   }
@@ -331,31 +343,37 @@ class PortfolioApp {
     });
   }
 
+  // Highlights the menu link of the section on screen. Section offsets are cached and refreshed on
+  // resize, and the check runs at most once per frame.
   bindScrollSpy() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = [...document.querySelectorAll('section[id]')];
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    let offsets = [];
+    let queued = false;
+    let currentId = '';
 
+    const measure = () => {
+      offsets = sections.map((sec) => ({ id: sec.id, top: sec.getBoundingClientRect().top + window.scrollY - 120 }));
+    };
+    const update = () => {
+      queued = false;
+      if (document.documentElement.classList.contains('app-mode')) return;
+      const y = window.scrollY;
+      let id = '';
+      offsets.forEach((item) => { if (y >= item.top) id = item.id; });
+      if (!id || id === currentId) return;
+      currentId = id;
+      navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+    };
+
+    measure();
+    window.addEventListener('load', measure);
+    window.addEventListener('resize', measure, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
     window.addEventListener('scroll', () => {
-      let currentSectionId = '';
-      const scrollY = window.scrollY;
-
-      sections.forEach(sec => {
-        const top = sec.offsetTop - 120;
-        const height = sec.offsetHeight;
-        if (scrollY >= top && scrollY < top + height) {
-          currentSectionId = sec.getAttribute('id');
-        }
-      });
-
-      if (currentSectionId) {
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${currentSectionId}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
     }, { passive: true });
   }
 }

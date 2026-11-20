@@ -162,7 +162,7 @@ body::before {
 }
 @keyframes hud-tick { from { scale: 0 1; } }
 
-@media (prefers-reduced-motion: reduce) {
+@media (update: slow), (update: none) {
   .phone-screen::after, .hero-stats-row > *::before { animation: none; }
   .phone-screen::after { display: none; }
   .hud-corners i { transition: none; opacity: 1; scale: 1; }

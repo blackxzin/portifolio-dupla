@@ -1,7 +1,7 @@
 import { prefersReducedMotion } from './motion.js';
 import { SECTION_IDS } from '../data/hudContent.js';
 
-const CARD_SELECTOR = '.project-card, .developer-profile-card, .benefit-card, .process-step-card, .offer-card, .offer-include-group, .contact-card-wrapper, .terminal-card';
+const CARD_SELECTOR = '.project-card, .stat-tile, .developer-profile-card, .benefit-card, .process-step-card, .offer-card, .offer-include-group, .contact-card-wrapper, .terminal-card';
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>_';
 const SCRAMBLE_MS = 650;
 const INTERACTIVE = 'a, button, input, select, textarea, [role="button"], .phone-tab, .tilt-card';

@@ -2,15 +2,37 @@
 // `image`: tall screenshot in /public/examples. `duration`: seconds for one slow scroll pass.
 export const HERO_EXAMPLES = [
   {
-    id: 'novatech',
-    image: '/examples/novatech.webp',
+    id: 'strike',
+    image: '/examples/strike.webp',
     width: 520,
-    height: 4000,
-    alt: 'Loja NovaTech: página inicial e vitrine de produtos, rolando sozinha',
-    chip: 'Exemplo de site feito por nós',
-    linkText: 'Ver NovaTech ao vivo ↗',
-    href: 'https://loja-online-one-eta.vercel.app',
-    duration: 34
+    height: 7000,
+    alt: 'Site da academia Strike Thai Itaí, com modalidades, turmas e aula experimental pelo WhatsApp, rolando sozinho',
+    chip: 'Site feito por nós',
+    linkText: 'Ver Strike Thai ao vivo ↗',
+    href: 'https://strike-thai-itai.vercel.app',
+    duration: 50
+  },
+  {
+    id: 'divinos',
+    image: '/examples/divinos.webp',
+    width: 520,
+    height: 7000,
+    alt: "Site da revenda Divino's Veículos, com estoque de carros, filtros e contato pelo WhatsApp, rolando sozinho",
+    chip: 'Site feito por nós',
+    linkText: "Ver Divino's Veículos ao vivo ↗",
+    href: 'https://divinos-veiculos.vercel.app',
+    duration: 50
+  },
+  {
+    id: 'ctxtreme',
+    image: '/examples/ctxtreme.webp',
+    width: 520,
+    height: 7000,
+    alt: 'Site do centro de treinamento CT Xtreme, com modalidades, avaliações e contato pelo WhatsApp, rolando sozinho',
+    chip: 'Site feito por nós',
+    linkText: 'Ver CT Xtreme ao vivo ↗',
+    href: 'https://ct-xtreme.vercel.app',
+    duration: 50
   },
   {
     id: 'barbearia',
@@ -22,27 +44,5 @@ export const HERO_EXAMPLES = [
     linkText: 'Ver a barbearia ao vivo ↗',
     href: '/demos/barbearia/',
     duration: 40
-  },
-  {
-    id: 'clinica',
-    image: '/examples/clinica.webp',
-    width: 520,
-    height: 7344,
-    alt: 'Site de exemplo de uma clínica, com especialidades, equipe e agendamento de consulta pelo WhatsApp, rolando sozinho',
-    chip: 'Site de exemplo (demo)',
-    linkText: 'Ver a clínica ao vivo ↗',
-    href: '/demos/clinica/',
-    duration: 52
-  },
-  {
-    id: 'advocacia',
-    image: '/examples/advocacia.webp',
-    width: 520,
-    height: 7843,
-    alt: 'Site de exemplo de um escritório de advocacia, com áreas de atuação e primeiro contato pelo WhatsApp, rolando sozinho',
-    chip: 'Site de exemplo (demo)',
-    linkText: 'Ver o escritório ao vivo ↗',
-    href: '/demos/advocacia/',
-    duration: 55
   }
 ];

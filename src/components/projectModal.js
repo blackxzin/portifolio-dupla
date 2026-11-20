@@ -74,9 +74,10 @@ export function setupProjectModal() {
             <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               Ver site ao vivo ↗
             </a>` : ''}
-          <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn ${project.demo ? 'btn-outline' : 'btn-primary'}">
-            Ver repositório no GitHub
-          </a>
+          ${project.github ? `
+            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="btn ${project.demo ? 'btn-outline' : 'btn-primary'}">
+              Ver repositório no GitHub
+            </a>` : ''}
           ${project.secondaryGithub ? `
             <a href="${project.secondaryGithub}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
               Repositório complementar

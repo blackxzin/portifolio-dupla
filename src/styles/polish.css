@@ -104,7 +104,7 @@ html, body { overflow-x: clip; }
   .phone-frame { width: clamp(232px, 62vw, 270px); }
   .hero-phone::before { width: min(150%, 100vw); }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (update: slow), (update: none) {
   .phone-frame, .phone-scroll { animation: none; }
 }
 

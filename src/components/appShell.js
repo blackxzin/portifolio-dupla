@@ -1,10 +1,9 @@
 import { VIEWS, QUESTS } from '../data/hudContent.js';
 import { projectsData } from '../data/portfolioData.js';
 import { prefersReducedMotion } from './motion.js';
+import { createSideTrack } from './sideTrack.js';
 
-const APP_QUERY = '(min-width: 1100px) and (min-height: 600px)';
-const ENTER_MS = 650;
-const WHEEL_STEP = 40;
+const APP_QUERY = '(min-width: 820px) and (min-height: 540px) and (pointer: fine)';
 
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -53,7 +52,9 @@ function buildTopBar() {
 
   const brand = el('a', 'app-brand');
   brand.href = '#intro';
-  brand.append('Lucas ', el('span', '', '& Felipe'));
+  const emblem = el('img', 'app-brand-emblem');
+  emblem.src = '/brand/emblem-small.webp'; emblem.alt = ''; emblem.width = 44; emblem.height = 21;
+  brand.append(emblem, 'Nova', el('span', '', 'Tech'));
 
   const tabs = el('div', 'app-tabs');
   VIEWS.forEach((view, index) => {
@@ -84,7 +85,7 @@ function buildPlayerPanel() {
   });
   const availability = field('Disponibilidade', '');
   availability.lastChild.replaceWith(el('span', 'hud-open', 'Abertos a projetos'));
-  panel.append(portraits, field('Dupla', 'Lucas & Felipe'), field('Ocupação', 'Devs web e sistemas'), field('Classe', 'Sites + automações'), availability);
+  panel.append(portraits, field('Equipe', 'NovaTech'), field('Ocupação', 'Devs web e sistemas'), field('Classe', 'Sites + automações'), availability);
   panel.append(el('p', 'hud-motto', 'Lema: site que traz cliente.'));
   return panel;
 }
@@ -109,32 +110,31 @@ export function setupAppShell() {
   const main = document.getElementById('main-content');
   if (!main) return;
 
-  const views = buildViews();
+  buildViews();
   const frame = el('div', 'hud-frame');
   frame.setAttribute('aria-hidden', 'true');
   frame.append(el('i'), el('i'), el('i'), el('i'));
   const top = buildTopBar();
   const player = buildPlayerPanel();
   const quest = buildQuestPanel();
-  document.body.append(frame, top, player, quest);
+  const meter = el('div', 'app-meter');
+  meter.setAttribute('aria-hidden', 'true');
+  meter.append(el('i'));
+  document.body.append(frame, top, player, quest, meter);
 
   const q = (key) => quest.querySelector(`[data-q="${key}"]`);
   const tabs = [...top.querySelectorAll('.app-tab')];
   const mq = window.matchMedia(APP_QUERY);
-  let activeId = null;
+  const isOn = () => document.documentElement.classList.contains('app-mode');
   let shownSection = null;
+  let activeView = null;
 
-  const updateQuest = () => {
-    const view = views.get(activeId);
-    if (!view) return;
-    const probe = view.getBoundingClientRect().top + view.clientHeight * 0.4;
-    const sections = [...view.querySelectorAll(':scope > section')];
-    let current = sections[0];
-    sections.forEach((section) => { if (section.getBoundingClientRect().top <= probe) current = section; });
-    if (!current || current.id === shownSection) return;
-    shownSection = current.id;
-    const [name, goal, rewards] = QUESTS[current.id];
-    q('section').textContent = VIEWS.find((v) => v.id === activeId).label;
+  const showQuest = (section) => {
+    if (section.id === shownSection) return;
+    shownSection = section.id;
+    const view = viewOfSection(section.id);
+    const [name, goal, rewards] = QUESTS[section.id];
+    q('section').textContent = view.label;
     q('name').textContent = name;
     q('goal').textContent = goal;
     q('rewards').replaceChildren(...rewards.map((text) => el('em', '', text)));
@@ -143,55 +143,51 @@ export function setupAppShell() {
     if (!prefersReducedMotion()) quest.classList.add('is-swap');
   };
 
-  const activate = (viewId, targetId) => {
-    if (!views.has(viewId)) return;
-    const changed = viewId !== activeId;
-    activeId = viewId;
-    views.forEach((wrapper, id) => {
-      wrapper.classList.toggle('is-active', id === viewId);
-      if (id === viewId && changed && !prefersReducedMotion()) {
-        wrapper.classList.add('is-entering');
-        setTimeout(() => wrapper.classList.remove('is-entering'), ENTER_MS);
-      }
-    });
+  const showView = (viewId) => {
+    if (viewId === activeView) return;
+    activeView = viewId;
     tabs.forEach((tab) => {
       const isCurrent = tab.dataset.view === viewId;
       tab.classList.toggle('is-active', isCurrent);
       if (isCurrent) tab.setAttribute('aria-current', 'page'); else tab.removeAttribute('aria-current');
     });
     top.dataset.index = pad(VIEWS.findIndex((v) => v.id === viewId) + 1);
-    const wrapper = views.get(viewId);
-    const target = targetId && document.getElementById(targetId);
-    if (target && wrapper.contains(target) && target !== wrapper.firstElementChild) target.scrollIntoView({ block: 'start' });
-    else wrapper.scrollTop = 0;
-    shownSection = null;
-    updateQuest();
   };
 
-  const goTo = (id, { push = true } = {}) => {
+  // The section under the left third of the strip is the current one.
+  const onMove = () => {
+    const box = main.getBoundingClientRect();
+    const probe = box.left + box.width * 0.35;
+    const sections = [...main.querySelectorAll('.app-view > section')];
+    const current = sections.find((s) => { const r = s.getBoundingClientRect(); return r.left <= probe && r.right > probe; }) || sections[0];
+    if (!current) return;
+    showQuest(current);
+    showView(viewOfSection(current.id).id);
+    const max = main.scrollWidth - main.clientWidth;
+    meter.style.setProperty('--p', max > 0 ? (main.scrollLeft / max).toFixed(4) : '0');
+  };
+
+  const track = createSideTrack(main, { isOn, onMove });
+
+  const goTo = (id, { push = true, instant = false } = {}) => {
     const view = viewOfSection(id);
     if (!view) return false;
-    activate(view.id, id);
+    const target = document.getElementById(id);
+    // A link to the first section of a screen lands on the screen itself (same spot).
+    track.scrollToSection(target, { instant });
     if (push) history.replaceState(null, '', `#${id}`);
     return true;
   };
 
-  // In screen mode every in-page link opens the screen that holds its target section.
+  // In screen mode every in-page link slides the strip to its target section.
   document.addEventListener('click', (event) => {
     const link = event.target.closest?.('a[href^="#"]');
-    if (!link || !document.documentElement.classList.contains('app-mode')) return;
+    if (!link || !isOn()) return;
     const id = link.getAttribute('href').slice(1);
     if (!id || !goTo(id)) return;
     event.preventDefault();
     event.stopImmediatePropagation();
   }, true);
-
-  views.forEach((wrapper) => wrapper.addEventListener('scroll', () => requestAnimationFrame(updateQuest), { passive: true }));
-
-  // The welcome screen has nothing to scroll: a wheel gesture moves on to the next screen.
-  views.get('welcome').addEventListener('wheel', (event) => {
-    if (event.deltaY > WHEEL_STEP && document.documentElement.classList.contains('app-mode')) goTo('hero');
-  }, { passive: true });
 
   const startedAt = Date.now();
   const clock = top.querySelector('[data-t="clock"]');
@@ -207,11 +203,13 @@ export function setupAppShell() {
   const sync = () => {
     const on = mq.matches;
     document.documentElement.classList.toggle('app-mode', on);
-    if (!on) return;
+    if (!on) { track.clear(); return; }
+    track.fit();
     const hash = decodeURIComponent(location.hash.slice(1));
-    if (!goTo(hash || 'intro', { push: false })) activate('welcome');
+    if (!hash || !goTo(hash, { push: false, instant: true })) main.scrollLeft = 0;
+    onMove();
   };
   mq.addEventListener('change', sync);
-  window.addEventListener('hashchange', () => { if (mq.matches) goTo(decodeURIComponent(location.hash.slice(1)), { push: false }); });
+  window.addEventListener('hashchange', () => { if (isOn()) goTo(decodeURIComponent(location.hash.slice(1)), { push: false }); });
   sync();
 }

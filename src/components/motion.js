@@ -22,8 +22,19 @@ const STACK = [
 ];
 
 
+// Battery saver on many phones (Samsung, Xiaomi, some iPhones) turns on "reduce motion" for the whole system.
+// The site keeps its animations there and only stops them on screens that cannot animate (e-ink),
+// while `isLiteMotion` switches the heavy parts to a lighter version on those phones.
 export const prefersReducedMotion = () =>
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.matchMedia('(update: slow), (update: none)').matches;
+
+export const isLiteMotion = () => {
+  const nav = navigator;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    || Boolean(nav.connection?.saveData)
+    || (nav.deviceMemory !== undefined && nav.deviceMemory <= 4)
+    || (nav.hardwareConcurrency !== undefined && nav.hardwareConcurrency <= 4);
+};
 
 // Fades/slides elements in as they enter the viewport, staggered per parent.
 export function setupReveal(root = document) {

@@ -1,9 +1,9 @@
 // Screens of the desktop "system" interface and the quest text shown for each section.
 export const VIEWS = [
-  { id: 'welcome', label: 'Boas-vindas', sections: ['intro'] },
+  { id: 'welcome', label: 'Início', sections: ['intro'] },
   { id: 'examples', label: 'Exemplos', sections: ['hero', 'bot'] },
-  { id: 'skills', label: 'Habilidades', sections: ['services', 'process'] },
-  { id: 'quests', label: 'Missões', sections: ['projects'] },
+  { id: 'skills', label: 'O que fazemos', sections: ['services', 'stack', 'process'] },
+  { id: 'quests', label: 'Missões', sections: ['stats', 'projects'] },
   { id: 'budget', label: 'Orçamento', sections: ['pricing'] },
   { id: 'team', label: 'A dupla', sections: ['duo-team', 'benefits'] },
   { id: 'contact', label: 'Contato', sections: ['contact'] }
@@ -13,11 +13,13 @@ export const SECTION_IDS = VIEWS.flatMap((view) => view.sections);
 
 // [mission name, objective, rewards]
 export const QUESTS = {
-  intro: ['Entrar no sistema', 'Conhecer a dupla e o que ela constrói.', ['Visão geral']],
+  intro: ['Conhecer a NovaTech', 'Ver quem somos e as quatro frentes em que trabalhamos.', ['Visão geral']],
   hero: ['Seu site no ar', 'Ver como um site leva clientes para o seu WhatsApp.', ['Mais contatos']],
   bot: ['Atendimento sozinho', 'Ver o bot respondendo e anotando um pedido no WhatsApp.', ['Tempo livre']],
-  services: ['Escolher a habilidade', 'Ver o que a dupla faz: sites, bots, sistemas e apps.', ['Sob medida']],
+  services: ['Escolher a frente', 'Sites, sistemas, automações e cloud, explicados um a um.', ['Sob medida']],
+  stack: ['Abrir a caixa de ferramentas', 'Ver com quais tecnologias construímos e para que serve cada uma.', ['Clareza']],
   process: ['Planejar a missão', 'Entender as etapas, do primeiro contato ao site no ar.', ['Sem surpresas']],
+  stats: ['Ler o painel', 'Ver os números da dupla, contados do próprio portfólio.', ['Transparência']],
   projects: ['Ver missões concluídas', 'Abrir os projetos e testar os demos ao vivo.', ['Prova real']],
   pricing: ['Pedir orçamento', 'Contar o que precisa e quanto pretende investir.', ['Proposta justa']],
   'duo-team': ['Conhecer os jogadores', 'Saber quem vai construir o seu projeto.', ['Contato direto']],

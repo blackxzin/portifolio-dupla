@@ -110,7 +110,7 @@ body { background-color: #050506; background-image: radial-gradient(ellipse at 8
   .intro-hi { font-size: clamp(7rem, 38vw, 11rem); }
   .intro-section { padding: 6rem 0 5rem; }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (update: slow), (update: none) {
   .intro-hi span, .intro-copy > *, .intro-scroll i { animation: none; }
   .intro-hi::before, .intro-hi::after { display: none; }
 }

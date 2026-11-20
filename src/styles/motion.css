@@ -247,7 +247,7 @@
   to { transform: scale(1.55); opacity: 0; }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (update: slow), (update: none) {
   .stack-marquee-track,
   .hero-title .gradient-text,
   .status-indicator,

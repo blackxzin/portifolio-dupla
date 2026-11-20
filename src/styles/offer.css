@@ -168,7 +168,7 @@
   .offer-cta-arrow { display: none; }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (update: slow), (update: none) {
   .offer-card, .offer-glow { animation: none; }
 }
 

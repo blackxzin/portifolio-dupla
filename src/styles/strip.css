@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Desktop strip (screen mode): every section sits side by side and the wheel moves sideways.
+   All rules are scoped to .app-mode, so phones and narrow windows keep the normal page.
+   ========================================================================== */
+
+.app-mode main#main-content {
+  display: flex; overflow-x: auto; overflow-y: hidden; overscroll-behavior: contain;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 48px, #000 calc(100% - 48px), transparent);
+}
+.app-mode main#main-content::-webkit-scrollbar { display: none; }
+
+.app-mode .app-view {
+  position: relative; inset: auto; display: flex; flex: 0 0 auto; height: 100%;
+  overflow: visible; animation: none;
+}
+.app-mode .app-view + .app-view { border-left: 1px solid rgba(236, 75, 75, 0.14); }
+
+.app-mode .app-view > section {
+  flex: 0 0 auto; width: var(--panel-w, 100%); height: 100%; min-height: 0;
+  display: flex; align-items: center; padding: 1.4rem 0; box-sizing: border-box; overflow: visible;
+}
+.app-mode .app-view > section > .container { flex: 1 1 auto; margin: 0; }
+.app-mode .stack-marquee, .app-mode .site-footer, .app-mode .projects-section .section-header::after { display: none; }
+
+/* Slide-in and speed tilt are written inline by sideTrack.js (only on visible, moving elements). */
+.app-mode .app-view > section > .container { transform-origin: 50% 100%; }
+
+/* Wide sections grow sideways instead of down */
+.app-mode .app-view > section.is-wide,
+.app-mode #services, .app-mode #projects, .app-mode #pricing, .app-mode #duo-team { width: auto; }
+.app-mode #services > .container, .app-mode #projects > .container,
+.app-mode #pricing > .container, .app-mode #duo-team > .container {
+  flex: 0 0 auto; width: max-content; display: flex; align-items: center; gap: clamp(2rem, 3.5vw, 3.5rem);
+  padding-right: clamp(3rem, 6vw, 6rem);
+}
+.app-mode #services .section-header, .app-mode #pricing .section-header, .app-mode #duo-team .section-header {
+  flex: 0 0 auto; width: 380px; max-width: none; margin: 0; text-align: left;
+}
+
+/* Services: one column per service */
+.app-mode .services-grid { display: flex; gap: 1.2rem; border-top: 0; }
+.app-mode .service-row, .app-mode .service-row:nth-child(even) {
+  width: 340px; grid-template-columns: minmax(0, 1fr); gap: 1.2rem; align-content: start;
+  padding: 1.6rem 1.4rem; border: 1px solid rgba(236, 75, 75, 0.22); background: rgba(8, 8, 10, 0.82);
+}
+.app-mode .service-row:nth-child(even) .service-row-head { order: 0; }
+
+/* Projects: search + filters on the left, cards in two rows that run sideways */
+.app-mode #projects > .container { display: grid; grid-template-columns: 360px max-content; grid-template-rows: auto auto 1fr; column-gap: 3rem; align-items: start; align-content: center; }
+.app-mode #projects .section-header { grid-column: 1; grid-row: 1; display: grid; gap: 1.2rem; margin: 0; }
+.app-mode #projects .project-search-bar { width: 100%; }
+.app-mode #projects .projects-filter-bar { grid-column: 1; grid-row: 2; flex-wrap: wrap; margin: 1.2rem 0 0; }
+.app-mode #projects .projects-more { grid-column: 1; grid-row: 3; justify-content: flex-start; margin-top: 1.4rem; }
+.app-mode #projects .projects-grid {
+  grid-column: 2; grid-row: 1 / 4; align-self: center;
+  grid-template-columns: none; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: 320px; gap: 1.2rem;
+}
+.app-mode #projects .projects-empty-state { grid-column: 2; grid-row: 1 / 4; align-self: center; width: 420px; }
+
+/* Price: header, then the price card, what is included and the guarantees in a row */
+.app-mode #offer-app { display: flex; align-items: center; gap: 2rem; }
+.app-mode .offer-grid { display: flex; align-items: center; gap: 2rem; }
+.app-mode .offer-grid > .offer-details { width: 460px; order: 2; }
+.app-mode .offer-grid > .offer-card-column { width: 400px; order: 1; }
+.app-mode .offer-guarantees { width: 300px; grid-template-columns: minmax(0, 1fr); margin-top: 0; }
+.app-mode .offer-glow { display: none; }
+
+/* Team: header, the two profiles and the "why the duo" note in a row */
+.app-mode .team-cards-grid { display: flex; gap: 1.4rem; margin: 0; }
+.app-mode .team-cards-grid > * { width: 430px; }
+.app-mode .synergy-banner { width: 320px; flex-direction: column; align-items: flex-start; margin: 0; }
+
+/* Process steps, benefits and contact keep the screen width */
+.app-mode .process-steps-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+/* Progress of the whole strip, under the top bar */
+.app-meter { display: none; }
+.app-mode .app-meter { display: block; position: fixed; top: 50px; left: 0; right: 0; z-index: 51; height: 2px; background: rgba(236, 75, 75, 0.12); pointer-events: none; }
+.app-meter i { position: absolute; inset: 0; background: #ec4b4b; transform-origin: left; scale: var(--p, 0) 1; }
+
+/* Small laptops / narrow windows: tighter top bar */
+@media (max-width: 1099px) {
+  .app-mode .app-top { padding: 0 20px; gap: 0.6rem; }
+  .app-mode .app-stats { display: none; }
+  .app-mode .app-tab { padding: 0.45rem 0.45rem; letter-spacing: 0.08em; font-size: 0.58rem; }
+  .app-mode main#main-content { left: 16px; right: 16px; }
+}
+@media (max-width: 960px) { .app-mode .app-brand { font-size: 1rem; } .app-mode .app-brand-emblem { width: 30px; } }
+
+/* The strip always keeps two columns side by side: stacking would make sections taller than the screen */
+.app-mode .hero-container { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }
+.app-mode .bot-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(1.5rem, 3vw, 3rem); align-items: center; }
+.app-mode .contact-card-wrapper { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.app-mode .benefits-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.app-mode .stats-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+
+/* Short screens: grow sideways even more */
+@media (max-height: 760px) {
+  .app-mode #projects .projects-grid { grid-template-rows: auto; }
+  .app-mode .offer-grid > .offer-details { width: auto; display: grid; grid-template-columns: repeat(3, 290px); gap: 1rem; align-items: start; }
+  .app-mode .offer-grid > .offer-details > * { margin: 0; }
+}
