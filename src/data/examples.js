@@ -24,17 +24,6 @@ export const HERO_EXAMPLES = [
     duration: 50
   },
   {
-    id: 'ctxtreme',
-    image: '/examples/ctxtreme.webp',
-    width: 520,
-    height: 7000,
-    alt: 'Site do centro de treinamento CT Xtreme, com modalidades, avaliações e contato pelo WhatsApp, rolando sozinho',
-    chip: 'Site feito por nós',
-    linkText: 'Ver CT Xtreme ao vivo ↗',
-    href: 'https://ct-xtreme.vercel.app',
-    duration: 50
-  },
-  {
     id: 'barbearia',
     image: '/examples/barbearia.webp',
     width: 520,

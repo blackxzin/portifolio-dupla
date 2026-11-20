@@ -135,25 +135,6 @@ export const projectsData = [
     metrics: { workflow: "Estoque · filtros · WhatsApp" }
   },
   {
-    id: "ct-xtreme",
-    title: "CT Xtreme",
-    badge: "NovaTech",
-    featured: true,
-    author: "NovaTech",
-    authorHandle: "blackxzin + Felipe-Luvizotto",
-    authorAvatar: "https://avatars.githubusercontent.com/u/173632812?v=4",
-    category: "web",
-    categoryLabel: "Site de centro de treinamento",
-    techs: ["HTML", "CSS", "JavaScript", "WhatsApp", "SEO local"],
-    shortDesc: "Site do CT Xtreme, centro de treinamento em Itaí (SP): crossfit, funcional, jiu-jitsu e muay thai, com horários e primeira visita pelo WhatsApp.",
-    longDesc: "Site para um centro de treinamento, com as modalidades, fotos reais da equipe, nota no Google, horário de funcionamento que mostra se está aberto agora, endereço e convite para a primeira visita pelo WhatsApp.",
-    businessValue: "Transforma quem pesquisa academia na cidade em uma conversa no WhatsApp para marcar a primeira visita.",
-    demo: "https://ct-xtreme.vercel.app",
-    stars: 0,
-    accentColor: "#ec4b4b",
-    metrics: { workflow: "Modalidades · horários · visita" }
-  },
-  {
     id: "novatech-loja",
     title: "Loja Online · Demo",
     badge: "Lucas Gabriel",
