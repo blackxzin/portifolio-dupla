@@ -1,4 +1,4 @@
-import { BOT_EXAMPLE } from '../data/botExample.js';
+import { BOT_EXAMPLE, BOT_FLOW } from '../data/botExample.js';
 import { prefersReducedMotion } from './motion.js';
 
 const TYPING_MS = 1100;
@@ -34,12 +34,33 @@ function buildTyping() {
   return typing;
 }
 
-// Animated WhatsApp-style conversation: typing dots, quick replies and a "new order" alert.
+function buildFlow(list) {
+  list.replaceChildren(...BOT_FLOW.map((item) => {
+    const node = el('li', 'bot-flow-step');
+    node.dataset.step = String(item.step);
+    const body = el('div', 'bot-flow-body');
+    body.append(el('strong', '', item.title), el('span', '', item.text));
+    node.append(el('i', 'bot-flow-dot', String(item.step).padStart(2, '0')), body);
+    return node;
+  }));
+}
+
+// Animated WhatsApp-style conversation: typing dots, quick replies and an alert to the team,
+// while the flow next to the phone lights up the step each message is in.
 export function setupBotDemo() {
   const visual = document.getElementById('bot-visual');
   const log = document.getElementById('wa-chat-log');
   const alert = document.getElementById('bot-toast');
+  const flow = document.getElementById('bot-flow');
   if (!visual || !log || !alert) return;
+  if (flow) buildFlow(flow);
+  const steps = flow ? [...flow.children] : [];
+  // Steps up to `n` stay lit as done, `n` itself is the active one.
+  const showStep = (n) => steps.forEach((node) => {
+    const step = Number(node.dataset.step);
+    node.classList.toggle('is-active', step === n);
+    node.classList.toggle('is-done', step < n);
+  });
 
   const { messages, notification } = BOT_EXAMPLE;
   alert.querySelector('.bot-toast-text strong').textContent = notification.title;
@@ -57,6 +78,7 @@ export function setupBotDemo() {
       if (message.options) append(buildOptions(message.options), false);
     });
     alert.classList.add('is-shown');
+    showStep(5);
   };
 
   if (prefersReducedMotion()) {
@@ -69,9 +91,11 @@ export function setupBotDemo() {
   const playOnce = async (id) => {
     log.replaceChildren();
     alert.classList.remove('is-shown');
+    showStep(0);
     await wait(500);
     for (const message of messages) {
       if (id !== runId) return false;
+      showStep(message.step || 0);
       if (message.from === 'bot') {
         const typing = buildTyping();
         append(typing);
@@ -91,6 +115,10 @@ export function setupBotDemo() {
     await wait(NOTIFY_DELAY_MS);
     if (id !== runId) return false;
     alert.classList.add('is-shown');
+    showStep(4);
+    await wait(1600);
+    if (id !== runId) return false;
+    showStep(5);
     await wait(LOOP_PAUSE_MS);
     return id === runId;
   };

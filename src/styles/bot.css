@@ -100,3 +100,43 @@
   .wa-bubble, .wa-options, .wa-typing, .wa-typing i { animation: none; }
   .bot-toast { transition: none; }
 }
+
+/* ---------- Path of one message (lit in sync with the chat) ---------- */
+.bot-flow { list-style: none; margin: 0.2rem 0 0.4rem; padding: 0; display: grid; gap: 0.55rem; position: relative; width: 100%; max-width: 34rem; }
+.bot-flow::before {
+  content: ''; position: absolute; left: 21px; top: 22px; bottom: 22px; width: 1px;
+  background: linear-gradient(rgba(236, 75, 75, 0.5), rgba(236, 75, 75, 0.08));
+}
+.bot-flow-step {
+  position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0.85rem; align-items: center;
+  padding: 0.7rem 0.9rem 0.7rem 0; border: 1px solid transparent; transition: border-color 0.35s, background 0.35s, transform 0.35s;
+}
+.bot-flow-dot {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; font-style: normal;
+  font-family: var(--font-display); font-size: 1rem; color: #8f8083; background: #0b0a0c;
+  border: 1px solid rgba(236, 75, 75, 0.3); transition: color 0.35s, background 0.35s, box-shadow 0.35s, border-color 0.35s;
+}
+.bot-flow-body { display: grid; gap: 0.15rem; }
+.bot-flow-body strong { font-family: var(--font-tech); font-size: 0.86rem; letter-spacing: 0.08em; text-transform: uppercase; color: #cdbcbe; transition: color 0.35s; }
+.bot-flow-body span { font-size: 0.9rem; line-height: 1.5; color: var(--text-muted); }
+.bot-flow-step.is-done .bot-flow-dot { color: #ff8a83; border-color: rgba(236, 75, 75, 0.7); }
+.bot-flow-step.is-done strong { color: #fff; }
+.bot-flow-step.is-active { border-color: rgba(236, 75, 75, 0.45); background: linear-gradient(90deg, rgba(236, 75, 75, 0.12), transparent 80%); transform: translateX(6px); }
+.bot-flow-step.is-active .bot-flow-dot { color: #140607; background: var(--red); border-color: var(--red); box-shadow: 0 0 22px -2px rgba(236, 75, 75, 0.85); }
+.bot-flow-step.is-active strong { color: #fff; }
+.bot-flow-step.is-active .bot-flow-dot::after {
+  content: ''; position: absolute; inset: -6px; border: 1px solid rgba(236, 75, 75, 0.6); animation: flow-ping 1.3s ease-out infinite;
+}
+@keyframes flow-ping { from { opacity: 1; scale: 0.85; } to { opacity: 0; scale: 1.35; } }
+
+/* The phone leans in 3D toward the flow */
+.bot-visual { perspective: 1200px; }
+.bot-visual .phone-frame { transform: rotateY(-14deg) rotateX(4deg); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 30px 40px 80px -30px rgba(0, 0, 0, 0.9), -10px 0 40px -20px rgba(236, 75, 75, 0.5); }
+.bot-visual:hover .phone-frame { transform: rotateY(-4deg) rotateX(2deg); }
+@media (max-width: 860px) {
+  .bot-visual .phone-frame { transform: none; }
+  .bot-flow-step.is-active { transform: none; }
+}
+.app-mode .bot-flow { gap: 0.35rem; }
+.app-mode .bot-flow-step { padding-block: 0.45rem; }
+.app-mode .bot-lead { font-size: 1rem; }

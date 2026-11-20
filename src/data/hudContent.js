@@ -15,7 +15,7 @@ export const SECTION_IDS = VIEWS.flatMap((view) => view.sections);
 export const QUESTS = {
   intro: ['Conhecer a NovaTech', 'Ver quem somos e as quatro frentes em que trabalhamos.', ['Visão geral']],
   hero: ['Seu site no ar', 'Ver como um site leva clientes para o seu WhatsApp.', ['Mais contatos']],
-  bot: ['Atendimento sozinho', 'Ver o bot respondendo e anotando um pedido no WhatsApp.', ['Tempo livre']],
+  bot: ['Automação em ação', 'Ver o caminho de uma mensagem: do WhatsApp até a sua equipe.', ['Tempo livre']],
   services: ['Escolher a frente', 'Sites, sistemas, automações e cloud, explicados um a um.', ['Sob medida']],
   stack: ['Abrir a caixa de ferramentas', 'Ver com quais tecnologias construímos e para que serve cada uma.', ['Clareza']],
   process: ['Planejar a missão', 'Entender as etapas, do primeiro contato ao site no ar.', ['Sem surpresas']],
